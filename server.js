@@ -5,6 +5,9 @@ var bodyParser = require("body-parser");
 var path = require("path");
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // 
 
 //
@@ -16,9 +19,14 @@ app.get("/home", function(request, response) {
  });
 
  app.post('/getBranch', function (req, res) {
-  console.log(req.body.demoForm);
+  // console.log(req.body.demoForm);
+  console.log("TEST")
+  res.redirect("/login");
 });
 
+app.post('/getJson', function (req, res) {
+  console.log(req.body.test);
+});
 
   app.listen(PORT);
   console.log("running on port " + PORT);  
