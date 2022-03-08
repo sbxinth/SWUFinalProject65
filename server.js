@@ -19,7 +19,7 @@ app.get("/home", function(request, response) {
  });
 
  app.post('/getBranch', function (req, res) {
-  // console.log(req.body.demoForm);
+  console.log(req.body.demoFormSelected);
   res.redirect("/login");
 });
 
