@@ -20,7 +20,11 @@ app.get("/home", function(request, response) {
 
  app.post('/getBranch', function (req, res) {
   console.log(req.body.demoFormSelected);
-  res.redirect("/login");
+  if (req.body.demoFormSelected == "COSCI"){
+    res.redirect("/login");
+  }else if (req.body.demoFormSelected == "ENGINEER"){
+    res.send("ENGINEER")
+  }
 });
 
 
