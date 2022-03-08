@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap');
+
+
+
+body{
+    font-family: 'Prompt', sans-serif;
+}
+
+
+
+@media screen and (max-width: 780px) {
+    .leftside--menu--admin  {
+      padding-top: 15px;}
+    .leftside--menu--admin a {
+      font-size: 18px;}
+       .imgsmall {
+         background-image: 130px;}
+  
+         p{
+           font-size: 12px;}
+          
+         .imgsmall{
+           width: 80px; }
+          .bgopen{
+            width: 40px;
+            height: 40px;
+            margin-bottom:20px ;
+          }
+          .leftside--menu--admin  {
+            height: 100%;
+            width: 170px;
+            position: fixed;
+            font-size: 0.95rem;
+  
+            }
+  
+  }
+  .leftside--menu--admin {
+      height: 100%;
+      width: 65px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #002769;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 10px;
+      }
+  
+      .leftside--menu--admin  a {
+padding-top: 15px;
+padding-bottom: 15px;
+padding-left: 20px;
+        text-decoration: none;
+          color: white;
+          display: block;
+          transition: 0.3s;
+          font-size: 0.95rem;
+        }
+
+
+        .leftside--menu--footer {
+          position: absolute;
+          bottom: 10px;
+padding-left: 5px;
+          text-decoration: none;
+          font-weight: lighter;
+          color: white;
+          display: block;
+          transition: 0.3s;
+  
+        }
+  
+        .leftside--menu--admin  a:hover {
+          color: #f1f1f1;
+          background-color: #003da7;
+        }
+  
+        a .hoverlogo :hover{
+          background-color:transparent;
+        }
+        
+        .leftside--menu--admin  .closebtn {
+          position: absolute;
+          top: 0;
+          right: 25px;
+          font-size: 1.2rem;
+          margin-left: 45px;
+        }
+  
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #ed1c4d;
+          min-width: 300px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 10;
+        }
+        
+        .dropdown-content a {
+          color: white;
+          padding: 12px 12px;
+          text-decoration: none;
+          display: block;
+        }
+       
+        
+  .dropdown-content a:hover {background-color: rgb(57, 51, 131);}
+  
+  .dropdown:hover .dropdown-content {display: inline;
+  }
+  
+  .dropdown:hover .dropbtn {background-color: #5550b8;}
+  
+  
+
+   
+.bg-main{
+    position: relative;
+    background-image: linear-gradient(to left, #6A11CB 0%, #2575FC 100%);
+  background-repeat: no-repeat;
+  height: 450px;
+  padding-left: 70px;
+  
+  }
+  
+
+  input {
+	outline: none;
+}
+input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+	display: none; 
+}
+
+
+input[type=search] {
+	background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+	border: solid 1px rgb(242, 242, 242);
+	padding: 9px 10px 9px 32px;
+	width: 70px;
+	
+	-webkit-border-radius: 9em;
+	-moz-border-radius: 9em;
+	border-radius: 9em;
+	
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+input[type=search]:focus {
+	width: 100px;
+	background-color: #fff;
+
+}
+
+
+input:-moz-placeholder {
+	color: #999;
+}
+input::-webkit-input-placeholder {
+	color: #999;
+}
+
+/* Demo 2 */
+#demo-2 input[type=search] {
+	width: 20px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+#demo-2 input[type=search]:hover {
+	background-color: #fff;
+}
+#demo-2 input[type=search]:focus {
+	width: 130px;
+	padding-left: 32px;
+	color: #000;
+	background-color: #fff;
+	cursor: auto;
+}
+#demo-2 input:-moz-placeholder {
+	color: transparent;
+}
+#demo-2 input::-webkit-input-placeholder {
+	color: transparent;
+}
+
+.box-name-admin{
+    width: 145px;
+    height: 45px;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    font-size: 0.88rem;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 45px;
+    box-shadow: rgba(0, 0, 0, 0.35) 2px 2px 2px;
+
+}
+
+.box-name-admin img {
+    width: 35px;
+    height: 35px;
+    border-radius: 35px;
+}
+
+.box-name-admin:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 2px 5px 5px;
+  background-color: rgb(235, 235, 235);
+
+
+}
+
+.box-content-admin {
+    margin-top: 30px;
+    padding: 15px;
+    width: 350px;
+    height: 150px;
+    border-radius: 12px;
+    background-image: url(../images/bg-content.png);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #fff;
+}
+
+.box-content-admin:hover{
+
+  box-shadow: rgba(0, 0, 0, 0.35) 2px 5px 29px;
+color: rgb(52, 18, 157);
+}
+
