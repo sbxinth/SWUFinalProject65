@@ -15,6 +15,10 @@ app.get("/home", function(request, response) {
   response.sendFile(path.join(__dirname, '/public/html/cosci_login.html'));
  });
 
+ app.post('/getBranch', function (req, res) {
+  console.log(req.body.demoForm);
+});
+
 
   app.listen(PORT);
   console.log("running on port " + PORT);  
