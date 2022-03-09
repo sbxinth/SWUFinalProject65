@@ -22,10 +22,10 @@ app.get("/home", function(request, response) {
   response.sendFile(path.join(__dirname, '/public/html/swu.html'));
  // start connect database 
 connection.connect();
-connection.query('SELECT * FROM account WHERE username = ? AND password = ?',["co611010035", "co611010035"], 
+connection.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',["co611010035", "co611010035"], 
 function (error, results, fields) {
   if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
+  console.log('username is : ', results[0].uusername);
 });
 connection.end();
 // end connect database
