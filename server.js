@@ -5,11 +5,12 @@ var bodyParser = require("body-parser");
 var path = require("path");
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
-const dbConnectionn = require("./database")
+const dbConnectionn = require("./database");
+const { render } = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // 
-
+app.set ( "view engine", "ejs" );
 //"SELECT * FROM Account WHERE username = ? AND password = ?",[username, password],
 //
 app.get("/home", function(request, response) {
@@ -28,6 +29,9 @@ app.get("/home", function(request, response) {
   }
 });
 
+app.get("/getEJS", function(req,res){
+  res.render("hometest")
+});
 
 app.post('/cosciAuth', function (req, res) {
 dbConnectionn.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',[req.body.swuID, req.body.password], 
