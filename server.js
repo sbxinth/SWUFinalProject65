@@ -26,6 +26,8 @@ connection.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',[
 function (error, results, fields) {
   if (error) throw error;
   console.log('username is : ', results[0].uusername);
+  console.log('password is : ', results[0].upassword);
+  console.log('real name is : ', results[0].uname,"",results[0].ulastname);
 });
 connection.end();
 // end connect database
