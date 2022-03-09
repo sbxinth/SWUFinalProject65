@@ -3,6 +3,7 @@ var app = express();
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var path = require("path");
+var mysql = require("mysql");
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
 
