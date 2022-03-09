@@ -15,10 +15,10 @@ app.set( "view engine", "ejs" );
 //"SELECT * FROM Account WHERE username = ? AND password = ?",[username, password],
 //
 app.get("/home", function(request, response) {
-  response.sendFile(path.join(__dirname, '/public/html/swu.html'));
+  response.render("swu");
  });
  app.get("/login", function(request, response) {
-  response.sendFile(path.join(__dirname, '/public/html/cosci_login.html'));
+  response.render("cosci_login");
  });
 
  app.post('/getBranch', function (req, res) {
@@ -26,7 +26,7 @@ app.get("/home", function(request, response) {
   if (req.body.demoFormSelected == "COSCI"){
     res.redirect("/login");
   }else if (req.body.demoFormSelected == "ENGINEER"){
-    res.send("ENGINEER")
+    res.send("ENGINEER");
   }
 });
 
@@ -43,11 +43,11 @@ function (error, results, fields) {
     console.log('username is : ', results[0].uusername);
     console.log('password is : ', results[0].upassword);
     console.log('real name is : ', results[0].uname,"",results[0].ulastname);
-    res.sendFile(path.join(__dirname, '/public/html/login_success.html'));
+    res.render("login_success");
   } else {
     // in case no account
     console.log("HAS NO ACCOUNT")
-    res.sendFile(path.join(__dirname, '/public/html/login_fail.html'));
+    res.render("login_fail");
   }
 });
 });
