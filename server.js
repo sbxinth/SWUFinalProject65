@@ -10,7 +10,8 @@ const { render } = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // 
-app.set ( "view engine", "ejs" );
+app.set("views",path.join(__dirname, '/public/views'))
+app.set( "view engine", "ejs" );
 //"SELECT * FROM Account WHERE username = ? AND password = ?",[username, password],
 //
 app.get("/home", function(request, response) {
