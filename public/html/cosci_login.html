@@ -40,6 +40,7 @@
                       <p>นิสิต มศว</p>
                     </div>
                     </div>
+                    <form action="cosciAuth" method="post">
                   <div class="container--login">
                       <div class="d-flex justify-content-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -50,17 +51,17 @@
                       </div>
                           <div class="mt-1 mb-3">
                             <label for="exampleFormControlInput1" class="form-label "> บัวศรีไอดี</label>
-                            <input type="text" class="form--control--login ms-3 ps-4" id="swuID" placeholder="บัวศรีไอดี">
+                            <input required="required" type="text" class="form--control--login ms-3 ps-4" name="swuID" id="swuID" placeholder="บัวศรีไอดี">
                           </div>
                           <div class="m-2 mt-4">
                             <label for="exampleFormControlInput1" class="form-label">รหัสผ่าน</label>
-                            <input type="password" class="form--control--login ms-3 ps-4" id="password" placeholder="รหัสผ่าน">
+                            <input type="password" required="required" class="form--control--login ms-3 ps-4" name="password" id="password" placeholder="รหัสผ่าน">
                           </div>
                           <div class="container-fluid">
                             <div class="row">
                               <div class="col-xxl-6">
                                 <div class="mt-4 mb-2 pt-2 d-flex justify-content-around ">
-                                  <button type="button" class="btn btn--confirm">เข้าสู่ระบบ</button>
+                                  <button type="submit" class="btn btn--confirm">เข้าสู่ระบบ</button>
             
                                 </div>
                               </div>
@@ -77,6 +78,7 @@
                              <a style="font-size: 1.13rem;" href="#"> *ลืมรหัสผ่าน </a>
                           </div>
                       </div>
+                    </form>
                       </div>
                     </div>
 

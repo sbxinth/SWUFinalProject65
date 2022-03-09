@@ -20,17 +20,6 @@ var connection = mysql.createConnection({
 //
 app.get("/home", function(request, response) {
   response.sendFile(path.join(__dirname, '/public/html/swu.html'));
- // start connect database 
-connection.connect();
-connection.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',["co611010035", "co611010035"], 
-function (error, results, fields) {
-  if (error) throw error;
-  console.log('username is : ', results[0].uusername);
-  console.log('password is : ', results[0].upassword);
-  console.log('real name is : ', results[0].uname,"",results[0].ulastname);
-});
-connection.end();
-// end connect database
  });
  app.get("/login", function(request, response) {
   response.sendFile(path.join(__dirname, '/public/html/cosci_login.html'));
@@ -43,6 +32,33 @@ connection.end();
   }else if (req.body.demoFormSelected == "ENGINEER"){
     res.send("ENGINEER")
   }
+});
+
+
+app.post('/cosciAuth', function (req, res) {
+   // start connect database 
+// connection.connect();
+connection.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',[req.body.swuID, req.body.password], 
+function (error, results, fields) {
+  if (results.length > 0) { // check qurey has value
+    // in case has value
+    if (error) throw error;
+    console.log('username is : ', results[0].uusername);
+    console.log('password is : ', results[0].upassword);
+    console.log('real name is : ', results[0].uname,"",results[0].ulastname);
+    // connection.end();
+    res.sendFile(path.join(__dirname, '/public/html/login_success.html'));
+    // res.sendFile(path.join(__dirname + "/public/html/login_success.html"))
+
+  } else {
+    // in case no account
+    console.log("HAS NO ACCOUNT")
+    res.sendFile(path.join(__dirname, '/public/html/login_fail.html'));
+  }
+
+});
+
+// end connect database
 });
 
 
