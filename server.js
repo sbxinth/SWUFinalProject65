@@ -19,28 +19,15 @@ app.use(
     saveUninitialized: true
   })
 );
-// DECLARING CUSTOM MIDDLEWARE
-const ifNotLoggedin = (req, res, next) => {
-  if(!req.session.isLoggedIn){
-    console.log("Notloggedin");
-      return res.render('cosci_login');
-  }
-  next();
-}
-const ifLoggedin = (req,res,next) => {
-  if(req.session.isLoggedIn){
-    console.log("loggedin");
-      return res.render('hometest');
-  }
-  next();
-}
-// END OF CUSTOM MIDDLEWARE
+
+ session.isLoggedIn = false;
+
 //
-app.get("/home",ifLoggedin, (request, response,next) => {
+app.get("/home", (request, response,) => {
   console.log(session.isLoggedIn);
   response.render("swu");
  });
- app.get("/login",ifLoggedin, (request, response,next) => {
+ app.get("/login", (request, response) => {
   response.render("cosci_login");
  });
 
