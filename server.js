@@ -12,12 +12,35 @@ app.use(bodyParser.json());
 // 
 app.set("views",path.join(__dirname, '/public/views'))
 app.set( "view engine", "ejs" );
-//"SELECT * FROM Account WHERE username = ? AND password = ?",[username, password],
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+// DECLARING CUSTOM MIDDLEWARE
+const ifNotLoggedin = (req, res, next) => {
+  if(!req.session.isLoggedIn){
+    console.log("Notloggedin");
+      return res.render('cosci_login');
+  }
+  next();
+}
+const ifLoggedin = (req,res,next) => {
+  if(req.session.isLoggedIn){
+    console.log("loggedin");
+      return res.render('hometest');
+  }
+  next();
+}
+// END OF CUSTOM MIDDLEWARE
 //
-app.get("/home", function(request, response) {
+app.get("/home",ifLoggedin, (request, response,next) => {
+  console.log(session.isLoggedIn);
   response.render("swu");
  });
- app.get("/login", function(request, response) {
+ app.get("/login",ifLoggedin, (request, response,next) => {
   response.render("cosci_login");
  });
 
@@ -43,6 +66,8 @@ function (error, results, fields) {
     console.log('username is : ', results[0].uusername);
     console.log('password is : ', results[0].upassword);
     console.log('real name is : ', results[0].uname,"",results[0].ulastname);
+    session.isLoggedIn = true;
+    console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
   } else {
     // in case no account
