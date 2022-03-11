@@ -24,16 +24,29 @@ app.use(
 
 //
 app.get("/home", (request, response,) => {
-  console.log(session.isLoggedIn);
+  console.log(session.isLoggedIn,"in /home");
   if (session.isLoggedIn == true){
-    response.render("hometest")
+    response.render("userprofile")
   }else{ // logged in is true
   response.render("swu");
   }
  });
 
  app.get("/login", (request, response) => {
-  response.render("cosci_login");
+  console.log(session.isLoggedIn,"in /login");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    response.render("userprofile")
+  }
+ });
+
+ app.get("/logout",function(req,res){
+  req.session.destroy(function (err) {
+    session.isLoggedIn = false;
+    res.redirect("/login");
+    res.end();
+});
  });
 
  app.post('/getBranch', function (req, res) {
@@ -46,7 +59,7 @@ app.get("/home", (request, response,) => {
 });
 
 app.get("/getEJS", function(req,res){
-  res.render("hometest")
+  res.render("userprofile")
 });
 
 app.post('/cosciAuth', function (req, res) {
