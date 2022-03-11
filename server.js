@@ -24,12 +24,7 @@ app.use(
 
 //
 app.get("/home", (request, response,) => {
-  console.log(session.isLoggedIn,"in /home");
-  if (session.isLoggedIn == true){
-    response.render("userprofile")
-  }else{ // logged in is true
   response.render("swu");
-  }
  });
 
  app.get("/login", (request, response) => {
