@@ -25,8 +25,13 @@ app.use(
 //
 app.get("/home", (request, response,) => {
   console.log(session.isLoggedIn);
+  if (session.isLoggedIn == true){
+    response.render("hometest")
+  }else{ // logged in is true
   response.render("swu");
+  }
  });
+
  app.get("/login", (request, response) => {
   response.render("cosci_login");
  });
