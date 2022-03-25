@@ -27,12 +27,28 @@ app.get("/home", (request, response,) => {
   response.render("swu");
  });
 
+ app.get("/profile", (request, response,) => {
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    response.render("userprofile", { 
+      firstname : session.firstname, 
+      lastname : session.lastname,
+      studentID : session.studentID
+    });
+  }
+ });
+
  app.get("/login", (request, response) => {
   console.log(session.isLoggedIn,"in /login");
   if (!session.isLoggedIn){
     response.render("cosci_login");
   }else{
-    response.render("userprofile")
+    response.render("userprofile", { 
+      firstname : session.firstname, 
+      lastname : session.lastname,
+      studentID : session.studentID
+    });
   }
  });
 
@@ -54,21 +70,51 @@ app.get("/home", (request, response,) => {
 });
 
 app.get("/getEJS", function(req,res){
-  res.render("userprofile")
+  res.redirect("/profile");
 });
 
+
+// dbConnectionn.query('SELECT * FROM user WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+// function (error, results, fields) {
+//   if (results.length > 0) { // check qurey has value
+//     // in case has value
+//     if (error) throw error;
+    
+//     session.isLoggedIn = true;
+//     session.firstname = results[0].Firstname;
+//     session.lastname = results[0].Lastname;
+//     session.studentID = results[0].Username;
+//     console.log('data is : ', results);
+//     console.log('username is : ', results[0].Username);
+//     console.log('password is : ', results[0].Password);
+//     console.log('real name is : ', session.firstname,"",session.lastname);
+//     console.log("session.isLoggedIn = ",session.isLoggedIn  )
+//     // res.render("login_success");
+    
+//   } else {
+//     // in case no account
+//     console.log("HAS NO ACCOUNT")
+//   }
+// });
+
+
 app.post('/cosciAuth', function (req, res) {
-dbConnectionn.query('SELECT * FROM account WHERE uusername = ? AND upassword = ?',[req.body.swuID, req.body.password], 
+dbConnectionn.query('SELECT * FROM user WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   if (results.length > 0) { // check qurey has value
     // in case has value
     if (error) throw error;
-    console.log('username is : ', results[0].uusername);
-    console.log('password is : ', results[0].upassword);
-    console.log('real name is : ', results[0].uname,"",results[0].ulastname);
+    
     session.isLoggedIn = true;
+    session.firstname = results[0].Firstname;
+    session.lastname = results[0].Lastname;
+    session.studentID = results[0].Username;
+    console.log('username is : ', results[0].Username);
+    console.log('password is : ', results[0].Password);
+    console.log('real name is : ', session.firstname,"",session.lastname);
     console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
+    
   } else {
     // in case no account
     console.log("HAS NO ACCOUNT")
