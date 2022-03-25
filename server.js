@@ -32,9 +32,13 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     response.render("userprofile", { 
-      firstname : session.firstname, 
-      lastname : session.lastname,
-      studentID : session.studentID
+      isloggedin : session.isLoggedIn ,
+      firstname : session.firstname ,
+      lastname : session.lastname ,
+      studentID : session.studentID ,
+      major : session.Major ,
+      Year : session.Year ,
+      status : session.status 
     });
   }
  });
@@ -45,9 +49,13 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     response.render("userprofile", { 
-      firstname : session.firstname, 
-      lastname : session.lastname,
-      studentID : session.studentID
+      isloggedin : session.isLoggedIn ,
+      firstname : session.firstname ,
+      lastname : session.lastname ,
+      studentID : session.studentID ,
+      major : session.Major ,
+      Year : session.Year ,
+      status : session.status 
     });
   }
  });
@@ -74,7 +82,7 @@ app.get("/getEJS", function(req,res){
 });
 
 
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor  WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN permission ON user.Permission=permission.idPermission  WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
 function (error, results, fields) {
   if (results.length > 0) { // check qurey has value
     // in case has value
@@ -90,7 +98,7 @@ function (error, results, fields) {
 
 
 app.post('/cosciAuth', function (req, res) {
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   if (results.length > 0) { // check qurey has value
     // in case has value
@@ -99,10 +107,17 @@ function (error, results, fields) {
     session.isLoggedIn = true;
     session.firstname = results[0].Firstname;
     session.lastname = results[0].Lastname;
-    session.studentID = results[0].Username;
+    session.studentID = results[0].ID_Student;
+    session.Major = results[0].name_maj;
+    session.Year = results[0].Year;
+    session.status = results[0].Detail_per;
+    
     console.log('name is : ', results[0].Firstname ,"",results[0].Lastname);
     console.log('studentID is : ', results[0].ID_Student);
     console.log('Major is : ', results[0].name_maj);
+    console.log('year is : ', results[0].Year);
+
+    console.log('Status is : ', results[0].Detail_per);
     console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
     
