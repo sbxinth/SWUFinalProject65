@@ -74,32 +74,23 @@ app.get("/getEJS", function(req,res){
 });
 
 
-// dbConnectionn.query('SELECT * FROM user WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
-// function (error, results, fields) {
-//   if (results.length > 0) { // check qurey has value
-//     // in case has value
-//     if (error) throw error;
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor  WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+function (error, results, fields) {
+  if (results.length > 0) { // check qurey has value
+    // in case has value
+    if (error) throw error;
+    console.log(results)
+    // res.render("login_success");
     
-//     session.isLoggedIn = true;
-//     session.firstname = results[0].Firstname;
-//     session.lastname = results[0].Lastname;
-//     session.studentID = results[0].Username;
-//     console.log('data is : ', results);
-//     console.log('username is : ', results[0].Username);
-//     console.log('password is : ', results[0].Password);
-//     console.log('real name is : ', session.firstname,"",session.lastname);
-//     console.log("session.isLoggedIn = ",session.isLoggedIn  )
-//     // res.render("login_success");
-    
-//   } else {
-//     // in case no account
-//     console.log("HAS NO ACCOUNT")
-//   }
-// });
+  } else {
+    // in case no account
+    console.log("HAS NO ACCOUNT")
+  }
+});
 
 
 app.post('/cosciAuth', function (req, res) {
-dbConnectionn.query('SELECT * FROM user WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   if (results.length > 0) { // check qurey has value
     // in case has value
@@ -109,9 +100,9 @@ function (error, results, fields) {
     session.firstname = results[0].Firstname;
     session.lastname = results[0].Lastname;
     session.studentID = results[0].Username;
-    console.log('username is : ', results[0].Username);
-    console.log('password is : ', results[0].Password);
-    console.log('real name is : ', session.firstname,"",session.lastname);
+    console.log('name is : ', results[0].Firstname ,"",results[0].Lastname);
+    console.log('studentID is : ', results[0].ID_Student);
+    console.log('Major is : ', results[0].name_maj);
     console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
     
