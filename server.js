@@ -27,19 +27,34 @@ app.get("/home", (request, response,) => {
   response.render("swu");
  });
 
+
  app.get("/profile", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
   }else{
-    response.render("userprofile", { 
-      isloggedin : session.isLoggedIn ,
-      firstname : session.firstname ,
-      lastname : session.lastname ,
-      studentID : session.studentID ,
-      major : session.Major ,
-      Year : session.Year ,
-      status : session.status 
-    });
+    if (session.status == "admin"){
+      console.log("go to admin profile");
+      response.render("main_admin", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("go to student profile");
+      response.render("userprofile", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    }
   }
  });
 
@@ -48,15 +63,30 @@ app.get("/home", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
   }else{
-    response.render("userprofile", { 
-      isloggedin : session.isLoggedIn ,
-      firstname : session.firstname ,
-      lastname : session.lastname ,
-      studentID : session.studentID ,
-      major : session.Major ,
-      Year : session.Year ,
-      status : session.status 
-    });
+    if (session.status == "admin"){
+      console.log("go to admin profile");
+      response.render("main_admin", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("go to student profile");
+      response.render("userprofile", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    }
+    
   }
  });
 
@@ -82,23 +112,23 @@ app.get("/getEJS", function(req,res){
 });
 
 
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN permission ON user.Permission=permission.idPermission  WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
-function (error, results, fields) {
-  if (results.length > 0) { // check qurey has value
-    // in case has value
-    if (error) throw error;
-    console.log(results)
-    // res.render("login_success");
+// dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+// function (error, results, fields) {
+//   if (results.length > 0) { // check qurey has value
+//     // in case has value
+//     if (error) throw error;
+//     console.log(results)
+//     // res.render("login_success");
     
-  } else {
-    // in case no account
-    console.log("HAS NO ACCOUNT")
-  }
-});
+//   } else {
+//     // in case no account
+//     console.log("HAS NO ACCOUNT")
+//   }
+// });
 
 
 app.post('/cosciAuth', function (req, res) {
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   if (results.length > 0) { // check qurey has value
     // in case has value
@@ -109,16 +139,18 @@ function (error, results, fields) {
     session.lastname = results[0].Lastname;
     session.studentID = results[0].ID_Student;
     session.Major = results[0].name_maj;
+    session.subMajor = results[0].name_submaj;
     session.Year = results[0].Year;
     session.status = results[0].Detail_per;
     
-    console.log('name is : ', results[0].Firstname ,"",results[0].Lastname);
-    console.log('studentID is : ', results[0].ID_Student);
-    console.log('Major is : ', results[0].name_maj);
-    console.log('year is : ', results[0].Year);
+    // console.log('name is : ', results[0].Firstname ,"",results[0].Lastname);
+    // console.log('studentID is : ', results[0].ID_Student);
+    // console.log('Major is : ', results[0].name_maj);
+    // console.log('Sub Major is : ', results[0].name_submaj);
+    // console.log('year is : ', results[0].Year);
 
-    console.log('Status is : ', results[0].Detail_per);
-    console.log("session.isLoggedIn = ",session.isLoggedIn  )
+    // console.log('Status is : ', results[0].Detail_per);
+    // console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
     
   } else {
@@ -129,6 +161,23 @@ function (error, results, fields) {
 });
 });
 
+//declare func gen uid//
+function getuidf() {
+  var date = new Date();
+  var components = [
+     date.getDate(),
+     date.getMonth()+1,
+      date.getFullYear(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+  ];
+  var id = components.join("");
+  return id.toString(16);
+}
+
+// end gen func
 
   app.listen(PORT);
   console.log("running on port " + PORT);  
