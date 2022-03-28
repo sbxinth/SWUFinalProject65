@@ -27,6 +27,28 @@ app.get("/home", (request, response,) => {
   response.render("swu");
  });
 
+ app.get("/info_activity01", (request, response,) => {
+  response.render("info_activity01");
+ }); 
+ app.get("/info_activity02", (request, response,) => {
+  response.render("info_activity02");
+ }); 
+ app.get("/info_activity03", (request, response,) => {
+  response.render("info_activity03");
+ });
+ app.get("/announce_activity", (request, response,) => {
+  response.render("announce_activity");
+ });
+ app.get("/details_activity", (request, response,) => {
+  response.render("details_activity");
+ });
+ app.get("/sub_activity", (request, response,) => {
+  response.render("sub_activity");
+ });
+ app.get("/add_activity", (request, response,) => {
+  response.render("add_activity");
+ });
+ 
 
  app.get("/profile", (request, response,) => {
   if (!session.isLoggedIn){
@@ -107,24 +129,31 @@ app.get("/home", (request, response,) => {
   }
 });
 
-app.get("/getEJS", function(req,res){
-  res.redirect("/profile");
+app.get("/main", function(req,res){
+  // res.render("main_student");
+  res.render("main_student", { 
+    isloggedin : session.isLoggedIn ,
+    firstname : session.firstname ,
+    lastname : session.lastname ,
+    studentID : session.studentID ,
+    major : session.Major ,
+    Year : session.Year ,
+    status : session.status 
+  });
 });
 
 
-// dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
-// function (error, results, fields) {
-//   if (results.length > 0) { // check qurey has value
-//     // in case has value
-//     if (error) throw error;
-//     console.log(results)
-//     // res.render("login_success");
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+function (error, results, fields) {
+  if (results.length > 0) { // check qurey has value
+    if (error) throw error;
     
-//   } else {
-//     // in case no account
-//     console.log("HAS NO ACCOUNT")
-//   }
-// });
+    console.log(results)
+    
+  } else {
+    console.log("HAS NO ACCOUNT")
+  }
+});
 
 
 app.post('/cosciAuth', function (req, res) {
