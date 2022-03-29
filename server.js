@@ -172,14 +172,6 @@ function (error, results, fields) {
     session.Year = results[0].Year;
     session.status = results[0].Detail_per;
     
-    // console.log('name is : ', results[0].Firstname ,"",results[0].Lastname);
-    // console.log('studentID is : ', results[0].ID_Student);
-    // console.log('Major is : ', results[0].name_maj);
-    // console.log('Sub Major is : ', results[0].name_submaj);
-    // console.log('year is : ', results[0].Year);
-
-    // console.log('Status is : ', results[0].Detail_per);
-    // console.log("session.isLoggedIn = ",session.isLoggedIn  )
     res.render("login_success");
     
   } else {
