@@ -215,17 +215,20 @@ app.get("/user",(req,res)=>{
     res.render("userprofile")
 })
 
-app.post("/user",upload.single("image"),(req,res)=>{
-  if (err){
-    throw console.error();
-   } else{
-   console.log(req.file)
-  //  dbConnectionn.query("UPDATE `User` SET `img_user`= '${req.file.path}' ") 
-   res.send("upload successful")
+app.post("/user", upload.single('image'), (req, res) => {
+  if (!req.file) {
+      console.log("No file upload");
+  } else {
+      console.log(req.file.filename)
+      var imgsrc = 'img/' + req.file.filename
+      var insertData = "UPDATE `User` SET `img_user`= (?) WHERE 1"
+      dbConnectionn.query(insertData, [imgsrc], (err, result) => {
+          if (err) throw err
+          // console.log("file uploaded")
+          console.log(req.file)
+          res.send("upload successful")
+      })
   }
-  // console.log(JSON.stringify(req.file))
-  // res.send("ok")
-
 });
 
 // end gen func

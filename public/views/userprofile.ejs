@@ -29,27 +29,27 @@
           <a href="javascript:void(0)" class="closebtn d-xl-none" onclick="closeNav()" >X</a>
        
            <div class="m-1 mb-4">
-            <a href="/main"><img class="z-index: 3;" src="http://cosci.swu.ac.th/img/logo.svg" width="150px"></a>  
+            <a href="../html/main_student.html"><img class="z-index: 3;" src="http://cosci.swu.ac.th/img/logo.svg" width="150px"></a>  
     
          
           </div>
-          <a href="/main">หน้าแรก</a>
+          <a href="../html/main_student.html">หน้าแรก</a>
           <div class="dropdown">
             <a href="#" class="dropbtn">ตรวจกิจกรรม&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; > </a>
             <div class="dropdown-content">
-              <a href="/info_activity01"> กิจกรรมบังคับ</a>
-              <a href="/info_activity02"> กิจกรรมเลือก</a>
-              <a href="/info_activity03"> กิจกรรมบำเพ็ญประโยชน์</a>
+              <a href="../html/info_activity01.html"> กิจกรรมบังคับ</a>
+              <a href="../html/info_activity02.html"> กิจกรรมเลือก</a>
+              <a href="../html/info_activity03.html"> กิจกรรมบำเพ็ญประโยชน์</a>
 
             </div>
 
           </div>
       
-          <a href="/details_activity">รายละเอียดกิจกรรม และหลักเกณฑ์</a>
-          <a href="/announce_activity">ประชาสัมพันธ์กิจกรรม</a>
+          <a href="../html/details_activity.html">รายละเอียดกิจกรรม และหลักเกณฑ์</a>
+          <a href="../html/announce_activity.html">ประชาสัมพันธ์กิจกรรม</a>
           <div class="leftside--menu--footer">
               <a href="/logout"><img src="https://image.flaticon.com/icons/png/512/1828/1828490.png" width="22px"> &nbsp;ออกจากระบบ</a>
-              <a href="/profile"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;หรัสนิสิต 61130010188</a>
+              <a href="../html/info_student.html"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;รหัสนิสิต 61130010188</a>
           </div>
         </div>
 
@@ -81,7 +81,7 @@
         
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a style=" text-decoration: underline ; " href="/main">หน้าแรก</a></li>
+              <li class="breadcrumb-item"><a style=" text-decoration: underline ; " href="../html/main_student.html">หน้าแรก</a></li>
               <li class="breadcrumb-item active " aria-current="page">ข้อมูลนิสิต</li>
             </ol>
           
@@ -105,7 +105,7 @@
               <div class="col-md-9 mt-1 ">
                 <hr>
 
-                  <h2> ข้อมูลนิสิต </h2>
+                  <h2> ข้อมูลนิสิต</h2>
 
 
               </div>
@@ -120,22 +120,22 @@
                       <div class="row">
                           <div class="col-ms-12 col-lg-7">
                               <div class="p-1 pt-3 d-flex justify-content-start">
-                                  <p class="pe-4  ms-5 fw-bold"> ชื่อ :</p>    <p><%= firstname %> <%= lastname %></p> 
+                                  <p class="pe-4  ms-5 fw-bold"> ชื่อ :</p>    <p>น.ส. รวิสรา เลิศจันทร์เพ็ญ </p> 
                                   </div>
                                   <div class="p-1  d-flex justify-content-start">
-                                      <p class="pe-4 ms-5 fw-bold"> เลขประจำตัวนิสิต :</p>    <p><%= studentID %></p> 
+                                      <p class="pe-4 ms-5 fw-bold"> เลขประจำตัวนิสิต :</p>    <p>61130010188</p> 
                                       </div>
-                                      <!-- <div class="p-1 d-flex justify-content-start">
+                                      <div class="p-1 d-flex justify-content-start">
                                           <p class="pe-4 ms-5 fw-bold"> คณะ :</p>    <p>วิทยาลัยนวัตกรรมสื่อสารสังคม </p> 
-                                          </div> -->
+                                          </div>
                                           <div class="p-1 d-flex justify-content-start">
-                                              <p class="pe-4 ms-5 fw-bold">สาขาวิชา :</p>    <p><%= major %></p> 
+                                              <p class="pe-4 ms-5 fw-bold">สาขาวิชา :</p>    <p>คอมพิวเตอร์เพื่อการสื่อสาร</p> 
                                               </div>
                                               <div class="p-1 d-flex justify-content-start">
-                                                  <p class="pe-4  ms-5 fw-bold">ชั้นปี :</p>    <p><%= Year %></p> 
+                                                  <p class="pe-4  ms-5 fw-bold">กลุ่มผู้เรียน :</p>    <p>อ.อัญชนา กลิ่นเทียน</p> 
                                                   </div>
                                                   <div class="p-1 d-flex justify-content-start">
-                                                      <p class="pe-4  ms-5 fw-bold">สถานะ :</p>    <p><%= status %></p> 
+                                                      <p class="pe-4  ms-5 fw-bold">การผ่านหลักสูตรกิจกรรม :</p>    <p>ไม่ผ่าน</p> 
                                                       </div>
                                  
                                   
@@ -143,7 +143,12 @@
                           
                           <div class="col-sm-10 col-lg-5 ">
                               <div class="mt-2 d-flex justify-content-center ">
-                                  <img class="imgprofile " src="../images/pic-ex.jpg">
+                                <form method="post" action="/user" enctype="multipart/form-data">
+                                <label for="file">
+                                  <img id="output" class="imgprofile " src="../images/pic-ex.jpg">
+                                  <input id="file" name="image" type="file" onchange="loadFile(event)"/>
+                                </label>
+                              </form>
                               </div>
                         
 
@@ -217,8 +222,12 @@ e.target.style.setProperty('--y', y + 'px');
           document.getElementById("main").style.marginLeft= "0";
         }
 
+        function loadFile(event) {
+        var image = document.getElementById("output");
+        var data = image.src = URL.createObjectURL(event.target.files[0]);
+            console.log(data)
+        };
 
-       
         </script>
 </body>
 
