@@ -4,6 +4,7 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 var path = require("path");
 const PORT = process.env.PORT || 3000
+const multer = require("multer");
 app.use(express.static('public'));
 const dbConnectionn = require("./database");
 const { render } = require("express/lib/response");
@@ -197,6 +198,35 @@ function getuidf() {
   var id = components.join("");
   return id.toString(16);
 }
+ // upload img
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './img')
+  },
+  filename: (req, file, cb) => {
+      cb(null, 'file-' + Date.now() + '.' +
+      file.originalname.split('.')[file.originalname.split('.').length-1])}
+})
+
+const upload = multer({ storage:storage })
+
+
+app.get("/user",(req,res)=>{
+    res.render("userprofile")
+})
+
+app.post("/user",upload.single("image"),(req,res)=>{
+  if (err){
+    throw console.error();
+   } else{
+   console.log(req.file)
+  //  dbConnectionn.query("UPDATE `User` SET `img_user`= '${req.file.path}' ") 
+   res.send("upload successful")
+  }
+  // console.log(JSON.stringify(req.file))
+  // res.send("ok")
+
+});
 
 // end gen func
 
