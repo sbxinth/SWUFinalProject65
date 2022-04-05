@@ -27,6 +27,19 @@ app.get("/home", (request, response,) => {
   response.render("swu");
  });
 
+
+
+// db Test //
+// dbConnectionn.query('SELECT * FROM request WHERE Username = ?',[session.username],function (error, results, fields) {
+//   if (results.length > 0) { // check qurey has value
+//     if (error) throw error;
+//     console.log(results)
+//   } else {
+//     console.log("HAS NO ACCOUNT")
+//   }
+// });
+
+
  app.get("/info_activity01", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -34,6 +47,17 @@ app.get("/home", (request, response,) => {
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
+          // db connect read request 
+          dbConnectionn.query('SELECT user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.idEvent=event.ID_event INNER JOIN type_event ON request.idType_req=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE request.Username = ?',[session.username],function (error, results, fields) {
+            session.datax = results;
+            if (results.length > 0) { // check qurey has value
+              if (error) throw error;
+              
+            } else {
+              console.log("HAS NO data")
+            }
+          });
+          // end read request
          if (results.length > 0) { 
             if (error) throw error;
               session.img = results[0].img_user;
@@ -45,7 +69,8 @@ app.get("/home", (request, response,) => {
                 major : session.Major ,
                 Year : session.Year ,
                 status : session.status,
-                imgpath : session.img 
+                imgpath : session.img,
+                data : session.datax
               });
           } else {
              console.log("HAS NO ACCOUNT")
@@ -365,18 +390,6 @@ app.get("/main", function(req,res){
   } // if session login
 });
 
-// db Test //
-// dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
-// function (error, results, fields) {
-//   if (results.length > 0) { // check qurey has value
-//     if (error) throw error;
-    
-//     console.log(results)
-    
-//   } else {
-//     console.log("HAS NO ACCOUNT")
-//   }
-// });
 
 
 app.post('/cosciAuth', function (req, res) {
@@ -388,6 +401,7 @@ function (error, results, fields) {
     // in case has value
     if (error) throw error;
     session.isLoggedIn = true;
+    session.username = req.body.swuID;
     session.firstname = results[0].Firstname;
     session.lastname = results[0].Lastname;
     session.studentID = results[0].ID_Student;
@@ -439,9 +453,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage })
 
 
-app.get("/profile",(req,res)=>{
-    res.render("userprofile")
-})
 
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {

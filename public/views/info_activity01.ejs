@@ -76,7 +76,7 @@
                 <a href="/details_activity">รายละเอียดกิจกรรม และหลักเกณฑ์</a>
                 <a href="/announce_activity">ประชาสัมพันธ์กิจกรรม</a>
                 <div class="leftside--menu--footer">
-                  <a href="#"><img src="../images/exit.png" width="22px"> &nbsp;ออกจากระบบ</a>
+                  <a href="/logout"><img src="../images/exit.png" width="22px"> &nbsp;ออกจากระบบ</a>
                   <a href="/profile"><img src="../images/person.png" width="22px"> &nbsp;<%= studentID %></a>
           </div>
         </div>
@@ -264,19 +264,22 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% for(var i=0; i < data.length; i++) { %>
                       <tr class="tr--hover" style="background-color: #EDEDED;">
-                        <th scope="row"> <a href="/details_submit">1</a></th>
-                        <td>1/2556</td>
-                        <td>04/08/63 </td>
-                        <td>04/08/63 </td>
-                        <td> ปฐมนิเทศต้อนรับนิสิต
-                            ใหม่และค่ายเสริมสร้าง
-                            อัตลักษณ์นิสิต</td>
+                        <th scope="row"> <%= i+1 %></th>
+                          <td><%= data[i].school_year %></td>
+                          <td><%= data[i].start_Event.toLocaleDateString() %> </td>
+                          <td><%= data[i].end_Event.toLocaleDateString() %> </td>
+                          <td><%= data[i].Name_Event %> </td>
                       </tr>
+                      <% } %>
                      
                     </tbody>
                   
                     </table>
+                    
+                    
+                    
             </div>
             </div>
            
