@@ -46,7 +46,7 @@
                 <a href="/announce_activity">ประชาสัมพันธ์กิจกรรม</a>
                 <div class="leftside--menu--footer">
               <a href="/logout"><img src="https://image.flaticon.com/icons/png/512/1828/1828490.png" width="22px"> &nbsp;ออกจากระบบ</a>
-              <a href="/profile"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;หรัสนิสิต 61130010188</a>
+              <a href="/profile"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;หรัสนิสิต <%= studentID %></a>
           </div>
         </div>
 
@@ -125,17 +125,17 @@
                     <div class="ps-3">
                       <div class="d-flex">
                         <p class="fw-bold me-1"> ชื่อ :  </p>   
-                        <p> น.ส. รวิสรา เลิศจันทร์เพ็ญ. </p>
+                        <p> <%= firstname %> <%= lastname %></p>
             
                       </div>
                       <div class="d-flex">
                         <p class="fw-bold me-3">เลขประจำตัวนิสิต :  </p>   
-                        <p> 61130010188</p>
+                        <p> <%= studentID %></p>
                       </div>
                      
                       <div class="d-flex">
                         <p class="fw-bold me-3">คณะ : </p>   
-                        <p>วิทยาลัยนวัตกรรมสื่อสารสังคม</p>
+                        <p><%= major %></p>
                       </div>
                   
                       <div class="d-flex">

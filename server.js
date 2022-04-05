@@ -28,25 +28,138 @@ app.get("/home", (request, response,) => {
  });
 
  app.get("/info_activity01", (request, response,) => {
-  response.render("info_activity01");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("info_activity01", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  }); 
+ 
  app.get("/info_activity02", (request, response,) => {
-  response.render("info_activity02");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("info_activity02", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  }); 
  app.get("/info_activity03", (request, response,) => {
-  response.render("info_activity03");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("info_activity03", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  });
  app.get("/announce_activity", (request, response,) => {
-  response.render("announce_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("announce_activity", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  });
  app.get("/details_activity", (request, response,) => {
-  response.render("details_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("details_activity", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  });
  app.get("/sub_activity", (request, response,) => {
-  response.render("sub_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("sub_activity", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  });
  app.get("/add_activity", (request, response,) => {
-  response.render("add_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student"){
+      response.render("add_activity", { 
+        isloggedin : session.isLoggedIn ,
+        firstname : session.firstname ,
+        lastname : session.lastname ,
+        studentID : session.studentID ,
+        major : session.Major ,
+        Year : session.Year ,
+        status : session.status 
+      });
+    } else {
+      console.log("not student perm")
+    }
+  }
  });
  
 
@@ -171,7 +284,7 @@ function (error, results, fields) {
     session.subMajor = results[0].name_submaj;
     session.Year = results[0].Year;
     session.status = results[0].Detail_per;
-    
+
     res.render("login_success");
     
   } else {
