@@ -47,14 +47,12 @@ app.get("/home", (request, response,) => {
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
-          // db connect read request 
-          dbConnectionn.query('SELECT user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.idEvent=event.ID_event INNER JOIN type_event ON request.idType_req=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE request.Username = ?',[session.username],function (error, results, fields) {
-            session.datax = results;
-          }); 
-          // end read request
          if (results.length > 0) { 
             if (error) throw error;
-              session.img = results[0].img_user;
+            // db connect read request 
+            session.img = results[0].img_user;
+          dbConnectionn.query('SELECT user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.idEvent=event.ID_event INNER JOIN type_event ON request.idType_req=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE request.Username = ?',[session.username],function (error, results, fields) {
+            session.datax = results;
               response.render("info_activity01", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -66,6 +64,9 @@ app.get("/home", (request, response,) => {
                 imgpath : session.img,
                 data : session.datax
               });
+          }); 
+          // end read request
+              
           } else {
              console.log("HAS NO ACCOUNT")
           }
