@@ -28,138 +28,25 @@ app.get("/home", (request, response,) => {
  });
 
  app.get("/info_activity01", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("info_activity01", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("info_activity01");
  }); 
- 
  app.get("/info_activity02", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("info_activity02", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("info_activity02");
  }); 
  app.get("/info_activity03", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("info_activity03", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("info_activity03");
  });
  app.get("/announce_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("announce_activity", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("announce_activity");
  });
  app.get("/details_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("details_activity", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("details_activity");
  });
  app.get("/sub_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("sub_activity", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("sub_activity");
  });
  app.get("/add_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student"){
-      response.render("add_activity", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status 
-      });
-    } else {
-      console.log("not student perm")
-    }
-  }
+  response.render("add_activity");
  });
  
 
@@ -176,7 +63,8 @@ app.get("/home", (request, response,) => {
         studentID : session.studentID ,
         major : session.Major ,
         Year : session.Year ,
-        status : session.status 
+        status : session.status,
+        imgpath : session.img
       });
     } else {
       console.log("go to student profile");
@@ -187,7 +75,8 @@ app.get("/home", (request, response,) => {
         studentID : session.studentID ,
         major : session.Major ,
         Year : session.Year ,
-        status : session.status 
+        status : session.status,
+        imgpath : session.img 
       });
     }
   }
@@ -251,7 +140,8 @@ app.get("/main", function(req,res){
     studentID : session.studentID ,
     major : session.Major ,
     Year : session.Year ,
-    status : session.status 
+    status : session.status,
+    imgpath : session.img
   });
 });
 
@@ -284,7 +174,8 @@ function (error, results, fields) {
     session.subMajor = results[0].name_submaj;
     session.Year = results[0].Year;
     session.status = results[0].Detail_per;
-
+    session.img = results[0].img_user;
+    
     res.render("login_success");
     
   } else {
@@ -310,6 +201,45 @@ function getuidf() {
   var id = components.join("");
   return id.toString(16);
 }
+
+//upload pic
+
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './public/img')
+  },
+  filename: (req, file, cb) => {
+      cb(null, 'file-' + Date.now() + '.' +
+      file.originalname.split('.')[file.originalname.split('.').length-1])}
+})
+
+const upload = multer({ storage:storage })
+
+
+app.get("/profile",(req,res)=>{
+    res.render("userprofile")
+})
+
+app.post("/profile", upload.single('image'), (req, res) => {
+  if (!req.file) {
+      console.log("No file upload");
+  } else {
+      console.log(req.file.filename)
+      var imgsrc = '../img/' + req.file.filename
+      var insertData = ("UPDATE `User` SET `img_user`= (?) WHERE ID_Student = (?)");
+      console.log(session.studentID);
+      dbConnectionn.query(insertData, [imgsrc,session.studentID], (err, result) => {
+          if (err) throw err
+          // console.log("file uploaded")
+          console.log(req.file)
+          console.log("upload successful")
+          res.redirect("/profile")
+          // console.log(session.imgpath)
+      })
+  }
+});
 
 // end gen func
 
