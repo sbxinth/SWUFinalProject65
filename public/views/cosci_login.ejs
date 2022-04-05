@@ -39,6 +39,7 @@
                          <h3>นิสิต และบุคลากร</h3>
                      </div>
                  </div>
+                 <form action="cosciAuth" method="post">
                  <div class="container--login">
                     <div class="d-flex justify-content-end">
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -49,18 +50,18 @@
                       </div>
                       <div class="mt-1 mb-3">
                         <label for="exampleFormControlInput1" class="form-label ps-2">บัวศรีไอดี</label>
-                        <input type="text" class="form--control--login ms-3 ps-4" id="swuID" placeholder="บัวศรีไอดี">
+                        <input type="text" class="form--control--login ms-3 ps-4" name="swuID" id="swuID" placeholder="บัวศรีไอดี">
                       </div>
                       <div class="mt-2 mt-4">
                         <label for="exampleFormControlInput2" class="form-label ps-2">รหัสผ่าน</label>
-                        <input type="password" class="form--control--login ms-3 ps-4" id="password" placeholder="รหัสผ่าน">
+                        <input type="password" class="form--control--login ms-3 ps-4" name="password" id="password" placeholder="รหัสผ่าน">
                       </div>
 
                       <div class="container-fluid">
                         <div class="row">
                           <div class="col-xxl-6">
                             <div class="mt-4 mb-2 pt-2 d-flex justify-content-around ">
-                             <a href="../html/main_student.html"><button type="button" class="btn btn--confirm">เข้าสู่ระบบ</button></a> 
+                             <button type="submit" class="btn btn--confirm">เข้าสู่ระบบ</button>
         
                             </div>
                           </div>
@@ -68,6 +69,7 @@
                             <div class="mt-4 mb-2 pt-2 d-flex justify-content-around ">
                              <a href="../html/register.html"><button type="button" class="btn btn--apply">สมัครบัวศรี</button></a> 
         </div>
+
         <div class=" col-xxl-10 d-flex justify-content-end">
             <a style="font-size: 1rem;" href="#"> *ลืมรหัสผ่าน </a>
          </div>
@@ -77,7 +79,7 @@
 
                       </div>
                 </div>
-              
+                </form>
             </div>
             <div class="col-xxl-4 mt-md-5  d-none d-md-block ">
                 <p class=" d-flex justify-content-center mt-xxl-5 pt-xxl-5 " style="font-size: 50px; color: white;">เว็บไซต์บริหารจัดการ <br>

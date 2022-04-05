@@ -1,0 +1,19 @@
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+            
+        
+<%= firstname %> <%= lastname %>
+
+<%= studentID %>
+
+<%= major %>
+
+<%= Year %>
+
+<%= imgpath %>

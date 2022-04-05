@@ -32,7 +32,6 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -62,7 +61,6 @@ app.get("/home", (request, response,) => {
   response.render("cosci_login");
 }else{
   if (session.status == "student") {
-    console.log("student id for query = ", session.studentID);
     dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
       function (error, results, fields) {
        if (results.length > 0) { 
@@ -92,7 +90,6 @@ app.get("/home", (request, response,) => {
   response.render("cosci_login");
 }else{
   if (session.status == "student") {
-    console.log("student id for query = ", session.studentID);
     dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
       function (error, results, fields) {
        if (results.length > 0) { 
@@ -122,7 +119,6 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -152,7 +148,6 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -182,7 +177,6 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -212,7 +206,6 @@ app.get("/home", (request, response,) => {
     response.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -256,7 +249,6 @@ app.get("/home", (request, response,) => {
         imgpath : session.img
       });
     } else {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -348,7 +340,6 @@ app.get("/main", function(req,res){
     res.render("cosci_login");
   }else{
     if (session.status == "student") {
-      console.log("student id for query = ", session.studentID);
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
         function (error, results, fields) {
          if (results.length > 0) { 
@@ -391,10 +382,11 @@ app.get("/main", function(req,res){
 app.post('/cosciAuth', function (req, res) {
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
+  
+  console.log(results[0]);
   if (results.length > 0) { // check qurey has value
     // in case has value
     if (error) throw error;
-    
     session.isLoggedIn = true;
     session.firstname = results[0].Firstname;
     session.lastname = results[0].Lastname;
@@ -409,7 +401,7 @@ function (error, results, fields) {
     
   } else {
     // in case no account
-    console.log("HAS NO ACCOUNT")
+    console.log("HAS NO ACCOUNT xxxx")
     res.render("login_fail");
   }
 });

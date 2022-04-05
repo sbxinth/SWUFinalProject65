@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
+    <title>หน้าแรก</title>
     <link rel="SHORTCUT ICON" href="../images/logo-swu.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -15,9 +15,41 @@
 
 </head>
 <body id="main">
-  <div class="circle1"></div>
-  <div class="circle2"></div>
-  <div class="circle3"></div>
+  
+<section>
+  <div class="">
+    <nav style="    background-image: linear-gradient(to right, #2575FC 30%, #6A11CB 100%);
+    ;   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" class="">
+      <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+          <div class=" d-flex justify-content-center ">
+            <span onclick="openNav()">
+              <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="50px" style="color: aliceblue;" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+          </div>
+              </span></div>
+        </ul>
+        <ul class="nav ">
+            <li class="nav-item mt-1" ><a href="/profile" class="nav-link link-light " ><%= firstname %> <%= lastname %> </a></li>
+
+            <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2"><img src=<%= imgpath %> class="imgprofile" style="width: 37px;height: 37px;"></a></li>
+
+          <li class="nav-item pt-1"><a href="/logout" class="nav-link link-dark px-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: aliceblue;"  fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+          </svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<div class="circle1"></div>
+
+<div class="circle2"></div>
+<div class="circle3"></div>
 
     <section>
       
@@ -25,7 +57,7 @@
                 <a href="javascript:void(0)" class="closebtn d-xl-none" onclick="closeNav()" >X</a>
              
                  <div class="m-1 mb-4">
-                  <a href="/main"><img class="z-index: 3;" src="http://cosci.swu.ac.th/img/logo.svg" width="150px"></a>  
+                  <a href="/main"><img class="z-index: 3;" src="http://internship.cosci.swu.ac.th/pic/logoCosci.png" width="150px"></a>  
           
                
                 </div>
@@ -44,8 +76,8 @@
                 <a href="/details_activity">รายละเอียดกิจกรรม และหลักเกณฑ์</a>
                 <a href="/announce_activity">ประชาสัมพันธ์กิจกรรม</a>
                 <div class="leftside--menu--footer">
-                    <a href="/logout"><img src="https://image.flaticon.com/icons/png/512/1828/1828490.png" width="22px"> &nbsp;ออกจากระบบ</a>
-                    <a href="/profile"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;หรัสนิสิต <%= studentID %></a>
+                    <a href="#"><img src="../images/exit.png" width="22px"> &nbsp; ออกจากระบบ</a>
+                    <a href="/profile"><img src="../images/person.png" width="22px"> &nbsp; <%= studentID %></a>
                 </div>
               </div>
 
@@ -55,81 +87,45 @@
 
 <section>
       
-  <div class="container">
-    <div class="row mt-4">
-        <div class="col-xl-2 ">
-            <div class="d-xxl-none bgopen mb-4">
-                <span style="font-size:30px;cursor:pointer" class="bgopen" onclick="openNav()">
-                  <div class="fs-2 mb-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list-nested" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"></path>
-            </svg>
-              </div>
-                  </span></div>
-            
+  <div class="container-fluid">
+
+    
+    <div class="row mt-5">
+        <div class="col-md-2 col-xl-5  ">
+           
             </div>
     
-        <div class="col-xl-4 ">
-<div class="container--info--1 d-none d-xl-block ">
-    <div class=" pt-2 d-flex  align-items-center">
-        <div class="ps-4">
-          <div class="d-flex">
-            <p class="fw-bold me-3"> กลุ่มผู้เรียน :  </p>   
-            <p>IC43 (ปี 4) </p>
-
-          </div>
-          <div class="d-flex">
-            <p class="fw-bold me-3">วิชาโท : </p>   
-            <p>วิชาโทการจัดการธุรกิจไซเบอร์</p>
-          </div>
-         
-          <div class="d-flex">
-            <p class="fw-bold me-3">สาขา : </p>   
-            <p>คอมพิวเตอร์เพื่อการสื่อสาร</p>
-          </div>
-      
-          <div class="d-flex">
-            <p class="fw-bold me-3">อาจารย์ที่ปรึกษา : </p>   
-            <p> อ.อัญชนา กลิ่นเทียน</p>
-          </div>
-           
-        </div>
-      
-    </div>
-
-</div>
-        </div>
-        <div class="col-xl-5  col-md-9  ">
-            <div class="  container--info--1 ">
+        <div class="col-md-9 col-xl-6 ms-2">
+          <a href="/profile"> <div class="  container--info--1 ">
                 <div class=" p-2 d-flex align-items-center">
-                    <div class="ps-3">
-                      <div class="d-flex">
-                        <p class="fw-bold me-1"> ชื่อ :  </p>   
-                        <p> <%= firstname %> <%= lastname %> </p>
-            
-                      </div>
-                      <div class="d-flex">
-                        <p class="fw-bold me-3">เลขประจำตัวนิสิต :  </p>   
-                        <p> <%= studentID %></p>
-                      </div>
-                     
-                      <div class="d-flex">
-                        <p class="fw-bold me-3">คณะ : </p>   
-                        <p><%= major %></p>
-                      </div>
-                  
-                      <div class="d-flex">
-                        <p class="fw-bold me-3">การผ่านหลักสูตรกิจกรรม :  </p>   
-                        <p>  ไม่ผ่าน</p>
-                      </div>
-                      
+                  <div class="ps-3">
+                    <div class="d-flex">
+                      <p class="fw-bold me-1"> ชื่อ :  </p>   
+                      <p class="fw-light color-gray ms-1"> <%= firstname %> <%= lastname %></p>
+          
                     </div>
-                    <div class="ms-5 pb-3 ">
-                        <img class="main--imgprofile" src="../images/pic-ex.jpg">
+                    <div class="d-flex">
+                      <p class="fw-bold me-1">เลขประจำตัวนิสิต :  </p>   
+                      <p class="fw-light color-gray ms-1"> <%= studentID %></p>
+                    </div>
+                   
+                
+                    <div class="d-flex">
+                      <p class="fw-bold me-1">สาขา :  </p>   
+                      <p class="fw-light color-gray ms-1"><%= major %></p>
+                    </div>
+                    <div class="d-flex">
+                      <p class="fw-bold me-1"> กลุ่มผู้เรียน :  </p>   
+                      <p class="fw-light color-gray ms-1">(ปี <%= Year %>) </p>
+          
+                    </div>
+                  </div>
+                    <div class="ms-4 ps-4 mb-3">
+                        <img class="main--imgprofile" src=<%= imgpath %>>
                       </div>
                 </div>
-            
             </div>
+          </a> 
         </div>
         </div>
      </div>
@@ -138,7 +134,7 @@
 <div class="container mt-4 d-flex justify-content-end">
 <button class="btnwarn">
 <span><img src="https://image.flaticon.com/icons/png/512/1157/1157000.png" width="20px"> <div class="ms-2 badge bg-danger">2</div> </span> 
-<a href="../html/notification_activity.html" style="color: white;">มีการแจ้งเตือน</a>
+<a href="/notification_activity" style="color: white;">มีการแจ้งเตือน</a>
 </button>
 
 </div>
@@ -150,94 +146,55 @@
 
 
 <section>
-<div class="container-fluid mt-3">
+<div class="container mt-3">
   <div class="row">
     <div class="col-md-2">
 
     </div>
-    <div class="col-md-9 mb-4 ms-5" >
-      <h2 class="fw-bold mt-4 topic">กิจกรรมนิสิต</h2>
+    <div class="col-md-9 mb-4 ms-5 " >
+      <h2 class="fw-bold mt-4 ps-3 topic">กิจกรรมนิสิต</h2>
     </div>
   </div>
 </div>
 
 <div>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-2 col-xxl-2">
       </div>
-      <div class="col-sm-11 col-xxl-9 ">
+      <div class="col-sm-11 col-xxl-9  ms-md-4">
         <div class="table-responsive bgtable">
           <table class="table " >
               <thead >
             <tr>
               <th class="fw-bold" scope="col" >กลุ่มกิจกรรม</th>
-              <th scope="col"></th>
               <th class="fw-bold" scope="col">จำนวน</th>
-              <th scope="col"></th>
+              <th class="fw-bold"  scope="col">หน่วย</th>
 
-              <th class="fw-bold"  scope="col">บังคับ</th>
-              <th scope="col"></th>
-
-              <th class="fw-bold" scope="col">เลือก</th>
-              <th scope="col"></th>
-
-              <th class="fw-bold" scope="col">สถานะ</th>
             </tr>
           </thead>
           <tbody >
           <tr class="tr--hover">
             <a href="/info_activity01"></a>
-            <th scope="row"> <a href="/info_activity01">กิจกรรมบังคับ</a>
-            </th>
-            <th scope="col"></th>
-            <td>ครั้ง</td>
-            <th scope="col"></th>
-            <td style="color: limegreen;">3/3</td>
-            <th scope="col"></th>
-            <td>-</td>
-            <th scope="col"></th>
-            <td><img src="https://image.flaticon.com/icons/png/512/4336/4336844.png" width="20px"></td>
-          </tr> </a> 
+            <th scope="row"> <a href="/info_activity01">กิจกรรมบังคับ</a> </th>
+            <td class="fw-light">3</td>
+            <td class="fw-light">ครั้ง</td>
+      
+           
+          </tr> 
             <tr class="tr--hover">
-              <th scope="row"> <a href="/info_activity02">กิจกรรมเลือก</a>
-              </th>             
-               <th scope="col"></th>
-              <td>ครั้ง</td>
-              <td scope="col"></td>
-              <td>-</td>
-              <td scope="col"></td>
-              <td style="color: limegreen;" >2/2</td>
-              <td scope="col"></td>
-              <td><img src="https://image.flaticon.com/icons/png/512/4336/4336844.png" width="20px"></td>
+              <th scope="row"> <a href="/info_activity02">กิจกรรมเลือก</a></th>             
+              <td class="fw-light">2</td>
+              <td class="fw-light" >ครั้ง</td>
             </tr>
             <tr class="tr--hover">
-              <th scope="row"> <a href="/info_activity03">กิจกรรมบำเพ็ญสาธารณประโยชน์</a>
-              </th>  
-              <td scope="col"></td>
-              <td>ครั้ง</td>
-              <td scope="col"></td>
-              <td style="color: rgb(205, 50, 50);">1/3</td>
-              <td scope="col"></td>
-              <td>-</td>
-              <td scope="col"></td>
-              <td><img src="https://image.flaticon.com/icons/png/512/4336/4336830.png" width="20px"></td>
+              <th scope="row"> <a href="/info_activity03">กิจกรรมบำเพ็ญสาธารณประโยชน์</a></th>  
+              <td class="fw-light">3 ครั้ง / 100 ชม.</td>
+          
+              <td class="fw-light">ครั้ง / ชั่วโมง</td>
+            
             </tr>
-            <tr class="tr--hover">
-              <th scope="row"> <a href="/info_activity03">กิจกรรมบำเพ็ญสาธารณประโยชน์</a>
-              </th>                <td scope="col"></td>
-
-              <td>ชั่วโมง</td>
-              <td scope="col"></td>
-
-              <td style="color: rgb(205, 50, 50);">44/100</td>
-              <td scope="col"></td>
-
-              <td>-</td>
-              <td scope="col"></td>
-
-              <td><img src="https://image.flaticon.com/icons/png/512/4336/4336830.png" width="20px"></td>
-            </tr>
+           
           </tbody>
         
           </table>
@@ -258,16 +215,16 @@
 
 
 <footer>
-  <div class="container pt-2 mt-3">
+  <div class="container pt-lg-5 mt-5 mb-4">
     <div class="row mt-5">
       <div class="col-md-3">
       </div>
-      <div class="col-md-5 pt-3 d-flex align-items-end " style="font-size: 12px;">
+      <div class="col-md-5 pt-3 d-flex  " style="font-size: 12px;">
        <p> @ COLLEGE OF SOCIAL COMMUNICATION INNOVATION </p> 
       </div>
       <div class="col-md-3 d-flex justify-content-center">
         <div class="me-3">
-          <img src="https://image.flaticon.com/icons/png/512/3014/3014736.png" width="30px"> 
+          <img src="../images/phone.png" width="30px"> 
       </div>
   <div class="pl-2" style="font-size: 12px;">
        ส่วนส่งเสริมและบริการการศึกษา <br>
