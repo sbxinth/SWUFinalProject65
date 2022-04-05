@@ -50,13 +50,7 @@ app.get("/home", (request, response,) => {
           // db connect read request 
           dbConnectionn.query('SELECT user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.idEvent=event.ID_event INNER JOIN type_event ON request.idType_req=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE request.Username = ?',[session.username],function (error, results, fields) {
             session.datax = results;
-            if (results.length > 0) { // check qurey has value
-              if (error) throw error;
-              
-            } else {
-              console.log("HAS NO data")
-            }
-          });
+          }); 
           // end read request
          if (results.length > 0) { 
             if (error) throw error;
