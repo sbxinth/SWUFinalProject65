@@ -28,25 +28,214 @@ app.get("/home", (request, response,) => {
  });
 
  app.get("/info_activity01", (request, response,) => {
-  response.render("info_activity01");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("info_activity01", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
  }); 
- app.get("/info_activity02", (request, response,) => {
-  response.render("info_activity02");
+ app.get("/info_activity02", (request, response,) => {  
+   if (!session.isLoggedIn){
+  response.render("cosci_login");
+}else{
+  if (session.status == "student") {
+    console.log("student id for query = ", session.studentID);
+    dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+      function (error, results, fields) {
+       if (results.length > 0) { 
+          if (error) throw error;
+            session.img = results[0].img_user;
+            response.render("info_activity02", { 
+              isloggedin : session.isLoggedIn ,
+              firstname : session.firstname ,
+              lastname : session.lastname ,
+              studentID : session.studentID ,
+              major : session.Major ,
+              Year : session.Year ,
+              status : session.status,
+              imgpath : session.img 
+            });
+        } else {
+           console.log("HAS NO ACCOUNT")
+        }
+      });
+  } else {
+    response.send("u r not student")
+  } // if perm student // admin
+} // if session login
  }); 
- app.get("/info_activity03", (request, response,) => {
-  response.render("info_activity03");
+ app.get("/info_activity03", (request, response,) => {  
+   if (!session.isLoggedIn){
+  response.render("cosci_login");
+}else{
+  if (session.status == "student") {
+    console.log("student id for query = ", session.studentID);
+    dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+      function (error, results, fields) {
+       if (results.length > 0) { 
+          if (error) throw error;
+            session.img = results[0].img_user;
+            response.render("info_activity03", { 
+              isloggedin : session.isLoggedIn ,
+              firstname : session.firstname ,
+              lastname : session.lastname ,
+              studentID : session.studentID ,
+              major : session.Major ,
+              Year : session.Year ,
+              status : session.status,
+              imgpath : session.img 
+            });
+        } else {
+           console.log("HAS NO ACCOUNT")
+        }
+      });
+  } else {
+    response.send("u r not student")
+  } // if perm student // admin
+} // if session login
  });
  app.get("/announce_activity", (request, response,) => {
-  response.render("announce_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("announce_activity", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
  });
  app.get("/details_activity", (request, response,) => {
-  response.render("details_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("details_activity", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
  });
  app.get("/sub_activity", (request, response,) => {
-  response.render("sub_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("sub_activity", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
  });
  app.get("/add_activity", (request, response,) => {
-  response.render("add_activity");
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("add_activity", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
  });
  
 
@@ -153,31 +342,48 @@ app.get("/home", (request, response,) => {
 });
 
 app.get("/main", function(req,res){
-  // res.render("main_student");
-  res.render("main_student", { 
-    isloggedin : session.isLoggedIn ,
-    firstname : session.firstname ,
-    lastname : session.lastname ,
-    studentID : session.studentID ,
-    major : session.Major ,
-    Year : session.Year ,
-    status : session.status,
-    imgpath : session.img
-  });
+  if (!session.isLoggedIn){
+    res.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              res.render("main_student", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
 });
 
-
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
-function (error, results, fields) {
-  if (results.length > 0) { // check qurey has value
-    if (error) throw error;
+// db Test //
+// dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',["co611010035", "co611010035"], 
+// function (error, results, fields) {
+//   if (results.length > 0) { // check qurey has value
+//     if (error) throw error;
     
-    console.log(results)
+//     console.log(results)
     
-  } else {
-    console.log("HAS NO ACCOUNT")
-  }
-});
+//   } else {
+//     console.log("HAS NO ACCOUNT")
+//   }
+// });
 
 
 app.post('/cosciAuth', function (req, res) {

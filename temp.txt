@@ -1,0 +1,28 @@
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              response.render("main_student", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
