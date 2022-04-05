@@ -1,0 +1,125 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0;0,200;0,300;0,400;1,200&display=swap');
+
+
+body{
+    font-family: 'Prompt', sans-serif;
+    font-style: initial ;
+  
+
+}
+
+ .swu {
+    font-size: 170px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    color: transparent;
+    border-bottom: white 2px ;
+}
+
+
+.bg-regiser{
+    background: url("../images/history-1705x960--1.jpeg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  
+}
+
+.side-left{
+    height: 100%;
+    width: 450px;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top, #6A11CB 0%, #2575FC 100%);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 12px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+    
+}
+
+
+.main{
+padding-left: 450px;
+}
+
+
+.form--control--register {
+    display: block;
+    width: 89%;
+    /* height: 100%; */
+    padding: .4rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 60%;
+    color: #2d353d;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #707070;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 1.1rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    box-shadow: rgb(0 0 0 / 1%) 3px 3px 6px;
+
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 72%;
+    line-height: 1.2;
+    padding : 10px 50px;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: 90%;
+    border-radius: 1.3rem;
+    box-shadow: rgba(0, 0, 0, 0.20) 3px 3px 5px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+
+.btn--login:hover {
+    color: #fff;
+    background-color:#4C1CBE;
+
+}
+.btn--register {
+    color: #fff;
+    background-color:#2647ff;
+
+}
+
+.btn--login{
+    color: #fff;
+    background-color:#0a0417;
+}
+
+.btn--register:hover{
+    color: #fff;
+    background-color:#0a0417;
+}
+
+.container--regiser{
+    width: 100%;
+    height: 100%;
+    padding: 2.1rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: rgba(33, 34, 34, 0.2) 0px 8px 24px;
+    opacity: 0.88;
+    margin-left: 25px;
+}

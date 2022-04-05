@@ -306,7 +306,8 @@ app.get("/home", (request, response,) => {
         studentID : session.studentID ,
         major : session.Major ,
         Year : session.Year ,
-        status : session.status 
+        status : session.status,
+        imgpath : session.img 
       });
     } else {
       console.log("go to student profile");
@@ -317,7 +318,8 @@ app.get("/home", (request, response,) => {
         studentID : session.studentID ,
         major : session.Major ,
         Year : session.Year ,
-        status : session.status 
+        status : session.status,
+        imgpath : session.img 
       });
     }
     
