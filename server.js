@@ -67,17 +67,38 @@ app.get("/home", (request, response,) => {
         imgpath : session.img
       });
     } else {
-      console.log("go to student profile");
-      response.render("userprofile", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status,
-        imgpath : session.img 
-      });
+      console.log("student id for query = ", session.studentID);
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+              session.img = results[0].img_user;
+              console.log("new img path ", session.img);
+              console.log("go to student profile");
+              response.render("userprofile", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img 
+              });
+          } else {
+             console.log("HAS NO ACCOUNT")
+          }
+});
+      // response.render("userprofile", { 
+      //   isloggedin : session.isLoggedIn ,
+      //   firstname : session.firstname ,
+      //   lastname : session.lastname ,
+      //   studentID : session.studentID ,
+      //   major : session.Major ,
+      //   Year : session.Year ,
+      //   status : session.status,
+      //   imgpath : session.img 
+      // });
     }
   }
  });
