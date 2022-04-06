@@ -273,7 +273,11 @@
                           <td><%= data[i].Name_Event %> </td>
                       </tr>
                       <% } %>
-                     
+                      <% if(i=="0"){ %>
+                        <tr class="tr--hover" style="background-color: #EDEDED;">
+                          <th scope="row"> <a href="">ยังไม่พบรายการคำร้อง</a></th>
+                        </tr>
+                     <% } %>
                     </tbody>
                   
                     </table>

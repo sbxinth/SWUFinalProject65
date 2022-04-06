@@ -266,21 +266,20 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <% for(var i=0; i < data.length; i++) { %>
                       <tr class="tr--hover" style="background-color: #EDEDED;">
-                        <th scope="row"> <a href="/details_submit">1</a></th>
-                        <td>1/2556</td>
-                        <td>04/08/63 </td>
-                        <td>04/08/63 </td>
-                        <td>จิตอาสาจาววา</td>
+                        <th scope="row"> <%= i+1 %></th>
+                          <td><%= data[i].school_year %></td>
+                          <td><%= data[i].start_Event.toLocaleDateString() %> </td>
+                          <td><%= data[i].end_Event.toLocaleDateString() %> </td>
+                          <td><%= data[i].Name_Event %> </td>
                       </tr>
-                      <tr class="tr--hover" style="background-color: #EDEDED;">
-                        <th scope="row"> <a href="/details_submit">2</a></th>
-                        <td>1/2561</td>
-                        <td>04/08/63 </td>
-                        <td>04/08/63 </td>
-                        <td>จิตอาสา</td>
-                      </tr>
-                     
+                      <% } %>
+                      <% if(i=="0"){ %>
+                        <tr class="tr--hover" style="background-color: #EDEDED;">
+                          <th scope="row"> <a href="">ยังไม่พบรายการคำร้อง</a></th>
+                        </tr>
+                     <% } %>
                      
                     </tbody>
                   
