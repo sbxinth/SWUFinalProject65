@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ชื่อกิจกรรม</title>
+    <title>กิจกรรม</title>
     <link rel="SHORTCUT ICON" href="../images/logo-swu.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -48,35 +48,47 @@
                 <a href="/details_activity">รายละเอียดกิจกรรม และหลักเกณฑ์</a>
                 <a href="/announce_activity">ประชาสัมพันธ์กิจกรรม</a>
                 <div class="leftside--menu--footer">
-                    <a href="/logout"><img src="https://image.flaticon.com/icons/png/512/1828/1828490.png" width="22px"> &nbsp;ออกจากระบบ</a>
-                    <a href="/profile"><img src="https://image.flaticon.com/icons/png/512/1077/1077012.png" width="22px"> &nbsp;หรัสนิสิต <%= studentID %></a>
+                  <a href="#"><img src="../images/exit.png" width="22px"> &nbsp;ออกจากระบบ</a>
+                  <a href="/profile"><img src="../images/person.png" width="22px"> &nbsp; <%= studentID %></a>
                 </div>
               </div>
 
     
 </section>
 
-
-
-
 <section>
-<div class="container-md">
-  <div class="bgopen mt-3 " style="opacity:0.6;">
-    <span style="font-size:30px;cursor:pointer" class="bgopen" onclick="openNav()">
-      <div class="fs-2 mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list-nested" viewBox="0 0 16 16">
-<path fill-rule="evenodd" d="M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z"></path>
-</svg>
-  </div>
+  <div class="">
+    <nav  class="haed--main fixed-topp ">
+      <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+          <div class=" d-flex justify-content-center ">
+            <span onclick="openNav()">
+              <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="50px" style="color: aliceblue;" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+          </div>
+              </span></div>
+        </ul>
+        <ul class="nav ">
+            <li class="nav-item mt-1" ><a href="/profile" class="nav-link link-light " ><%= firstname %> <%= lastname %></a></li>
+
+            <li class="nav-item"><a href="/profile" class="nav-link link-dark px-2"><img src=<%= imgpath %> class="imgprofile" style="width: 37px;height: 37px;"></a></li>
+
+          <li class="nav-item pt-1"><a href="/logout" class="nav-link link-dark px-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="color: aliceblue;"  fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+          </svg></a></li>
+        </ul>
       </div>
-</span>
-</div>
-</div>
- 
+    </nav>
+  </div>
 </section>
 
 
-<section style="margin-top:5%;">
+
+
+<section style="margin-top: 8%;">
 
 
 
@@ -89,14 +101,14 @@
   <h1 class="mb-5 " style="color: white;border-bottom: solid 2px ;padding: 10px;">ชื่อกิจกรรม</h1>
 
 <div class="container-box ">
-  <a href="../html/announce_activity"> < กลับไปที่หน้าหลัก</a>
+  <a href="/announce_activity"> < กลับไปที่หน้าหลัก</a>
 <div class="row">
   <div class="col-md-12 mt-md-5 d-flex justify-content-center">
 <img  class="fix_mainimg" src="../images/history-1705x960--1.jpeg">
   </div>
 <div class="container">
     <div class="d-flex align-items-center mt-4 ms-4" style="color: black;border-bottom: solid 1px ;padding: 10px;">
-        <img src="https://image.flaticon.com/icons/png/512/3094/3094679.png" width="40px">   
+        <img src="../images/announcement.png" width="40px">   
         <p class="pt-3 ps-4"> ชื่อกิจกรรม ฉบับเต้ม COSCI cinema</p>
 
         
@@ -124,21 +136,29 @@ Sub details รายละเอียดกิจกรรม รายละ�
 ละเอียดกิจกรรมอรายละเอียดกิจกรรม <br>
 Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
 ละเอียดกิจกรรมอรายละเอียดกิจกรรม
+Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+ละเอียดกิจกรรมอรายละเอียดกิจกรรม 
+Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+ละเอียดกิจกรรมอรายละเอียดกิจกรรม <br>
+Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+ละเอียดกิจกรรมอรายละเอียดกิจกรรม <br>
+Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+ละเอียดกิจกรรมอรายละเอียดกิจกรรม
  </p>
+
 
             </div>
         </div>
       </div>
       <div class="d-flex justify-content-end mt-5">
         <button class="btnfav me-3">
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="color:rgb(255, 255, 255);">
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" style="color:rgb(255, 255, 255);">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
           </svg> </span> 
-          <a href="" style="color: white;">กด fav.ไว้</a>
+          <a href="/add_activity" style="color: white;">ลงกิจกรรม</a>
           </button>
           
-        <img src="https://image.flaticon.com/icons/png/512/145/145802.png" width="40px">
-        <img class="ms-2" src=" https://image.flaticon.com/icons/png/512/179/179342.png" width="40px">
+       <a href="https://www.facebook.com/cosciswunews"><img src="../images/facebook.png"  width="40px"></a> 
         
           </div>
   </div>
@@ -146,18 +166,17 @@ Sub details รายละเอียดกิจกรรม รายละ�
   </div>
 </section>
 
-
 <footer>
-  <div class="container pt-5 mt-3">
+  <div class="container p-lg-4 mt-5 mb-4">
     <div class="row mt-5">
-      <div class="col-md-4">
+      <div class="col-md-3">
       </div>
-      <div class="col-md-4 pt-3 d-flex align-items-end " style="font-size: 12px;">
+      <div class="col-md-5 pt-3 d-flex  " style="font-size: 12px;">
        <p> @ COLLEGE OF SOCIAL COMMUNICATION INNOVATION </p> 
       </div>
-      <div class="col-md-4 d-flex justify-content-end">
+      <div class="col-md-3 d-flex justify-content-center">
         <div class="me-3">
-          <img src="https://image.flaticon.com/icons/png/512/3014/3014736.png" width="30px"> 
+          <img src="../images/phone.png" width="30px"> 
       </div>
   <div class="pl-2" style="font-size: 12px;">
        ส่วนส่งเสริมและบริการการศึกษา <br>
@@ -167,8 +186,8 @@ Sub details รายละเอียดกิจกรรม รายละ�
     </div>
 
   </div>
+</div>
 </footer>
-
 
 
 <script>
@@ -194,7 +213,9 @@ e.target.style.setProperty('--y', y + 'px');
        }
 
   
- 
+
+
+
       </script>
        
 </body>
