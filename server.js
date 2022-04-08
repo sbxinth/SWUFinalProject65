@@ -71,7 +71,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',[session.username],function (error, results, fields) {
             session.datax = results;
-            console.log("datax = ",session.datax, "username = ",session.username )
+            // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("info_activity01", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -108,7 +108,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมเลือก"',[session.username],function (error, results, fields) {
             session.datax = results;
-            console.log("datax = ",session.datax, "username = ",session.username )
+            // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("info_activity02", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -145,7 +145,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบำเพ็ญสาธารณประโยชน์"',[session.username],function (error, results, fields) {
             session.datax = results;
-            console.log("datax = ",session.datax, "username = ",session.username )
+            // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("info_activity03", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -298,7 +298,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,request.date_req,type_req.Detail_Type_R,status.Detail_Status FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN user ON request.Username=user.Username INNER JOIN type_req ON request.idType_req=type_req.idType_Req INNER JOIN status ON request.Status_req=status.idStatus WHERE user.Username = ?',[session.username],function (error, results, fields) {
             session.datax = results;
-            console.log("datax = ",session.datax, "username = ",session.username )
+            // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("status_page", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -351,6 +351,10 @@ app.get("/home", (request, response,) => {
     } // if perm student // admin
   } // if session login
  });
+
+ app.post('/getIDREQ', function (req, res) {
+  console.log(req.body.reqiD,"reqID");
+});
  
  app.get("/profile", (request, response,) => {
   if (!session.isLoggedIn){
@@ -374,8 +378,8 @@ app.get("/home", (request, response,) => {
          if (results.length > 0) { 
             if (error) throw error;
               session.img = results[0].img_user;
-              console.log("new img path ", session.img);
-              console.log("go to student profile");
+              // console.log("new img path ", session.img);
+              // console.log("go to student profile");
               response.render("userprofile", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
@@ -405,7 +409,7 @@ app.get("/home", (request, response,) => {
  });
 
  app.get("/login", (request, response) => {
-  console.log(session.isLoggedIn,"in /login");
+  // console.log(session.isLoggedIn,"in /login");
   if (!session.isLoggedIn){
     response.render("cosci_login");
   }else{
@@ -491,7 +495,7 @@ app.post('/cosciAuth', function (req, res) {
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   
-  console.log(results[0]);
+  // console.log(results[0]);
   if (results.length > 0) { // check qurey has value
     // in case has value
     if (error) throw error;
@@ -551,17 +555,19 @@ const upload = multer({ storage:storage })
 
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {
+      
       console.log("No file upload");
+      res.render("No file upload");
   } else {
-      console.log(req.file.filename)
+      // console.log(req.file.filename)
       var imgsrc = '../img/' + req.file.filename
       var insertData = ("UPDATE `User` SET `img_user`= (?) WHERE ID_Student = (?)");
-      console.log(session.studentID);
+      // console.log(session.studentID);
       dbConnectionn.query(insertData, [imgsrc,session.studentID], (err, result) => {
           if (err) throw err
           // console.log("file uploaded")
-          console.log(req.file)
-          console.log("upload successful")
+          // console.log(req.file)
+          // console.log("upload successful")
           res.redirect("/profile")
           // console.log(session.imgpath)
       })
