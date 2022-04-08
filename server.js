@@ -3,13 +3,31 @@ var app = express();
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var path = require("path");
+var router = express.Router();
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
 const dbConnectionn = require("./database");
 const { render } = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// 
+//  test get req 1
+// var url = require('url');
+// var fs = require('fs');
+// var http = require('http');
+// var adr = 'http://127.0.0.1:3000/details_submit/?rqt=request&code=2568';
+// var q = url.parse(adr, true);
+
+// // console.log(q,"detail");
+// var datqeu=q.query;
+// // console.log(datqeu.rqt,"query");
+// if (datqeu.rqt == "request") {
+//     // console.log("xxxxxxxxxxxxxxxxxxxxx");
+// }
+
+
+// test get req2
+
+//
 app.set("views",path.join(__dirname, '/public/views'))
 app.set( "view engine", "ejs" );
 app.use(
@@ -30,14 +48,14 @@ app.get("/home", (request, response,) => {
 
 
 // db Test //
-dbConnectionn.query('SELECT request.idRequest,request.date_req,type_req.Detail_Type_R,status.Detail_Status FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN user ON request.Username=user.Username INNER JOIN type_req ON request.idType_req=type_req.idType_Req INNER JOIN status ON request.Status_req=status.idStatus WHERE user.Username = ?',["co611010035"],function (error, results, fields) {
-  // if (results.length > 0) { // check qurey has value
-    if (error) throw error;
-    console.log(results)
-  // } else {
-  //   console.log("HAS NO data")
-  // }
-});
+// dbConnectionn.query('SELECT request.idRequest,request.date_req,type_req.Detail_Type_R,status.Detail_Status FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN user ON request.Username=user.Username INNER JOIN type_req ON request.idType_req=type_req.idType_Req INNER JOIN status ON request.Status_req=status.idStatus WHERE user.Username = ?',["co611010035"],function (error, results, fields) {
+//   // if (results.length > 0) { // check qurey has value
+//     if (error) throw error;
+//     console.log(results)
+//   // } else {
+//   //   console.log("HAS NO data")
+//   // }
+// });
 
 
  app.get("/info_activity01", (request, response,) => {
