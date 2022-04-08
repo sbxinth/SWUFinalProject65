@@ -300,6 +300,7 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
 
  app.post('/add_activity', function (req, res) {
    console.log(req.body);
+   
    res.send("submitted");
   // console.log(req.body.demoFormSelected);
 });

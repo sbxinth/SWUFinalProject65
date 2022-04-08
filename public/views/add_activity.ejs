@@ -162,7 +162,7 @@
             <div class="row g-3 d-flex">
               <div class="mb-2 col-10 col-lg-6">
                 <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                <input type="text" class="form-control" name="exampleFormControlInput1" placeholder="61130010188">
+                <input type="text" class="form-control" name="studentID" value="61130010188">
                 <div id="emailHelp" class="form-text">* กรุณาระบุรหัสประจำตัวนิสิต 11 หลัก ให้ถูกต้องและครบถ้วน</div>
 
               </div>
@@ -170,7 +170,7 @@
 
 <div class=" mb-2 col-10 col-lg-6">
   <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
-  <select class="form-select" aria-label="select Activity category">
+  <select class="form-select" name="majorSelect" aria-label="select Activity category">
     <option selected>เอก/สาขา</option>
     <option value="1">วิชาเอกการผลิตงานภาพยนตร์และสื่อดิจิทัล</option>
     <option value="2">วิชาเอกการแสดงและกำกับการแสดงภาพยนตร์</option>
@@ -191,11 +191,11 @@
 <div class="mb-1 col-10 ">
   <label for="exampleFormControlInput1" class="form-label">คำนำหน้า *    </label>
   <div class="form-check">
-    <input type="radio" class="form-check-input" name="validationFormCheck1" name="radio-stacked" >
+    <input type="radio" class="form-check-input" name="male" name="radio-stacked" >
     <label class="form-check-label" for="validationFormCheck2">นาย</label>
   </div>
   <div class="form-check">
-    <input type="radio" class="form-check-input" name="validationFormCheck2" name="radio-stacked" >
+    <input type="radio" class="form-check-input" name="female" name="radio-stacked" >
     <label class="form-check-label" for="validationFormCheck2">นาง / นางสาว</label>
   </div>
 </div>
@@ -203,13 +203,13 @@
 
 <div class="mb-1 col-10 col-lg-6">
   <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-  <input type="text" class="form-control" name="exampleFormControlInput1" placeholder="รวิสรา">
+  <input type="text" class="form-control" name="name" value="รวิสรา">
   <div id="emailHelp" class="form-text">* ไม่ต้องใส่คำนำหน้า</div>
 
 </div>
 <div class="mb-1 col-10 col-lg-6">
   <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="เลิศจันทร์เพ็ญ">
+  <input type="text" class="form-control" name="lastname" id="exampleFormControlInput1" value="เลิศจันทร์เพ็ญ">
 
 </div>
 
@@ -281,7 +281,7 @@
   <div class="mb-1 col-12">
     <label for="exampleFormControlInput1" class="form-label">ระยะเวลาที่เข้าร่วมกิจกรรม/โครงการ *
     </label>
-    <input type="number" class="form-control" name="exampleFormControlInput1" placeholder="0">
+    <input type="number" class="form-control" name="durationEventTime" value="0">
     <div id="emailHelp" class="form-text">* เช่น 08.30 - 12.30 น. = 4 ชม. (ไม่รวมช่วงเวลาการเดินทางและพักผ่อน)</div>
 
   </div>
