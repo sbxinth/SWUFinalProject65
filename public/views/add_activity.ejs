@@ -100,125 +100,10 @@
   </span>
   </div>
   <div class="col-xxl-4 col-md-1"></div>
- <!-- <div class="col-xxl-4 col-md-8">
-    <div class="row">
-      <a href="/info_student.html">
-        <div class="container--info--1 d-flex justify-content-md-around align-items-center " style="background-color: rgb(255, 255, 255); padding: 5px;">
-          <div class="pt-3 px-2 ">
-            <div class="d-flex justify-content-between">
-              <p class="fw-bolder">ชื่อ :</p> <p class="ps-4"> น.ส. รวิสรา เลิศจันทร์เพ็ญ.</p>    
-            </div>
-            <div class="d-flex justify-content-between">
-              <p class="fw-bolder">Swu id :</p> <p> 61130010188 </p>    
-            </div>
-  
-          </div>
-          <div class="mx-1 ">
-            <img class="main--imgprofile" src=<%= imgpath %>  style="width: 50px;height: 50px;">
-          </div>
-    </div>
-    
-      </a>
-    
-  
-  </div>-->
+
   </div>
-  
 
     </section>
-             
-
-  <!--  <section>
-
-
-      <div class="container-fluid mt-5">
-        <div class="row">
-          <div class="col-md-1 col-xxl-2">
-          </div>
-          <div class="col-sm-10 col-xxl-9">
-            <div class="bgtable table-responsive ">
-              <table class="table ">
-                  <thead>
-                <tr>
-                  <th scope="col">กลุ่มกิจกรรม</th>
-                  <th scope="col"></th>
-                  <th scope="col">จำนวน</th>
-                  <th scope="col"></th>
-    
-                  <th scope="col">บังคับ</th>
-                  <th scope="col"></th>
-    
-                  <th scope="col">เลือก</th>
-                  <th scope="col"></th>
-    
-                  <th scope="col">สถานะ</th>
-    
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="tr--hover">
-                  <th scope="row">กิจกรรมบังคับ</th>
-                  <th scope="col"></th>
-                  <td>ครั้ง</td>
-                  <th scope="col"></th>
-                  <td style="color: limegreen;">3/3</td>
-                  <th scope="col"></th>
-                  <td>-</td>
-                  <th scope="col"></th>
-                  <td><img src="https://image.flaticon.com/icons/png/512/4336/4336844.png" width="20px"></td>
-                </tr>
-                <tr class="tr--hover">
-                  <th scope="row">กิจกรรมเลือก</th>
-                  <th scope="col"></th>
-                  <td>ครั้ง</td>
-                  <td scope="col"></td>
-                  <td>-</td>
-                  <td scope="col"></td>
-                  <td style="color: limegreen;">2/2</td>
-                  <td scope="col"></td>
-                  <td><img src="https://image.flaticon.com/icons/png/512/4336/4336844.png" width="20px"></td>
-                </tr>
-                <tr class="tr--hover">
-                  <th scope="row">กิจกรรมบำเพ็ญสาธารณประโยชน์	</th>
-                  <td scope="col"></td>
-                  <td>ครั้ง</td>
-                  <td scope="col"></td>
-                  <td style="color: rgb(205, 50, 50);">1/3</td>
-                  <td scope="col"></td>
-                  <td>-</td>
-                  <td scope="col"></td>
-                  <td><img src="https://image.flaticon.com/icons/png/512/4336/4336830.png" width="20px"></td>
-                </tr>
-                <tr class="tr--hover">
-                  <th scope="row">กิจกรรมบำเพ็ญสาธารณประโยชน์	</th>
-                  <td scope="col"></td>
-    
-                  <td>ชั่วโมง</td>
-                  <td scope="col"></td>
-    
-                  <td style="color: rgb(205, 50, 50);">44/100</td>
-                  <td scope="col"></td>
-    
-                  <td>-</td>
-                  <td scope="col"></td>
-    
-                  <td><img src="https://image.flaticon.com/icons/png/512/4336/4336830.png" width="20px"></td>
-                </tr>
-              </tbody>
-            
-              </table>
-    
-          </div>
-        
-          </div>
-    <div class="col-sm-1 col-xxl-1">
-    
-    </div>
-      </div>
-    </div>
-    </section>  -->
-
-
 
 <section>
     <div class="container my-5">
@@ -232,23 +117,23 @@
                  
 </section>
 
+  <form action="/add_activity" method="post" class="row g-3">
 <section>
-
 <div class="container">
   <div class="row" >
     <div class="col-xl-2 col-md-1">
     </div>
     <div class="col-xl-9 col-md-11">
       <div class="bgadd ">
-        <form class="row g-3">
+        
           <div class="col-md-6">
             <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
-            <select id="inputState" class="form-select">
+            <select id="inputState" name="inputState" class="form-select">
               <option >ลงทะเบียนเข้าร่วมทั่วไป</option>
               <option>ลงทะเบียนกรณีตกหล่น</option>
             </select>
           </div>
-      
+        
         </div>
     </div>
     
@@ -277,7 +162,7 @@
             <div class="row g-3 d-flex">
               <div class="mb-2 col-10 col-lg-6">
                 <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="61130010188">
+                <input type="text" class="form-control" name="exampleFormControlInput1" placeholder="61130010188">
                 <div id="emailHelp" class="form-text">* กรุณาระบุรหัสประจำตัวนิสิต 11 หลัก ให้ถูกต้องและครบถ้วน</div>
 
               </div>
@@ -306,11 +191,11 @@
 <div class="mb-1 col-10 ">
   <label for="exampleFormControlInput1" class="form-label">คำนำหน้า *    </label>
   <div class="form-check">
-    <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+    <input type="radio" class="form-check-input" name="validationFormCheck1" name="radio-stacked" >
     <label class="form-check-label" for="validationFormCheck2">นาย</label>
   </div>
   <div class="form-check">
-    <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+    <input type="radio" class="form-check-input" name="validationFormCheck2" name="radio-stacked" >
     <label class="form-check-label" for="validationFormCheck2">นาง / นางสาว</label>
   </div>
 </div>
@@ -318,21 +203,15 @@
 
 <div class="mb-1 col-10 col-lg-6">
   <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="รวิสรา">
+  <input type="text" class="form-control" name="exampleFormControlInput1" placeholder="รวิสรา">
   <div id="emailHelp" class="form-text">* ไม่ต้องใส่คำนำหน้า</div>
 
 </div>
 <div class="mb-1 col-10 col-lg-6">
   <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลิศจันทร์เพ็ญ">
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="เลิศจันทร์เพ็ญ">
 
 </div>
-
-<!--<div class="mb-1 col-10 col-lg-6">
-  <label for="exampleFormControlInput1" class="form-label">เบอร์ติดต่อ * </label>
-  <input type="phone" class="form-control" id="exampleFormControlInput1" placeholder="0848445345">
-
-</div>-->
 
 
 
@@ -370,9 +249,12 @@
                   <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
                   <select class="form-select" aria-label="select Activity category">
                     <option selected>เลือกกิจกรรมที่เข้าร่วม</option>
-                    <option value="1">กิจกรรมซัมติง</option>
+                    <% for(var i = 0 ; i < dataAC.length ; i++ ) { %>
+                    <option value=<%= i %>><%= dataAC[i].Name_Event %></option>
+                      <% } %>
+                    <!-- <option value="1">กิจกรรมซัมติง</option>
                     <option value="2">กิจกรรม</option>
-                    <option value="3">กิจกรรมอื่นๆ</option>
+                    <option value="3">กิจกรรมอื่นๆ</option> -->
                     
                 
                 
@@ -387,19 +269,19 @@
   <div class="mb-1 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">วันที่ เข้าร่วมกิจกรรม (วันแรก) *
     </label>
-    <input type="date" class="form-control" id="firstdate" >  
+    <input type="date" class="form-control" id="firstdate" name="firstdate" >  
   </div>
   
   <div class="mb-1 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">วันที่ สิ้นสุดเข้าร่วมกิจกรรม  *
     </label>
-    <input type="date" class="form-control" id="lastdate" >  
+    <input type="date" class="form-control" id="lastdate"  name="lastdate">  
   </div>
 
   <div class="mb-1 col-12">
     <label for="exampleFormControlInput1" class="form-label">ระยะเวลาที่เข้าร่วมกิจกรรม/โครงการ *
     </label>
-    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="0">
+    <input type="number" class="form-control" name="exampleFormControlInput1" placeholder="0">
     <div id="emailHelp" class="form-text">* เช่น 08.30 - 12.30 น. = 4 ชม. (ไม่รวมช่วงเวลาการเดินทางและพักผ่อน)</div>
 
   </div>
@@ -471,7 +353,7 @@
 
 <div class="col-12 mt-5 pt-3" >
   <div class="d-flex justify-content-end ">
-    <a href="/confirmed_activity.html"> <button type="button" class=" btn2 btn--blue">ยืนยันข้อมูล</button></a>
+     <button type="submit" class=" btn2 btn--blue">ยืนยันข้อมูล</button>
  </div>  
 </div>
 
@@ -495,7 +377,7 @@
       </section>
         
 
-
+    </form>
 
 
 

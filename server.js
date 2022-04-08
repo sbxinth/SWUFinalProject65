@@ -34,7 +34,7 @@ app.use(
   session({
     secret: "secret",
     resave: true,
-    cookie: {maxAge:15},
+    cookie: {maxAge:6},
     saveUninitialized: true
   })
 );
@@ -48,14 +48,14 @@ app.get("/home", (request, response,) => {
 
 
 // db Test //
-// dbConnectionn.query('SELECT request.idRequest,user.ID_Student,user.Firstname,user.Lastname,Major.name_maj,user.user_phone,event.Name_Event,event.start_Event,event.end_Event FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username INNER JOIN major ON user.Major=major.idMajor WHERE user.Username = ? AND request.idRequest = ?',["co611010035","3456"],function (error, results, fields) {
-//   // if (results.length > 0) { // check qurey has value
-//     if (error) throw error;
-//     console.log(results)
-//   // } else {
-//   //   console.log("HAS NO data")
-//   // }
-// });
+dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
+  // if (results.length > 0) { // check qurey has value
+    if (error) throw error;
+    console.log(results)
+  // } else {
+  //   console.log("HAS NO data")
+  // }
+});
 
 
  app.get("/info_activity01", (request, response,) => {
@@ -71,6 +71,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',[session.username],function (error, results, fields) {
             session.datax = results;
+           
             // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("info_activity01", { 
                 isloggedin : session.isLoggedIn ,
@@ -266,16 +267,27 @@ app.get("/home", (request, response,) => {
          if (results.length > 0) { 
             if (error) throw error;
               session.img = results[0].img_user;
-              response.render("add_activity", { 
-                isloggedin : session.isLoggedIn ,
-                firstname : session.firstname ,
-                lastname : session.lastname ,
-                studentID : session.studentID ,
-                major : session.Major ,
-                Year : session.Year ,
-                status : session.status,
-                imgpath : session.img 
+              dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
+                // if (results.length > 0) { // check qurey has value
+                  if (error) throw error;
+                  console.log(results)
+                  session.dataACtiv = results;
+                  response.render("add_activity", { 
+                    isloggedin : session.isLoggedIn ,
+                    firstname : session.firstname ,
+                    lastname : session.lastname ,
+                    studentID : session.studentID ,
+                    major : session.Major ,
+                    Year : session.Year ,
+                    status : session.status,
+                    imgpath : session.img ,
+                    dataAC : session.dataACtiv
+                  });
+                // } else {
+                //   console.log("HAS NO data")
+                // }
               });
+              
           } else {
              console.log("HAS NO ACCOUNT")
           }
@@ -285,6 +297,13 @@ app.get("/home", (request, response,) => {
     } // if perm student // admin
   } // if session login
  });
+
+ app.post('/add_activity', function (req, res) {
+   console.log(req.body);
+   res.send("submitted");
+  // console.log(req.body.demoFormSelected);
+});
+
  app.get("/status_page", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
