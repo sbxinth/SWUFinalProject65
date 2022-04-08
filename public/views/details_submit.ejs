@@ -148,7 +148,7 @@
               <div class="row g-3 d-flex">
                 <div class="mb-2 col-10 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                  <input class="form-control" type="text" value="81130010188" aria-label="Disabled input example" disabled readonly>
+                  <input class="form-control" type="text" value=<%= studentID %> aria-label="Disabled input example" disabled readonly>
   
                 </div>
                
@@ -156,7 +156,7 @@
   <div class=" mb-2 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
    
-    <input class="form-control" type="text" value="วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร" aria-label="Disabled input example" disabled readonly>
+    <input class="form-control" type="text" value="<%= data[0].name_maj %>"  aria-label="Disabled input example" disabled readonly>
 
   </div>
   
@@ -175,18 +175,18 @@
   
   <div class="mb-1 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-    <input class="form-control" type="text" value="รวิสรา" aria-label="Disabled input example" disabled readonly>
+    <input class="form-control" type="text" value="<%= data[0].Firstname %>" aria-label="Disabled input example" disabled readonly>
   
   </div>
   <div class="mb-1 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-    <input class="form-control" type="text" value="เลิศจันทร์เพ็ญ" aria-label="Disabled input example" disabled readonly>
+    <input class="form-control" type="text" value="<%= data[0].Lastname %>" aria-label="Disabled input example" disabled readonly>
   
   </div>
   
   <div class="mb-1 col-10 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">เบอร์ติดต่อ * </label>
-    <input class="form-control" type="text" value="0986675466" aria-label="Disabled input example" disabled readonly>
+    <input class="form-control" type="text" value="<%= data[0].user_phone %>" aria-label="Disabled input example" disabled readonly>
   
   </div>
   
@@ -224,7 +224,7 @@
                 <div class="row g-3 d-flex">
                   <div class="mb-2 col-12 ">
                     <label for="exampleFormControlInput1" class="form-label">ชื่อกิจกรรม/โครงการ * </label>
-                    <input class="form-control" type="text" value="กิจกรรมสานฝัน" aria-label="Disabled input example" disabled readonly>
+                    <input class="form-control" type="text" value="<%= data[0].Name_Event %>" aria-label="Disabled input example" disabled readonly>
     
                   </div>
                  
@@ -234,14 +234,14 @@
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ เข้าร่วมกิจกรรม (วันแรก) *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" disabled readonly>
+      <input class="form-control" type="text" value="<%= data[0].start_Event.toLocaleDateString() %>" aria-label="Disabled input example" disabled readonly>
  
     </div>
     
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ สิ้นสุดเข้าร่วมกิจกรรม  *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" disabled readonly>
+      <input class="form-control" type="text" value="<%= data[0].end_Event.toLocaleDateString() %>" aria-label="Disabled input example" disabled readonly>
     </div>
   
     <div class="mb-1 col-12">
