@@ -664,16 +664,23 @@ app.post('/add_activity',upload2.any(),  (req, res) => {
     return file.filename; // or file.originalname
   });
   console.log(req.body);
-  console.log(filenames);
-  var imgsrc = '../imgedi/' + filenames[0];
-  var imgsrc2 = '../imgedi/' + filenames[1];
-  var imgsrc3 = '../imgedi/' + filenames[2];
-  var imgsrc4 = '../imgedi/' + filenames[3];
+  console.log(filenames.length,"lenght");
+  var myData = []; 
+  for (let i = 0; i < filenames.length; i++) {
+    myData.push(filenames[i]);
+  }
+  console.log(myData);
+
+  // var imgsrc = '../imgedi/' + filenames[0];
+  // var imgsrc2 = '../imgedi/' + filenames[1];
+  // var imgsrc3 = '../imgedi/' + filenames[2];
+  // var imgsrc4 = '../imgedi/' + filenames[3];
   // var insertData = ("UPDATE `evidence` SET `img_evid`= (?) , `file_evid` = (?) WHERE ID_Student = (?)");
-  // dbConnectionn.query(insertData,[imgsrc,imgsrc2,session.studentID],(err,result) => {
-  //   if (err) throw err
-  //   console.log("file uploaded")
-    console.log(imgsrc,imgsrc2,imgsrc3,imgsrc4)
+//    dbConnectionn.query(insertData,[imgsrc,imgsrc2,session.studentID],(err,result) => {
+//      if (err) throw err
+//      console.log("file uploaded")
+//      console.log(imgsrc,imgsrc2,imgsrc3,imgsrc4)
+// }
 }
 });
 
