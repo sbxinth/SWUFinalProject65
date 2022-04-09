@@ -299,11 +299,7 @@ app.get("/home", (request, response,) => {
   } // if session login
  });
 
- app.post('/add_activity', function (req, res) {
-   console.log(req.body);
-   res.redirect("/confirmed_activity");
-  // console.log(req.body.demoFormSelected);
-});
+
 
 
 
@@ -374,7 +370,7 @@ app.get("/home", (request, response,) => {
 //   } // if session login
 //  });
 
- app.post('/details_submit', function (req, response) {
+ app.post('/details_submit', (req, response) => {
   console.log(req.body.reqiD,"reqID");
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -540,7 +536,7 @@ app.get("/confirmed_activity", (request, response,) => {
   }
  });
 
- app.get("/logout",function(req,res){
+ app.get("/logout", (req,res) => {
   req.session.destroy(function (err) {
     session.isLoggedIn = false;
     res.redirect("/login");
@@ -548,7 +544,7 @@ app.get("/confirmed_activity", (request, response,) => {
 });
  });
 
- app.post('/getBranch', function (req, res) {
+ app.post('/getBranch', (req, res) => {
   console.log(req.body.demoFormSelected);
   if (req.body.demoFormSelected == "COSCI"){
     res.redirect("/login");
@@ -557,7 +553,7 @@ app.get("/confirmed_activity", (request, response,) => {
   }
 });
 
-app.get("/main", function(req,res){
+app.get("/main", (req,res) => {
   if (!session.isLoggedIn){
     res.render("cosci_login");
   }else{
@@ -589,7 +585,7 @@ app.get("/main", function(req,res){
 
 
 
-app.post('/cosciAuth', function (req, res) {
+app.post('/cosciAuth',  (req, res) => {
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   
@@ -650,7 +646,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage:storage })
 
-
+app.post('/add_activity',upload.any(),  (req, res) => {
+  if (!req.files) {
+  console.log("nofile");
+} else {
+  var filenames = req.files.map(function(file) {
+    return file.filename; // or file.originalname
+  });
+  console.log(req.body);
+  // console.log(filenames[0]);
+  var imgsrc = '../img/' + req.file.filename[0];
+  var imgsrc2 = '../img/' + req.file.filename[1];
+}
+});
 
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {
