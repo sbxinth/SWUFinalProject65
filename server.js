@@ -645,8 +645,21 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage:storage })
+///////////////////////////////////////////
 
-app.post('/add_activity',upload.any(),  (req, res) => {
+const storage2 = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './public/imgedi')
+  },
+  filename: (req, file, cb) => {
+      cb(null, 'file-' + Date.now() + '.' +
+      file.originalname.split('.')[file.originalname.split('.').length-1])}
+})
+
+const upload2 = multer({ storage:storage2 })
+
+//////////////////////////////////////////
+app.post('/add_activity',upload2.any(),  (req, res) => {
   if (!req.files) {
   console.log("nofile");
 } else {
@@ -654,9 +667,9 @@ app.post('/add_activity',upload.any(),  (req, res) => {
     return file.filename; // or file.originalname
   });
   console.log(req.body);
-  // console.log(filenames[0]);
-  var imgsrc = '../img/' + req.file.filename[0];
-  var imgsrc2 = '../img/' + req.file.filename[1];
+  console.log(filenames);
+  var imgsrc = '../img/' + filenames[0];
+  var imgsrc2 = '../img/' + filenames[1];
 }
 });
 
