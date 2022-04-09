@@ -48,14 +48,14 @@ app.get("/home", (request, response,) => {
 
 
 // db Test //
-dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
-  // if (results.length > 0) { // check qurey has value
-    if (error) throw error;
-    console.log(results)
-  // } else {
-  //   console.log("HAS NO data")
-  // }
-});
+// dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
+//   // if (results.length > 0) { // check qurey has value
+//     if (error) throw error;
+//     console.log(results)
+//   // } else {
+//   //   console.log("HAS NO data")
+//   // }
+// });
 
 
  app.get("/info_activity01", (request, response,) => {
@@ -270,7 +270,7 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
               dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
                 // if (results.length > 0) { // check qurey has value
                   if (error) throw error;
-                  console.log(results)
+                  // console.log(results)
                   session.dataACtiv = results;
                   response.render("add_activity", { 
                     isloggedin : session.isLoggedIn ,
@@ -281,7 +281,8 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
                     Year : session.Year ,
                     status : session.status,
                     imgpath : session.img ,
-                    dataAC : session.dataACtiv
+                    dataAC : session.dataACtiv,
+                    gender : session.gender
                   });
                 // } else {
                 //   console.log("HAS NO data")
@@ -300,10 +301,11 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
 
  app.post('/add_activity', function (req, res) {
    console.log(req.body);
-   
-   res.send("submitted");
+   res.redirect("/confirmed_activity");
   // console.log(req.body.demoFormSelected);
 });
+
+
 
  app.get("/status_page", (request, response,) => {
   if (!session.isLoggedIn){
@@ -396,7 +398,8 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
                 Year : session.Year ,
                 status : session.status,
                 imgpath : session.img,
-                data : session.datax
+                data : session.datax,
+                gender : session.gender
               });
           }); 
           // end read request
@@ -411,7 +414,46 @@ dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fi
   } // if session login
   
 });
- 
+
+app.get("/confirmed_activity", (request, response,) => {
+  if (!session.isLoggedIn){
+    response.render("cosci_login");
+  }else{
+    if (session.status == "student") {
+      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+        function (error, results, fields) {
+         if (results.length > 0) { 
+            if (error) throw error;
+            // db connect read request 
+            session.img = results[0].img_user;
+          dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',[session.username],function (error, results, fields) {
+            session.datax = results;
+           
+            // console.log("datax = ",session.datax, "username = ",session.username )
+              response.render("confirmed_activity", { 
+                isloggedin : session.isLoggedIn ,
+                firstname : session.firstname ,
+                lastname : session.lastname ,
+                studentID : session.studentID ,
+                major : session.Major ,
+                Year : session.Year ,
+                status : session.status,
+                imgpath : session.img,
+                data : session.datax
+              });
+          }); 
+          // end read request
+              
+          } else {
+             console.log("HAS NO data")
+          }
+        });
+    } else {
+      response.send("u r not student")
+    } // if perm student // admin
+  } // if session login
+ }); 
+
  app.get("/profile", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -548,7 +590,7 @@ app.get("/main", function(req,res){
 
 
 app.post('/cosciAuth', function (req, res) {
-dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
+dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 function (error, results, fields) {
   
   // console.log(results[0]);
@@ -565,6 +607,7 @@ function (error, results, fields) {
     session.Year = results[0].Year;
     session.status = results[0].Detail_per;
     session.img = results[0].img_user;
+    session.gender = results[0].detail_gen;
     
     res.render("login_success");
     
