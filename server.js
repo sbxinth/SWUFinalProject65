@@ -635,7 +635,7 @@ function getuidf() {
 
 const multer = require("multer");
 
-const storage = multer.diskStorage({
+var storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './public/img')
   },
@@ -644,34 +644,39 @@ const storage = multer.diskStorage({
       file.originalname.split('.')[file.originalname.split('.').length-1])}
 })
 
-const upload = multer({ storage:storage })
-///////////////////////////////////////////
-
-const storage2 = multer.diskStorage({
+var storage2 = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, './public/imgedi')
+    cb(null, './public/imgedi')
   },
   filename: (req, file, cb) => {
       cb(null, 'file-' + Date.now() + '.' +
       file.originalname.split('.')[file.originalname.split('.').length-1])}
 })
 
-const upload2 = multer({ storage:storage2 })
+const upload = multer({ storage:storage })
+const upload2 = multer({ storage:storage2})
 
-//////////////////////////////////////////
 app.post('/add_activity',upload2.any(),  (req, res) => {
   if (!req.files) {
-  console.log("nofile");
+  console.log("no file");
 } else {
   var filenames = req.files.map(function(file) {
     return file.filename; // or file.originalname
   });
   console.log(req.body);
   console.log(filenames);
-  var imgsrc = '../img/' + filenames[0];
-  var imgsrc2 = '../img/' + filenames[1];
+  var imgsrc = '../imgedi/' + filenames[0];
+  var imgsrc2 = '../imgedi/' + filenames[1];
+  var imgsrc3 = '../imgedi/' + filenames[2];
+  var imgsrc4 = '../imgedi/' + filenames[3];
+  // var insertData = ("UPDATE `evidence` SET `img_evid`= (?) , `file_evid` = (?) WHERE ID_Student = (?)");
+  // dbConnectionn.query(insertData,[imgsrc,imgsrc2,session.studentID],(err,result) => {
+  //   if (err) throw err
+  //   console.log("file uploaded")
+    console.log(imgsrc,imgsrc2,imgsrc3,imgsrc4)
 }
 });
+
 
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {
