@@ -668,8 +668,9 @@ app.post('/add_activity',upload2.any(),  (req, res) => {
   });
   console.log(req.body);
   console.log(filenames);
-  var imgsrc = '../img/' + filenames[0];
-  var imgsrc2 = '../img/' + filenames[1];
+  var imgsrc = '../imgedi/' + filenames[0];
+  var imgsrc2 = '../imgedi/' + filenames[1];
+  console.log(imgsrc,imgsrc2)
 }
 });
 
