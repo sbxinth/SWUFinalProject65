@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2022 at 09:48 PM
+-- Generation Time: Apr 09, 2022 at 11:19 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.15
 
@@ -74,6 +74,25 @@ INSERT INTO `evidence` (`idEvidence`, `idRequest`, `idRegister`, `img_Evid`) VAL
 (5555, 2000, 2345, 'lll'),
 (6666, 2001, 2347, 'lll'),
 (7777, 2002, 8765, ';;;;;;');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gender`
+--
+
+CREATE TABLE `gender` (
+  `gender_id` varchar(2) NOT NULL,
+  `detail_gen` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gender`
+--
+
+INSERT INTO `gender` (`gender_id`, `detail_gen`) VALUES
+('1', 'ชาย'),
+('2', 'หญิง');
 
 -- --------------------------------------------------------
 
@@ -214,21 +233,24 @@ CREATE TABLE `request` (
   `ID_event` int(11) NOT NULL,
   `idEvidence` int(11) NOT NULL,
   `date_req` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Status_req` int(2) NOT NULL
+  `Status_req` int(2) NOT NULL,
+  `hour` varchar(2) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `request`
 --
 
-INSERT INTO `request` (`idRequest`, `Username`, `idType_req`, `ID_event`, `idEvidence`, `date_req`, `Status_req`) VALUES
-(2000, 'co611010039', 1, 260320, 5555, '2022-04-06 07:07:10', 1),
-(2001, 'co611010039', 1, 26032022, 6666, '2022-04-06 07:07:47', 1),
-(2002, 'co611010039', 1, 6042022, 7777, '2022-04-06 07:07:47', 1),
-(3000, 'co611010035', 1, 6042022, 1111, '2022-04-06 07:08:16', 1),
-(3100, 'co611010035', 1, 260320, 2222, '2022-04-06 07:08:22', 1),
-(3456, 'co611010035', 2, 26032022, 4444, '2022-04-06 07:06:19', 1),
-(3500, 'co611010035', 1, 26032022, 3333, '2022-04-06 07:08:31', 1);
+INSERT INTO `request` (`idRequest`, `Username`, `idType_req`, `ID_event`, `idEvidence`, `date_req`, `Status_req`, `hour`, `start_date`, `end_date`) VALUES
+(2000, 'co611010039', 1, 260320, 5555, '2022-04-09 08:15:28', 1, '8', '2022-03-26', '2022-04-13'),
+(2001, 'co611010039', 1, 26032022, 6666, '2022-04-09 08:19:17', 1, '8', '2022-04-06', '2022-04-13'),
+(2002, 'co611010039', 1, 6042022, 7777, '2022-04-09 08:19:25', 1, '5', '2022-03-26', '2022-04-08'),
+(3000, 'co611010035', 1, 6042022, 1111, '2022-04-09 08:20:09', 1, '8', '2022-04-06', '2022-04-28'),
+(3100, 'co611010035', 1, 260320, 2222, '2022-04-09 08:20:24', 1, '8', '2022-03-26', '2022-04-13'),
+(3456, 'co611010035', 2, 26032022, 4444, '2022-04-09 08:21:20', 1, '8', '2022-04-06', '2022-04-28'),
+(3500, 'co611010035', 1, 26032022, 3333, '2022-04-09 08:21:28', 1, '8', '2022-04-06', '2022-04-08');
 
 -- --------------------------------------------------------
 
@@ -343,6 +365,7 @@ CREATE TABLE `user` (
   `user_phone` varchar(10) NOT NULL,
   `Firstname` varchar(255) NOT NULL,
   `Lastname` varchar(255) NOT NULL,
+  `gender_id` varchar(1) NOT NULL,
   `Major` int(2) NOT NULL,
   `secMaj` int(2) NOT NULL,
   `Year` varchar(2) NOT NULL,
@@ -354,10 +377,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`Username`, `Password`, `ID_Student`, `user_phone`, `Firstname`, `Lastname`, `Major`, `secMaj`, `Year`, `Permission`, `img_user`) VALUES
-('co611010035', 'co611010035', '61130010035', '0611725321', 'Rachapol', 'Burinwatthana', 3, 2, '4', 1, '../img/file-1649262704223.png'),
-('co611010039', '123', '61130010039', '0999999999', 'Kamonlapat', 'Phaenthong', 3, 2, '4', 1, '../img/file-1649179618413.png'),
-('year3', 'year3', '516156156', '0888888888', 'Namaewa', 'Ltnamse', 2, 1, '2', 1, '../img/file-1649281894740.png');
+INSERT INTO `user` (`Username`, `Password`, `ID_Student`, `user_phone`, `Firstname`, `Lastname`, `gender_id`, `Major`, `secMaj`, `Year`, `Permission`, `img_user`) VALUES
+('co611010035', 'co611010035', '61130010035', '0611725321', 'Rachapol', 'Burinwatthana', '1', 3, 2, '4', 1, '../img/file-1649262704223.png'),
+('co611010039', '123', '61130010039', '0999999999', 'Kamonlapat', 'Phaenthong', '2', 3, 2, '4', 1, '../img/file-1649179618413.png'),
+('year3', 'year3', '516156156', '0888888888', 'Namaewa', 'Ltnamse', '2', 2, 1, '2', 1, '../img/file-1649281894740.png');
 
 --
 -- Indexes for dumped tables
@@ -374,6 +397,12 @@ ALTER TABLE `event`
 --
 ALTER TABLE `evidence`
   ADD PRIMARY KEY (`idEvidence`);
+
+--
+-- Indexes for table `gender`
+--
+ALTER TABLE `gender`
+  ADD PRIMARY KEY (`gender_id`);
 
 --
 -- Indexes for table `major`
