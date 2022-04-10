@@ -96,17 +96,17 @@ router.post('/add_activity',upload2.any(), async (req, res) => {
     console.log(req.files);
 
     var statereq =  await new Promise((resolve,rejects)=>{
-     var {reqtype,eventtype,durationEventTime,firstdate,lastdate,} = req.body
+     var {reqtype,eventtype,durationEventTime,firstdate,lastdate} = req.body
       dbConnectionn.query(`INSERT INTO request (
       idRequest, Username, idType_req, ID_event,file_img,file_pdf,Status_req,hour,start_date,end_date
-    ) VALUE (?,?,?,?,?,?,?,?,?,?)`[getuidf(),session.usernname,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
+    ) VALUE (?,?,?,?,?,?,?,?,?,?,?)`[getuidf(),session.studentID,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
     ,function (error, results, fields) {
        if (error) throw error; 
        resolve(results)  //
        });
      })
 
-     if(startreq){
+     if(statereq){
        console.log(statereq)
      }
 

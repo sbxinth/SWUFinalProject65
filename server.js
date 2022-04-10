@@ -42,6 +42,7 @@ app.use(
 
 // routers
  app.use("/", require('./route/activityforstd_router'))
+ app.use("/", require('./route/announce_router'))
 
 
 app.get("/home", (request, response,) => {
@@ -172,35 +173,39 @@ app.get("/home", (request, response,) => {
     } // if perm student // admin
   } // if session login
  }); 
- app.get("/announce_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student") {
-      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
-        function (error, results, fields) {
-         if (results.length > 0) { 
-            if (error) throw error;
-              session.img = results[0].img_user;
-              response.render("announce_activity", { 
-                isloggedin : session.isLoggedIn ,
-                firstname : session.firstname ,
-                lastname : session.lastname ,
-                studentID : session.studentID ,
-                major : session.Major ,
-                Year : session.Year ,
-                status : session.status,
-                imgpath : session.img 
-              });
-          } else {
-             console.log("HAS NO ACCOUNT")
-          }
-        });
-    } else {
-      response.send("u r not student")
-    } // if perm student // admin
-  } // if session login
- });
+
+////////////// announnce_act
+ 
+//  app.get("/announce_activity", (request, response,) => {
+//   if (!session.isLoggedIn){
+//     response.render("cosci_login");
+//   }else{
+//     if (session.status == "student") {
+//       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
+//         function (error, results, fields) {
+//          if (results.length > 0) { 
+//             if (error) throw error;
+//               session.img = results[0].img_user;
+//               response.render("announce_activity", { 
+//                 isloggedin : session.isLoggedIn ,
+//                 firstname : session.firstname ,
+//                 lastname : session.lastname ,
+//                 studentID : session.studentID ,
+//                 major : session.Major ,
+//                 Year : session.Year ,
+//                 status : session.status,
+//                 imgpath : session.img 
+//               });
+//           } else {
+//              console.log("HAS NO ACCOUNT")
+//           }
+//         });
+//     } else {
+//       response.send("u r not student")
+//     } // if perm student // admin
+//   } // if session login
+//  });
+
  app.get("/details_activity", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -230,6 +235,7 @@ app.get("/home", (request, response,) => {
     } // if perm student // admin
   } // if session login
  });
+ 
  app.get("/sub_activity", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -602,17 +608,7 @@ var storage = multer.diskStorage({
       file.originalname.split('.')[file.originalname.split('.').length-1])}
 })
 
-var storage2 = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './public/imgedi')
-  },
-  filename: (req, file, cb) => {
-      cb(null, 'file-' + Date.now() + '.' +
-      file.originalname.split('.')[file.originalname.split('.').length-1])}
-})
-
 const upload = multer({ storage:storage })
-const upload2 = multer({ storage:storage2})
 
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {
