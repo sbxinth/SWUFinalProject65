@@ -33,12 +33,12 @@ app.set( "view engine", "ejs" );
 app.use(
   session({
     secret: "secret",
-    resave: false,
-    // cookie: {maxAge:6},
-    saveUninitialized: false
+    resave: true,
+    cookie: {maxAge:6},
+    saveUninitialized: true
   })
 );
- session.isLoggedIn = true;
+ session.isLoggedIn = false;
 
 // routers
  app.use("/", require('./route/activityforstd_router'))
