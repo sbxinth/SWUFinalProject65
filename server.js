@@ -33,14 +33,17 @@ app.set( "view engine", "ejs" );
 app.use(
   session({
     secret: "secret",
-    resave: true,
-    cookie: {maxAge:6},
-    saveUninitialized: true
+    resave: false,
+    // cookie: {maxAge:6},
+    saveUninitialized: false
   })
 );
- session.isLoggedIn = false;
+ session.isLoggedIn = true;
 
-//
+// routers
+ app.use("/", require('./route/activityforstd_router'))
+
+
 app.get("/home", (request, response,) => {
   response.render("swu");
  });
@@ -57,7 +60,6 @@ app.get("/home", (request, response,) => {
 //   // }
 // });
 
-
  app.get("/info_activity01", (request, response,) => {
   if (!session.isLoggedIn){
     response.render("cosci_login");
@@ -71,7 +73,7 @@ app.get("/home", (request, response,) => {
             session.img = results[0].img_user;
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',[session.username],function (error, results, fields) {
             session.datax = results;
-           
+          
             // console.log("datax = ",session.datax, "username = ",session.username )
               response.render("info_activity01", { 
                 isloggedin : session.isLoggedIn ,
@@ -257,51 +259,7 @@ app.get("/home", (request, response,) => {
     } // if perm student // admin
   } // if session login
  });
- app.get("/add_activity", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student") {
-      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
-        function (error, results, fields) {
-         if (results.length > 0) { 
-            if (error) throw error;
-              session.img = results[0].img_user;
-              dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
-                // if (results.length > 0) { // check qurey has value
-                  if (error) throw error;
-                  // console.log(results)
-                  session.dataACtiv = results;
-                  response.render("add_activity", { 
-                    isloggedin : session.isLoggedIn ,
-                    firstname : session.firstname ,
-                    lastname : session.lastname ,
-                    studentID : session.studentID ,
-                    major : session.Major ,
-                    Year : session.Year ,
-                    status : session.status,
-                    imgpath : session.img ,
-                    dataAC : session.dataACtiv,
-                    gender : session.gender
-                  });
-                // } else {
-                //   console.log("HAS NO data")
-                // }
-              });
-              
-          } else {
-             console.log("HAS NO ACCOUNT")
-          }
-        });
-    } else {
-      response.send("u r not student")
-    } // if perm student // admin
-  } // if session login
- });
-
-
-
-
+ 
 
  app.get("/status_page", (request, response,) => {
   if (!session.isLoggedIn){
@@ -578,7 +536,7 @@ app.get("/main", (req,res) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
 });
@@ -656,35 +614,6 @@ var storage2 = multer.diskStorage({
 const upload = multer({ storage:storage })
 const upload2 = multer({ storage:storage2})
 
-app.post('/add_activity',upload2.any(),  (req, res) => {
-  if (!req.files) {
-  console.log("no file");
-} else {
-  var filenames = req.files.map(function(file) {
-    return file.filename; // or file.originalname
-  });
-  console.log(req.body);
-  console.log(filenames.length,"lenght");
-  var myData = []; 
-  for (let i = 0; i < filenames.length; i++) {
-    myData.push(filenames[i]);
-  }
-  console.log(myData);
-
-  // var imgsrc = '../imgedi/' + filenames[0];
-  // var imgsrc2 = '../imgedi/' + filenames[1];
-  // var imgsrc3 = '../imgedi/' + filenames[2];
-  // var imgsrc4 = '../imgedi/' + filenames[3];
-  // var insertData = ("UPDATE `evidence` SET `img_evid`= (?) , `file_evid` = (?) WHERE ID_Student = (?)");
-//    dbConnectionn.query(insertData,[imgsrc,imgsrc2,session.studentID],(err,result) => {
-//      if (err) throw err
-//      console.log("file uploaded")
-//      console.log(imgsrc,imgsrc2,imgsrc3,imgsrc4)
-// }
-}
-});
-
-
 app.post("/profile", upload.single('image'), (req, res) => {
   if (!req.file) {
       
@@ -705,6 +634,7 @@ app.post("/profile", upload.single('image'), (req, res) => {
       })
   }
 });
+
 
 // end gen func
 

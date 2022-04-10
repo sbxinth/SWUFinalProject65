@@ -128,10 +128,17 @@
         
           <div class="col-md-6">
             <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
-            <select id="inputState" name="inputState" class="form-select">
-              <option >ลงทะเบียนเข้าร่วมทั่วไป</option>
-              <option>ลงทะเบียนกรณีตกหล่น</option>
+            <select id="reqtype" name="reqtype" class="form-select">
+                <% reqtype.map((e)=>{ %>
+                  <option value="<%= e.id %>"> <%= e.name %> </option>
+                <% }) %>
             </select>
+         
+         
+            <!-- <select id="inputState" name="inputState" class="form-select">
+              <option>ลงทะเบียนเข้าร่วมทั่วไป</option>
+              <option>ลงทะเบียนกรณีตกหล่น</option>
+            </select> -->
           </div>
         
         </div>
@@ -260,11 +267,11 @@
               <div class="row g-3 d-flex">
                 <div class="mb-2 col-12 ">
                   <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
-                  <select class="form-select" aria-label="select Activity category">
+                  <select name="eventtype" class="form-select" aria-label="select Activity category">
                     <option selected>เลือกกิจกรรมที่เข้าร่วม</option>
-                    <% for(var i = 0 ; i < dataAC.length ; i++ ) { %>
-                    <option value=<%= i %>><%= dataAC[i].Name_Event %></option>
-                      <% } %>
+                    <% dataAC.map((e)=>{ %>
+                      <option value="<%= e.id %>"> <%= e.name %> </option>
+                    <% }) %>
                     <!-- <option value="1">กิจกรรมซัมติง</option>
                     <option value="2">กิจกรรม</option>
                     <option value="3">กิจกรรมอื่นๆ</option> -->
@@ -302,11 +309,11 @@
   <div class="mb-1">
     <label for="file" class="form-label">แนบภาพถ่ายระหว่างเข้าร่วมกิจกรรม/โครงการ *
     </label>
-    <input class="form-control" name="pic" type="file" id="file" multiple>
+    <input class="form-control" name="pic" type="file" id="img" multiple required>
   </div>
   <div class="mb-1">
     <label for="file" class="form-label">แนบกำหนดการ หรือเอกสารที่รับรองเข้าร่วมกิจกรรม/โครงการ *</label>
-    <input class="form-control" name="file" type="file" id="file">
+    <input class="form-control" name="file" type="file" id="file" required>
     <div id="emailHelp" class="form-text">เอกสารรับรองการเข้าร่วมกิจกรรม เช่น ประกาศนียบัตร เกียรติบัตร ใบรับรองการเข้าร่วมกิจกรรม ใบเซ็นชื่อ/ลงทะเบียน ฯลฯ
     </div>
   </div>
@@ -421,14 +428,14 @@
 
     <script>
      
-     document.querySelector('.buttonwarn').onmousemove = function (e) {
+//      document.querySelector('.buttonwarn').onmousemove = function (e) {
 
-var x = e.pageX - e.target.offsetLeft;
-var y = e.pageY - e.target.offsetTop;
+// var x = e.pageX - e.target.offsetLeft;
+// var y = e.pageY - e.target.offsetTop;
 
-e.target.style.setProperty('--x', x + 'px');
-e.target.style.setProperty('--y', y + 'px');
-};
+// e.target.style.setProperty('--x', x + 'px');
+// e.target.style.setProperty('--y', y + 'px');
+// };
 
 
         function openNav() {
@@ -441,8 +448,12 @@ e.target.style.setProperty('--y', y + 'px');
           document.getElementById("main").style.marginLeft= "0";
         }
 
-      
-       
+        document.getElementById("img").addEventListener('change', function (e) {
+          var number_of_images = this.files.length;
+          if (number_of_images > 3) {
+            alert(`อัพโหลดภาพได้สูงสุดไม่เกิน 3 ภาพ`);
+            this.value = ''} 
+        });
         </script>
 </body>
 
