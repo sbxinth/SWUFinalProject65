@@ -87,19 +87,17 @@ router.post('/add_activity',upload2.any(), async (req, res) => {
     let pdf = img.pop();  // pop last file from img to collected in pdf 
     img = img.join(',')   // connected array to string
 
-    console.log(req.body);
+    console.log(req.body,"req.body");
     console.log(img.length,"lenght");
-    console.log(img)
-    console.log(pdf)
+    console.log(img,"img")
+    console.log(pdf,"pdf")
 
 
-    console.log(req.files);
+    console.log(req.files,"req.file");
 
     var statereq =  await new Promise((resolve,rejects)=>{
      var {reqtype,eventtype,durationEventTime,firstdate,lastdate} = req.body
-      dbConnectionn.query(`INSERT INTO request (
-      idRequest, Username, idType_req, ID_event,file_img,file_pdf,Status_req,hour,start_date,end_date
-    ) VALUE (?,?,?,?,?,?,?,?,?,?,?)`[getuidf(),session.studentID,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
+      dbConnectionn.query('INSERT INTO request (idRequest, Username, idType_req, ID_event,file_img,file_pdf,Status_req,hour,start_date,end_date  ) VALUE (?,?,?,?,?,?,?,?,?,?)' ,[getuidf(),session.studentID,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
     ,function (error, results, fields) {
        if (error) throw error; 
        resolve(results)  //
