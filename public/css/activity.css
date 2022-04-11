@@ -235,7 +235,7 @@ left: 1%;
     color: white;
     text-transform: uppercase;
     position: absolute;
-    bottom: 37%;
+    bottom: 35%;
     width: 100%;
     opacity: 0.9;
     
@@ -286,6 +286,8 @@ left: 1%;
   .card-body {
     flex: 1 1 auto;
     padding: 1rem 1rem;
+    text-overflow: '...อ่านต่อ'
+
 }
 
   .card-img, .card-img-top {
@@ -294,9 +296,10 @@ left: 1%;
   }
 
   .card-text {
-    font-size: 15px;
-    height: 100px;
-    text-indent: 15px;
+    font-size: 13px;
+    height: 90px;
+    text-indent: 10px;
+    overflow: hidden;
   }
 
 .container-box{

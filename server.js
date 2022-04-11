@@ -3,13 +3,17 @@ var app = express();
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var path = require("path");
+var usercheck = require("./middleware/logintokencheck");
 var router = express.Router();
+const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
 const dbConnectionn = require("./database");
 const { render } = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 //  test get req 1
 // var url = require('url');
 // var fs = require('fs');
@@ -24,29 +28,73 @@ app.use(bodyParser.json());
 //     // console.log("xxxxxxxxxxxxxxxxxxxxx");
 // }
 
+// app.get("/test",async(req, res) => {
+// try{
+//   console.log("0");
+//   throw new Error("textok")
+//   await new Promise((resolve,rejects)=>{
+//         console.log("1");
+//         resolve()
+//      });
+
+//   console.log("2")
+
+//   await new Promise((resolve,rejects)=>{
+//        console.log("3");
+//        rejects("test");
+//         });
+
+//   console.log("4");
+
+// }  catch (err){
+//   console.log(err.name)
+// }
+// });
 
 // test get req2
-
+// const savecookie = await res.cookie('jwt', responsefromservice, { httpOnly: true, domain : '' , maxAge: process.env.COOKIES_SINGIN_EXPIRE})
 //
+
 app.set("views",path.join(__dirname, '/public/views'))
 app.set( "view engine", "ejs" );
 app.use(
   session({
     secret: "secret",
     resave: true,
-    cookie: {maxAge:6},
+    cookie: {maxAge:60000},
     saveUninitialized: true
   })
 );
  session.isLoggedIn = false;
 
+
+
+
 // routers
  app.use("/", require('./route/activityforstd_router'))
  app.use("/", require('./route/announce_router'))
 
-
-app.get("/home", (request, response,) => {
-  response.render("swu");
+ app.use(function(req,res,next){
+  try{
+    // console.log(req.cookies.sslg)
+    if (req.cookies?.sslg) {
+    res.locals.isloggedin = req.cookies.sslg.isLoggedIn 
+    res.locals.firstname = req.cookies.sslg.firstname 
+    res.locals.lastname = req.cookies.sslg.lastname 
+    res.locals.studentID = req.cookies.sslg.studentID 
+    res.locals.major = req.cookies.sslg.Major 
+    res.locals.Year = req.cookies.sslg.Year 
+    res.locals.status = req.cookies.sslg.status
+    res.locals.imgpath = req.cookies.sslg.img 
+    res.locals.gender = req.cookies.sslg.gender
+    // console.log(res.locals)
+    }
+  next()
+  }
+  catch{ next() }
+})
+app.get("/home", (req, res) => {
+  resrender("swu");
  });
 
 
@@ -61,47 +109,22 @@ app.get("/home", (request, response,) => {
 //   // }
 // });
 
- app.get("/info_activity01", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
-    if (session.status == "student") {
-      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
-        function (error, results, fields) {
-         if (results.length > 0) { 
-            if (error) throw error;
-            // db connect read request 
-            session.img = results[0].img_user;
-          dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',[session.username],function (error, results, fields) {
-            session.datax = results;
-          
-            // console.log("datax = ",session.datax, "username = ",session.username )
-              response.render("info_activity01", { 
-                isloggedin : session.isLoggedIn ,
-                firstname : session.firstname ,
-                lastname : session.lastname ,
-                studentID : session.studentID ,
-                major : session.Major ,
-                Year : session.Year ,
-                status : session.status,
-                imgpath : session.img,
-                data : session.datax
+ app.get("/info_activity01",usercheck.checkloginforalluser, (req, res) => {
+   
+          // console.log(req.cookies.sslg,"data sslg in log xxx")
+          dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',
+          [req.cookies.sslg.username],
+          function (error, results, fields) {
+            // console.log(req.cookies.sslg.username,"username in log")
+            var datax = results;
+              res.render("info_activity01", {
+                data : datax
               });
           }); 
-          // end read request
-              
-          } else {
-             console.log("HAS NO data")
-          }
-        });
-    } else {
-      response.send("u r not student")
-    } // if perm student // admin
-  } // if session login
  }); 
- app.get("/info_activity02", (request, response,) => {
+ app.get("/info_activity02", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -113,7 +136,7 @@ app.get("/home", (request, response,) => {
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมเลือก"',[session.username],function (error, results, fields) {
             session.datax = results;
             // console.log("datax = ",session.datax, "username = ",session.username )
-              response.render("info_activity02", { 
+              res.render("info_activity02", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -132,13 +155,13 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  }); 
- app.get("/info_activity03", (request, response,) => {
+ app.get("/info_activity03", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -150,7 +173,7 @@ app.get("/home", (request, response,) => {
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบำเพ็ญสาธารณประโยชน์"',[session.username],function (error, results, fields) {
             session.datax = results;
             // console.log("datax = ",session.datax, "username = ",session.username )
-              response.render("info_activity03", { 
+              res.render("info_activity03", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -169,16 +192,16 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  }); 
 
 ////////////// announnce_act
  
-//  app.get("/announce_activity", (request, response,) => {
+//  app.get("/announce_activity", (req, res) => {
 //   if (!session.isLoggedIn){
-//     response.render("cosci_login");
+//     res.render("cosci_login");
 //   }else{
 //     if (session.status == "student") {
 //       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -186,7 +209,7 @@ app.get("/home", (request, response,) => {
 //          if (results.length > 0) { 
 //             if (error) throw error;
 //               session.img = results[0].img_user;
-//               response.render("announce_activity", { 
+//               res.render("announce_activity", { 
 //                 isloggedin : session.isLoggedIn ,
 //                 firstname : session.firstname ,
 //                 lastname : session.lastname ,
@@ -201,14 +224,14 @@ app.get("/home", (request, response,) => {
 //           }
 //         });
 //     } else {
-//       response.send("u r not student")
+//       res.send("u r not student")
 //     } // if perm student // admin
 //   } // if session login
 //  });
 
- app.get("/details_activity", (request, response,) => {
+ app.get("/details_activity", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -216,7 +239,7 @@ app.get("/home", (request, response,) => {
          if (results.length > 0) { 
             if (error) throw error;
               session.img = results[0].img_user;
-              response.render("details_activity", { 
+              res.render("details_activity", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -231,14 +254,14 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  });
  
- app.get("/sub_activity", (request, response,) => {
+ app.get("/sub_activity", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -246,7 +269,7 @@ app.get("/home", (request, response,) => {
          if (results.length > 0) { 
             if (error) throw error;
               session.img = results[0].img_user;
-              response.render("sub_activity", { 
+              res.render("sub_activity", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -261,15 +284,15 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  });
  
 
- app.get("/status_page", (request, response,) => {
+ app.get("/status_page", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -281,7 +304,7 @@ app.get("/home", (request, response,) => {
           dbConnectionn.query('SELECT request.idRequest,request.date_req,type_req.Detail_Type_R,status.Detail_Status FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN user ON request.Username=user.Username INNER JOIN type_req ON request.idType_req=type_req.idType_Req INNER JOIN status ON request.Status_req=status.idStatus WHERE user.Username = ?',[session.username],function (error, results, fields) {
             session.datax = results;
             // console.log("datax = ",session.datax, "username = ",session.username )
-              response.render("status_page", { 
+              res.render("status_page", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -300,13 +323,13 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  }); 
-//  app.get("/details_submit", (request, response,) => {
+//  app.get("/details_submit", (req, res) => {
 //   if (!session.isLoggedIn){
-//     response.render("cosci_login");
+//     res.render("cosci_login");
 //   }else{
 //     if (session.status == "student") {
 //       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -314,7 +337,7 @@ app.get("/home", (request, response,) => {
 //          if (results.length > 0) { 
 //             if (error) throw error;
 //               session.img = results[0].img_user;
-//               response.render("details_submit", { 
+//               res.render("details_submit", { 
 //                 isloggedin : session.isLoggedIn ,
 //                 firstname : session.firstname ,
 //                 lastname : session.lastname ,
@@ -329,15 +352,15 @@ app.get("/home", (request, response,) => {
 //           }
 //         });
 //     } else {
-//       response.send("u r not student")
+//       res.send("u r not student")
 //     } // if perm student // admin
 //   } // if session login
 //  });
 
- app.post('/details_submit', (req, response) => {
+ app.post('/details_submit', (req, res) => {
   console.log(req.body.reqiD,"reqID");
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -349,7 +372,7 @@ app.get("/home", (request, response,) => {
           dbConnectionn.query('SELECT request.idRequest,user.ID_Student,user.Firstname,user.Lastname,Major.name_maj,user.user_phone,event.Name_Event,event.start_Event,event.end_Event FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username INNER JOIN major ON user.Major=major.idMajor WHERE user.Username = ? AND request.idRequest = ?',[session.username,req.body.reqiD],function (error, results, fields) {
             session.datax = results;
             console.log("datax = ",session.datax)
-              response.render("details_submit", { 
+              res.render("details_submit", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -369,15 +392,15 @@ app.get("/home", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
   
 });
 
-app.get("/confirmed_activity", (request, response,) => {
+app.get("/confirmed_activity", (req, res) => {
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "student") {
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
@@ -390,7 +413,7 @@ app.get("/confirmed_activity", (request, response,) => {
             session.datax = results;
            
             // console.log("datax = ",session.datax, "username = ",session.username )
-              response.render("confirmed_activity", { 
+              res.render("confirmed_activity", { 
                 isloggedin : session.isLoggedIn ,
                 firstname : session.firstname ,
                 lastname : session.lastname ,
@@ -409,71 +432,35 @@ app.get("/confirmed_activity", (request, response,) => {
           }
         });
     } else {
-      response.send("u r not student")
+      res.send("u r not student")
     } // if perm student // admin
   } // if session login
  }); 
 
- app.get("/profile", (request, response,) => {
-  if (!session.isLoggedIn){
-    response.render("cosci_login");
-  }else{
+ app.get("/profile", 
+ usercheck.checkloginforalluser
+  ,(req, res) => {
+    // console.log(req.cookies.sslg)
     if (session.status == "admin"){
-      console.log("go to admin profile");
-      response.render("main_admin", { 
-        isloggedin : session.isLoggedIn ,
-        firstname : session.firstname ,
-        lastname : session.lastname ,
-        studentID : session.studentID ,
-        major : session.Major ,
-        Year : session.Year ,
-        status : session.status,
-        imgpath : session.img
-      });
+        console.log("go to admin profile");
+        res.render("main_admin")
     } else {
-      dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission WHERE ID_Student = ? ',[session.studentID], 
-        function (error, results, fields) {
-         if (results.length > 0) { 
-            if (error) throw error;
-              session.img = results[0].img_user;
-              // console.log("new img path ", session.img);
-              // console.log("go to student profile");
-              response.render("userprofile", { 
-                isloggedin : session.isLoggedIn ,
-                firstname : session.firstname ,
-                lastname : session.lastname ,
-                studentID : session.studentID ,
-                major : session.Major ,
-                Year : session.Year ,
-                status : session.status,
-                imgpath : session.img 
-              });
-          } else {
-             console.log("HAS NO ACCOUNT")
-          }
-});
-      // response.render("userprofile", { 
-      //   isloggedin : session.isLoggedIn ,
-      //   firstname : session.firstname ,
-      //   lastname : session.lastname ,
-      //   studentID : session.studentID ,
-      //   major : session.Major ,
-      //   Year : session.Year ,
-      //   status : session.status,
-      //   imgpath : session.img 
-      // });
-    }
-  }
- });
+        res.render("userprofile")
+    }   
+  });
+ 
+//     }
+//   }
+//  });
 
- app.get("/login", (request, response) => {
+ app.get("/login", (req, res) => {
   // console.log(session.isLoggedIn,"in /login");
   if (!session.isLoggedIn){
-    response.render("cosci_login");
+    res.render("cosci_login");
   }else{
     if (session.status == "admin"){
       console.log("go to admin profile");
-      response.render("main_admin", { 
+      res.render("main_admin", { 
         isloggedin : session.isLoggedIn ,
         firstname : session.firstname ,
         lastname : session.lastname ,
@@ -485,7 +472,7 @@ app.get("/confirmed_activity", (request, response,) => {
       });
     } else {
       console.log("go to student profile");
-      response.render("userprofile", { 
+      resrender("userprofile", { 
         isloggedin : session.isLoggedIn ,
         firstname : session.firstname ,
         lastname : session.lastname ,
@@ -551,24 +538,27 @@ app.get("/main", (req,res) => {
 
 app.post('/cosciAuth',  (req, res) => {
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
-function (error, results, fields) {
+async function (error, results, fields) {
   
   // console.log(results[0]);
   if (results.length > 0) { // check qurey has value
     // in case has value
     if (error) throw error;
-    session.isLoggedIn = true;
-    session.username = req.body.swuID;
-    session.firstname = results[0].Firstname;
-    session.lastname = results[0].Lastname;
-    session.studentID = results[0].ID_Student;
-    session.Major = results[0].name_maj;
-    session.subMajor = results[0].name_submaj;
-    session.Year = results[0].Year;
-    session.status = results[0].Detail_per;
-    session.img = results[0].img_user;
-    session.gender = results[0].detail_gen;
-    
+    var isLoggedIn = true;
+    var username = req.body.swuID;
+    var firstname = results[0].Firstname;
+    var lastname = results[0].Lastname;
+    var studentID = results[0].ID_Student;
+    var Major = results[0].name_maj;
+    var subMajor = results[0].name_submaj;
+    var Year = results[0].Year;
+    var status = results[0].Detail_per;
+    var img = results[0].img_user;
+    var gender = results[0].detail_gen;
+    var responsefromservice = {
+      isLoggedIn,username,firstname,lastname,studentID,Major,subMajor,Year,status,img,gender
+    }
+    const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: "60000"})
     res.render("login_success");
     
   } else {
@@ -598,6 +588,7 @@ function getuidf() {
 //upload pic
 
 const multer = require("multer");
+const req = require("express/lib/request");
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
