@@ -29,7 +29,7 @@ module.exports.checklogin = async (req, res, next) => {
                 
               } else {
                 // in case no account
-                console.log("HAS ")
+                console.log("HAS NO ACCOUNT")
                 res.redirect("/login");
               }
             });
