@@ -9,51 +9,9 @@ const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000
 app.use(express.static('public'));
 const dbConnectionn = require("./database");
-const { render, redirect } = require("express/lib/response");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-//  test get req 1
-// var url = require('url');
-// var fs = require('fs');
-// var http = require('http');
-// var adr = 'http://127.0.0.1:3000/details_submit/?rqt=request&code=2568';
-// var q = url.parse(adr, true);
-
-// // console.log(q,"detail");
-// var datqeu=q.query;
-// // console.log(datqeu.rqt,"query");
-// if (datqeu.rqt == "request") {
-//     // console.log("xxxxxxxxxxxxxxxxxxxxx");
-// }
-
-// app.get("/test",async(req, res) => {
-// try{
-//   console.log("0");
-//   throw new Error("textok")
-//   await new Promise((resolve,rejects)=>{
-//         console.log("1");
-//         resolve()
-//      });
-
-//   console.log("2")
-
-//   await new Promise((resolve,rejects)=>{
-//        console.log("3");
-//        rejects("test");
-//         });
-
-//   console.log("4");
-
-// }  catch (err){
-//   console.log(err.name)
-// }
-// });
-
-// test get req2
-// const savecookie = await res.cookie('jwt', responsefromservice, { httpOnly: true, domain : '' , maxAge: process.env.COOKIES_SINGIN_EXPIRE})
-//
 
 app.set("views",path.join(__dirname, '/public/views'))
 app.set( "view engine", "ejs" );
@@ -98,16 +56,6 @@ app.get("/home", (req, res) => {
  });
 
 
-
-// db Test //
-// dbConnectionn.query('SELECT Name_Event FROM event' ,function (error, results, fields) {
-//   // if (results.length > 0) { // check qurey has value
-//     if (error) throw error;
-//     console.log(results)
-//   // } else {
-//   //   console.log("HAS NO data")
-//   // }
-// });
 
  app.get("/info_activity01",usercheck.checkforstudentonly, (req, res) => {
    
@@ -232,6 +180,7 @@ app.get("/main",usercheck.checkforstudentonly ,(req,res) => {
 
 
 app.post('/cosciAuth',  (req, res) => {
+  console.log(req.body)
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 async function (error, results, fields) {
   if (results.length > 0) { 
