@@ -146,31 +146,32 @@
 
 
 <div class="container">
+  
+  <form class="form-floating  ms-3 my-3" action="/add_announcement" method="POST" >
   <div class="row ">
   
     <div class="col-md-11">
 <!--ชื่อกิจกรรม --> 
 
       <div class="mt-4 ms-4" >
-        <form class="form-floating  ms-3 my-3" >
-          <input type="text" class="form-control form-control-lg" id="floatingInputValue" placeholder="" >
-          <label for="floatingInputValue">แก้ไขชื่อกิจกรรม</label>
-        </form>
+        <label for="floatingInputValue">ชื่อกิจกรรม</label>
+          <input type="text" name="event_name" class="form-control form-control-lg" id="floatingInputValue" placeholder="" >
+        
+      </div>
+  
+  
     </div>
-  
-  
-</div>
    
   <!--เนื้อหาย่อ --> 
 
   <div class="col-md-11">
     <div class="mt-4 ms-4" >
-      <form class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;">
-        <textarea class="form-control " aria-label="With textarea"> </textarea>
+      <div class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;">
+        <textarea name="detail" class="form-control " aria-label="With textarea"> </textarea>
         <label for="floatingInputValue">เนื้อหาแบบย่อ </label>
         <div id="" class="form-text">เนื้อหาแบบย่อ ควรไม่เกิน 100 ตัวอักษร</div>
   
-      </form>
+      </div>
   </div>
   
   </div>
@@ -188,17 +189,13 @@
 
 
   </div>
+  
 </div>
-
-
-
-
-        
-          </div> 
-          <div class="d-flex justify-content-end mt-5 me-2" >
-            <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"  >ยืนยันข้อมูล</button>
-
-          </div>
+    </div> 
+    <div class="d-flex justify-content-end mt-5 me-2" >
+      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"  >ยืนยันข้อมูล</button>
+    </form>
+    </div>
 
   </div>
 

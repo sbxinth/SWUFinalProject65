@@ -5,6 +5,8 @@ var session = require("express-session");
 const usercheck = require('../middleware/logintokencheck')
 const mwupdatereq = require('../middleware/update_rq')
 const multer = require("multer");
+const { resolve } = require('path');
+const { rejects } = require('assert');
 
 router.get("/main_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
     
@@ -98,32 +100,49 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
     res.render("activity_admin");  
 
 });
-router.get("/control_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
-
-    res.render("control_announcement");  
+// db test//
+// dbConnectionn.query(`SELECT Name_Event,Detail_Event FROM event;`,
+//             function (error, results, fields) {
+//                 console.log(results)
+//         });
+// end db test
+router.get("/control_announcement",usercheck.checkloginforalluser,async(req,res) => {
+    var datax = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT Name_Event,Detail_Event,Detail_Img FROM event;`,
+            function (error, results, fields) {
+                resolve(results)
+        });
+    });
+    console.log(datax.length)
+    res.render("control_announcement",{
+        datax : datax
+    });  
 
 });
-router.get("/sub_request_general",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.get("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("sub_request_general");  
 
 });
-router.get("/sub_request_omit",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.get("/sub_request_omit",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("sub_request_omit");  
 
 });
-router.get("/add_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.get("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("add_announcement");  
 
 });
-router.get("/review_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.post("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
+    console.log("hit submit",req.body)
+});
+router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("review_announcement");  
 
 });
-router.get("/edit_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.get("/edit_announcement",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("edit_announcement");  
 

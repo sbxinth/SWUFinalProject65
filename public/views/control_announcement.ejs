@@ -123,13 +123,15 @@
 <section>
     <div class="container">
 <div class="row">
+    <!-- card 1  -->
+    <% for(i=0; i < datax.length ; i++) { %>
     <div class="col-md-6 col-xl-4 d-flex justify-content-center">
         <div class="card--admin" >
             <img src="../images/history-1705x960--1.jpeg" class="card-img-top-admin" alt="...">
                 <div class="card-body" >
-                        <a href="/review_announcement"> <h5 class="card-title-admin" > Card title</h5></a>  
+                        <a href="/review_announcement"> <h5 class="card-title-admin " > <%= datax[i].Name_Event %> </h5></a>  
            
-                <p class="card-text-admin ">กิจกรรมที่กำลังดำเนิน</p>
+                <p class="card-text-admin "><%= datax[i].Detail_Event %></p>
                <div class="justify-content-end">
                   <a href="#" class="btn btn-activity-admin"  data-bs-toggle="modal" data-bs-target="#RemoveAnnounce">X</a>
 <!--modal remove --> 
@@ -144,7 +146,7 @@
                         </div>
                         <div class="modal-body">
                            <div class="d-flex justify-content-center">
-<p>ยืนยันลบกิจกรรมนี้ออกจากประชาสัมพันธ์</p>
+                            <p>ยืนยันลบกิจกรรมนี้ออกจากประชาสัมพันธ์</p>
                            </div> 
                            <div class="d-flex justify-content-end">
                             <p class="me-5" style="color: red">***ไม่ทำการกู้คืนได้อีก**
@@ -167,7 +169,10 @@
               </div>
           </div>
     </div>
-    <div class="col-md-6 col-xl-4 d-flex justify-content-center">
+    
+    <% } %>
+    <!-- card 1 -->
+    <!-- <div class="col-md-6 col-xl-4 d-flex justify-content-center">
         <div class="card--admin">
             <img src="../images/history-1705x960--1.jpeg" class="card-img-top-admin " alt="...">
             <div class="card-body">
@@ -196,7 +201,7 @@
               
               </div>
           </div>
-    </div>
+    </div> -->
     
 </div>
     </div>
