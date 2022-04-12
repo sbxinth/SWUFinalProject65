@@ -94,7 +94,7 @@ module.exports.checkforstudentonly = async (req, res, next) => {
     if (req.cookies.sslg.status != "student") { 
       return res.send("คุณไม่มีสิทธิ์เข้าถึงหน้าเว็ปนี้")
     }
-    console.log(req.cookies.sslg,"in checkforstudentonly");
+    // console.log(req.cookies.sslg,"in checkforstudentonly");
       dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE ID_Student = ? '
       ,[req.cookies.sslg.studentID],
      async function (error, results, fields) {

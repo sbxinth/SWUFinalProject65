@@ -180,7 +180,7 @@ app.get("/main",usercheck.checkforstudentonly ,(req,res) => {
 
 
 app.post('/cosciAuth',  (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
 dbConnectionn.query('SELECT * FROM user INNER JOIN Major ON user.Major=Major.idMajor INNER JOIN submajor ON user.secMaj=submajor.idsubMajor INNER JOIN permission ON user.Permission=permission.idPermission INNER JOIN gender ON user.gender_id=gender.gender_id WHERE Username = ? AND Password = ?',[req.body.swuID, req.body.password], 
 async function (error, results, fields) {
   if (results.length > 0) { 
