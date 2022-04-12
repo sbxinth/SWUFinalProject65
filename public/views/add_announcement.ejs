@@ -124,11 +124,12 @@
 <!--เปลี่ยนรูป --> 
 
 
+<form class="form-floating  ms-3 my-3" action="/add_announcement" method="POST" enctype="multipart/form-data" >
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <div class="file-upload">
 
   <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <input class="file-upload-input" name="image" type='file' onchange="readURL(this);" accept="image/*" />
     <div class="drag-text">
       <h3>คลิกเพื่อเปลี่ยนรูป</h3>
     </div>
@@ -147,7 +148,6 @@
 
 <div class="container">
   
-  <form class="form-floating  ms-3 my-3" action="/add_announcement" method="POST" >
   <div class="row ">
   
     <div class="col-md-11">
@@ -180,7 +180,7 @@
 
 <div class="col-md-11">
   <div class="form-floating ms-4 mt-4">
-    <textarea type="text" class="form-control" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "> 
+    <textarea type="text" name="detailFull" class="form-control" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "> 
    </textarea>
     <label for="floatingTextarea2">แก้ไขเนื้อหา</label>
   </div>

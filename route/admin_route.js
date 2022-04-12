@@ -7,6 +7,39 @@ const mwupdatereq = require('../middleware/update_rq')
 const multer = require("multer");
 const { resolve } = require('path');
 const { rejects } = require('assert');
+const req = require("express/lib/request");
+const { DATE } = require('mysql/lib/protocol/constants/types');
+
+function getuidf() {
+    var date = new Date();
+    var components = [
+       date.getDate(),
+       date.getMonth()+1,
+        date.getFullYear(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+    ];
+    var id = components.join("");
+    return id.toString(16);
+  }
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd ;
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './public/img/act')
+  },
+  filename: (req, file, cb) => {
+      cb(null, 'file-' + Date.now() + '.' +
+      file.originalname.split('.')[file.originalname.split('.').length-1])}
+})
+
+const upload = multer({ storage:storage })
 
 router.get("/main_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
     
@@ -134,8 +167,24 @@ router.get("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
     res.render("add_announcement");  
 
 });
-router.post("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
-    console.log("hit submit",req.body)
+
+
+// console.log(today);
+
+router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('image'),(req,res) => {
+    if (!req.file) {
+        console.log("No file upload");
+    } else {
+        var imgsrc = '../img/act/' + req.file.filename
+        console.log("hit submit",req.body,imgsrc)
+        // var
+        var sqlx = "INSERT INTO `event` (`ID_event`, `Name_Event`, `Detail_Event`, `start_Event`, `end_Event`, `Posted_Event`, `idType_Event`, `thamnail`, `Detail_Img`, `school_year`) VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?');"
+        dbConnectionn.query(sqlx,[getuidf(), req.body.event_name , req.body.detailFull , `start_Event`, `end_Event`, today , `idType_Event`, `thamnail`, `Detail_Img`, `school_year`],
+                    function (error, results, fields) {
+                        console.log(results)
+                });
+        res.send("upload successful !")
+    }
 });
 router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
 
