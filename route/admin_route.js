@@ -6,13 +6,14 @@ const usercheck = require('../middleware/logintokencheck')
 const mwupdatereq = require('../middleware/update_rq')
 const multer = require("multer");
 
-router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+router.get("/main_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
     
         var bungkublenget = await new Promise((resolve,reject) => {
                 dbConnectionn.query(`SELECT * FROM request 
-                INNER JOIN event on event.ID_event=request.ID_event
-                INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-                where Status_req != "4" and Detail_type_E='กิจกรรมบังคับ'`,
+                INNER JOIN type_req on request.idType_req=type_req.idType_Req
+                inner join event on event.ID_event=request.ID_event
+                inner join type_event on type_event.idType_Event=event.idType_Event
+                where Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
                 function (error, results, fields) {
                     if (error) throw error; 
                     resolve(results.length)
@@ -20,9 +21,10 @@ router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
          })
         var bungkublengetpassed = await new Promise((resolve,reject) => {
             dbConnectionn.query(`SELECT * FROM request 
-            INNER JOIN event on event.ID_event=request.ID_event
-            INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-            where Status_req = "4" and Detail_type_E='กิจกรรมบังคับ'`,
+            INNER JOIN type_req on request.idType_req=type_req.idType_Req
+            inner join event on event.ID_event=request.ID_event
+            inner join type_event on type_event.idType_Event=event.idType_Event
+            where Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='ตกหล่น'`,
             function (error, results, fields) {
                 resolve(results.length)
         });
@@ -30,9 +32,10 @@ router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
 
         var leuakLeng = await new Promise((resolve,reject) => {
                 dbConnectionn.query(`SELECT * FROM request 
-                INNER JOIN event on event.ID_event=request.ID_event
-                INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-                where Status_req != "4" and Detail_type_E='กิจกรรมเลือก'`,
+                INNER JOIN type_req on request.idType_req=type_req.idType_Req
+                inner join event on event.ID_event=request.ID_event
+                inner join type_event on type_event.idType_Event=event.idType_Event
+                where Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='บันทึกกิจกรรม'`,
                 function (error, results, fields) {
                     resolve(results.length)
             });
@@ -41,9 +44,10 @@ router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
 
         var leuakLengpasss = await new Promise((resolve,reject) => {
                     dbConnectionn.query(`SELECT * FROM request 
-                    INNER JOIN event on event.ID_event=request.ID_event
-                    INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-                    where Status_req = "4" and Detail_type_E='กิจกรรมเลือก'`,
+                    INNER JOIN type_req on request.idType_req=type_req.idType_Req
+                    inner join event on event.ID_event=request.ID_event
+                    inner join type_event on type_event.idType_Event=event.idType_Event
+                    where Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='ตกหล่น'`,
                     function (error, results, fields) {
                         resolve(results.length)
                 });
@@ -52,9 +56,10 @@ router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
 
         var bampen = await new Promise((resolve,reject) => {
                         dbConnectionn.query(`SELECT * FROM request 
-                        INNER JOIN event on event.ID_event=request.ID_event
-                        INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-                        where Status_req != "4" and Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์'`,
+                        INNER JOIN type_req on request.idType_req=type_req.idType_Req
+                        inner join event on event.ID_event=request.ID_event
+                        inner join type_event on type_event.idType_Event=event.idType_Event
+                        where Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='บันทึกกิจกรรม'`,
                         function (error, results, fields) {
                             resolve(results.length)
                     });
@@ -63,20 +68,67 @@ router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
 
         var bampenpass = await new Promise((resolve,reject) => {
                             dbConnectionn.query(`SELECT * FROM request 
-                            INNER JOIN event on event.ID_event=request.ID_event
-                            INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
-                            where Status_req = "4" and Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์'`,
+                            INNER JOIN type_req on request.idType_req=type_req.idType_Req
+                            inner join event on event.ID_event=request.ID_event
+                            inner join type_event on type_event.idType_Event=event.idType_Event
+                            where Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='ตกหล่น'`,
+                            function (error, results, fields) {
+                                resolve(results.length)
+                        });
+        })
+
+
+        var eventnow = await new Promise((resolve,reject) => {
+                            dbConnectionn.query(`SELECT * FROM event;`,
                             function (error, results, fields) {
                                 resolve(results.length)
                         });
         })
 
     var allrequest = bungkublenget+leuakLeng+bampen
-    var dataset = {bungkublenget,bungkublengetpassed,leuakLeng,leuakLengpasss,bampen,bampenpass,allrequest}
+    var tokloan = bungkublengetpassed+leuakLengpasss+bampenpass
+    var dataset = {bungkublenget,bungkublengetpassed,leuakLeng,leuakLengpasss,bampen,bampenpass,allrequest,tokloan,eventnow}
     const savecookie = await res.cookie('amrq', dataset, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
     res.render("main_admin",{
         datax : dataset
         });  
 });
+router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("activity_admin");  
+
+});
+router.get("/control_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("control_announcement");  
+
+});
+router.get("/sub_request_general",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("sub_request_general");  
+
+});
+router.get("/sub_request_omit",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("sub_request_omit");  
+
+});
+router.get("/add_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("add_announcement");  
+
+});
+router.get("/review_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("review_announcement");  
+
+});
+router.get("/edit_announcement",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("edit_announcement");  
+
+});
+
+
 
 module.exports = router;

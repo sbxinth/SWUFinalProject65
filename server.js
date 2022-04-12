@@ -152,7 +152,7 @@ app.get("/confirmed_activity",usercheck.checkforstudentonly,(req, res) => {
     // console.log(req.cookies.sslg)
     if (req.cookies.sslg.status == "admin"){
         console.log("go to admin profile");
-        res.redirect("/admin_main")
+        res.redirect("/main_admin")
     } else {
         res.render("userprofile")
     }   

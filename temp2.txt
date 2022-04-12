@@ -17,3 +17,6 @@
 <%= Year %>
 
 <%= imgpath %>
+
+bungkublenget,bungkublengetpassed,leuakLeng,
+leuakLengpasss,bampen,bampenpass,allrequest
