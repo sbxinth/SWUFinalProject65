@@ -69,7 +69,7 @@ module.exports.checkloginforalluser = async (req, res, next) => {
           var responsefromservice = {
           isLoggedIn,username,firstname,lastname,studentID,Major,subMajor,Year,status,img,gender
           }
-          const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: "60000"})
+          const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
           return next()
           
         } else {
@@ -85,6 +85,7 @@ module.exports.checkloginforalluser = async (req, res, next) => {
       res.redirect('/login')
       console.log(`Something went wrong with : checkloginforalluser ` ,error);
   }
+
   // res.status(response.status).send(response)
 
 }
