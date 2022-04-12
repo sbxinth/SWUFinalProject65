@@ -207,7 +207,7 @@ async function (error, results, fields) {
   }
 });
 });
-
+// console.log(getuidf());
 //declare func gen uid//
 function getuidf() {
   var date = new Date();
