@@ -41,6 +41,15 @@ app.use(
     res.locals.gender = req.cookies.sslg.gender
     // console.log(res.locals)
     }
+    if (req.cookies?.amrq) {
+      res.locals.bungkublenget = req.cookies.bungkublenget
+      res.locals.bungkublengetpassed = req.cookies.bungkublengetpassed
+      res.locals.leuakLeng = req.cookies.leuakLeng
+      res.locals.leuakLengpasss = req.cookies.leuakLengpasss
+      res.locals.bampen = req.cookies.bampen
+      res.locals.bampenpass = req.cookies.bampenpass
+      res.locals.allrequest = req.cookies.allrequest
+    }
   next()
   }
   catch{ next() }
@@ -203,7 +212,7 @@ async function (error, results, fields) {
     var responsefromservice = {
       isLoggedIn,username,firstname,lastname,studentID,Major,subMajor,Year,status,img,gender
     }
-    const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: "60000"})
+    const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
     res.render("login_success");
   } else {
     console.log("HAS NO ACCOUNT xxxx")

@@ -3,9 +3,10 @@ const router = express.Router();
 const dbConnectionn = require("../database");
 var session = require("express-session");
 const usercheck = require('../middleware/logintokencheck')
+const mwupdatereq = require('../middleware/update_rq')
 const multer = require("multer");
 
-router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
+router.get("/admin_main",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
     
         var bungkublenget = await new Promise((resolve,reject) => {
                 dbConnectionn.query(`SELECT * FROM request 
@@ -27,7 +28,7 @@ router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
         });
             })
 
-            var leuakLeng = await new Promise((resolve,reject) => {
+        var leuakLeng = await new Promise((resolve,reject) => {
                 dbConnectionn.query(`SELECT * FROM request 
                 INNER JOIN event on event.ID_event=request.ID_event
                 INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
@@ -35,10 +36,10 @@ router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
                 function (error, results, fields) {
                     resolve(results.length)
             });
-                })
+        })
 
 
-                var leuakLengpasss = await new Promise((resolve,reject) => {
+        var leuakLengpasss = await new Promise((resolve,reject) => {
                     dbConnectionn.query(`SELECT * FROM request 
                     INNER JOIN event on event.ID_event=request.ID_event
                     INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
@@ -46,10 +47,10 @@ router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
                     function (error, results, fields) {
                         resolve(results.length)
                 });
-                    })
+        })
 
 
-                    var bampen = await new Promise((resolve,reject) => {
+        var bampen = await new Promise((resolve,reject) => {
                         dbConnectionn.query(`SELECT * FROM request 
                         INNER JOIN event on event.ID_event=request.ID_event
                         INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
@@ -57,10 +58,10 @@ router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
                         function (error, results, fields) {
                             resolve(results.length)
                     });
-                        })
+        })
 
 
-                        var bampenpass = await new Promise((resolve,reject) => {
+        var bampenpass = await new Promise((resolve,reject) => {
                             dbConnectionn.query(`SELECT * FROM request 
                             INNER JOIN event on event.ID_event=request.ID_event
                             INNER JOIN type_event ON type_event.idType_Event=event.idType_Event
@@ -68,9 +69,11 @@ router.get("/admin_main",usercheck.checkloginforalluser, async(req,res) => {
                             function (error, results, fields) {
                                 resolve(results.length)
                         });
-                            })
+        })
+
     var allrequest = bungkublenget+leuakLeng+bampen
     var dataset = {bungkublenget,bungkublengetpassed,leuakLeng,leuakLengpasss,bampen,bampenpass,allrequest}
+    const savecookie = await res.cookie('amrq', dataset, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
     res.render("main_admin",{
         datax : dataset
         });  

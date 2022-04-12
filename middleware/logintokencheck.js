@@ -1,5 +1,4 @@
 const dbConnectionn = require("../database");
-var session = require("express-session");
 
 module.exports.checklogin = async (req, res, next) => {    
   try{
