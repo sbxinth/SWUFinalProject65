@@ -25,7 +25,7 @@ app.use(
 );
  session.isLoggedIn = false;
 
-
+// console.log(365*24*60*60)
  app.use(function(req,res,next){
   try{
     // console.log(req.cookies.sslg)
@@ -49,14 +49,18 @@ app.use(
 // routers
  app.use("/", require('./route/activityforstd_router'))
  app.use("/", require('./route/announce_router'))
+ app.use("/", require('./route/admin_route'))
 
 
 app.get("/home", (req, res) => {
   resrender("swu");
  });
-
-
-
+// db test//
+// dbConnectionn.query(`SELECT * FROM request where Status_req != "4"`,
+//             function (error, results, fields) {
+//                 console.log(results.length)
+//         });
+// end db test
  app.get("/info_activity01",usercheck.checkforstudentonly, (req, res) => {
    
           // console.log(req.cookies.sslg,"data sslg in log xxx")
@@ -139,7 +143,7 @@ app.get("/confirmed_activity",usercheck.checkforstudentonly,(req, res) => {
     // console.log(req.cookies.sslg)
     if (req.cookies.sslg.status == "admin"){
         console.log("go to admin profile");
-        res.render("main_admin")
+        res.redirect("/admin_main")
     } else {
         res.render("userprofile")
     }   
