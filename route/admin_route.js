@@ -29,7 +29,7 @@ function getuidf() {
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd ;
-
+  
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './public/img/act')
@@ -141,7 +141,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
 // end db test
 router.get("/control_announcement",usercheck.checkloginforalluser,async(req,res) => {
     var datax = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT Name_Event,Detail_Event,Detail_Img FROM event;`,
+        dbConnectionn.query(`SELECT ID_event,Name_Event,Detail_Event,Detail_Img FROM event;`,
             function (error, results, fields) {
                 resolve(results)
         });
@@ -167,23 +167,33 @@ router.get("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
     res.render("add_announcement");  
 
 });
+router.post("/edit_announcement",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.body)
+    res.render("edit_announcement",{
 
+    });
+});
 
 // console.log(today);
 
-router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('image'),(req,res) => {
+router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('image'),async(req,res) => {
     if (!req.file) {
         console.log("No file upload");
     } else {
         var imgsrc = '../img/act/' + req.file.filename
-        console.log("hit submit",req.body,imgsrc)
+        console.log("hit submit",req.body)
         // var
-        var sqlx = "INSERT INTO `event` (`ID_event`, `Name_Event`, `Detail_Event`, `start_Event`, `end_Event`, `Posted_Event`, `idType_Event`, `thamnail`, `Detail_Img`, `school_year`) VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?');"
-        dbConnectionn.query(sqlx,[getuidf(), req.body.event_name , req.body.detailFull , `start_Event`, `end_Event`, today , `idType_Event`, `thamnail`, `Detail_Img`, `school_year`],
+        var sqlx = 'INSERT INTO event (ID_event, Name_Event, Detail_Event, start_Event, end_Event, Posted_Event, idType_Event, thamnail, Detail_Img, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+
+            await new Promise((resolve,rejects)=>{
+            dbConnectionn.query(sqlx,[getuidf(), req.body.event_name , req.body.detailFull , req.body.start_date , req.body.end_date, today , req.body.eventtype , imgsrc , imgsrc , yyyy+543],
                     function (error, results, fields) {
-                        console.log(results)
+                        if (error) throw error
+                        resolve(results)
                 });
-        res.send("upload successful !")
+        res.redirect("/control_announcement")
+        }) 
+        
     }
 });
 router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
@@ -191,12 +201,14 @@ router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
     res.render("review_announcement");  
 
 });
-router.get("/edit_announcement",usercheck.checkloginforalluser,(req,res) => {
-
-    res.render("edit_announcement");  
+router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.params.eventID)
+    // res.render("edit_announcement");  
 
 });
-
+// app.get('/p/:tagId', function(req, res) {
+//   res.send("tagId is set to " + req.params.tagId);
+// });
 
 
 module.exports = router;

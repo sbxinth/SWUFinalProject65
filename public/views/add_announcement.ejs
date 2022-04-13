@@ -167,22 +167,33 @@
   <div class="col-md-11">
     <div class="mt-4 ms-4" >
       <div class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;">
-        <textarea name="detail" class="form-control " aria-label="With textarea"> </textarea>
+        <!-- <textarea name="detail" class="form-control " aria-label="With textarea"> </textarea>
         <label for="floatingInputValue">เนื้อหาแบบย่อ </label>
         <div id="" class="form-text">เนื้อหาแบบย่อ ควรไม่เกิน 100 ตัวอักษร</div>
   
-      </div>
+      </div> -->
   </div>
-  
+  <label for="floatingInputValue" style="padding-bottom: 10px;">วันเริ่มกิจกรรม</label>
+  <input type="date" style="margin-bottom: 25px;" class="form-control" id="firstdate" name="start_date" > 
+  <label for="floatingInputValue" style="padding-bottom: 10px;">วันสิ้นสุดกิจกรรม</label> 
+  <input type="date" style="margin-bottom: 25px;" class="form-control" id="firstdate" name="end_date" >  
   </div>
+
+  <select name="eventtype" style="margin-bottom: 25px;" name="event_typ" class="form-select" aria-label="select Activity category">
+    <option selected>ประเภทกิจกรรม</option>
+    <option value=1> กิจกรรมบังคับ </option>
+    <option value=2> กิจกรรมเลือก </option>
+    <option value=3> กิจกรรมบําเพ็ญสาธารณะประโยชน์ </option>
   
       <!--แก้ไขเนื้อหาหลัก --> 
 
 <div class="col-md-11">
   <div class="form-floating ms-4 mt-4">
+    
     <textarea type="text" name="detailFull" class="form-control" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "> 
    </textarea>
-    <label for="floatingTextarea2">แก้ไขเนื้อหา</label>
+   
+   <label for="floatingTextarea2">แก้ไขเนื้อหา</label>
   </div>
 
 </div>

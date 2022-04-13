@@ -160,10 +160,11 @@
                       </div>
                     </div>
                   </div>
-
-
-                  <a href="/edit_announcement" class="btn btn-activity-admin"><i class="bi bi-pencil-square"></i></a>
-    
+                  
+                <!-- <form action="/edit_announcement" method="post"> -->
+                  <a type="submit" href="/edit_announcement/<%= datax[i].ID_event %>" name="eventid" value=<%= datax[i].ID_event %> class="btn btn-activity-admin"><i class="bi bi-pencil-square"></i></a>
+                <!-- </form> -->
+                
                </div>
               
               </div>
