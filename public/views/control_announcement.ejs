@@ -154,7 +154,9 @@
                                                        </div> 
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
-                          <button type="button" class="btnadmin btn--red" data-bs-dismiss="modal">ยืนยัน</button>
+                            <form action="/delete_event/<%= datax[i].ID_event %>" method="post">
+                          <button type="submit" class="btnadmin btn--red" data-bs-dismiss="modal">ยืนยัน</button>
+                        </form>
                           <button type="button" class="btnadmin" data-bs-dismiss="modal">ยกเลิก</button>
                         </div>
                       </div>

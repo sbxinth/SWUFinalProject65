@@ -247,6 +247,15 @@ router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(re
     })
 
 });
-
+router.post("/delete_event/:eventID",usercheck.checkloginforalluser,(req,res) => {
+    // console.log(req.params.eventID)
+    
+    // DELETE FROM thesisz.event WHERE (ID_event = '1342022223911');
+    dbConnectionn.query(`DELETE FROM event WHERE (ID_event = ?)`,[req.params.eventID],
+            function (error, results, fields) {
+                console.log(results)
+                 res.redirect("/control_announcement")
+               });
+});
 
 module.exports = router;
