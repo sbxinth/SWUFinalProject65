@@ -150,6 +150,16 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
     res.render("activity_admin");  
 
 });
+router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("activity_admin02");  
+
+});
+router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    res.render("activity_admin03");  
+
+});
 router.get("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
 
     res.render("sub_request_general");  
