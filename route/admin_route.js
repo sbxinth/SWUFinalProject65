@@ -25,11 +25,28 @@ function getuidf() {
   }
 
   var today = new Date();
+  var now = new Date();
+  
+//   console.log(today)
+//   console.log(today.toUTCString())
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
   var yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd ;
-  
+  function formatDateToString(date){
+    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
+    return ( yyyy + "-" + MM + "-" + dd);
+ }
+
+// db test//
+// dbConnectionn.query(`SELECT event.*,type_event.Detail_type_E FROM thesisz.event inner join type_event on type_event.idType_Event=event.idType_Event`,
+//             function (error, results, fields) {
+//                 console.log(formatDateToString(results[2].start_Event))
+//                 console.log(results[7].start_Event)
+                
+//         });
+// end db test
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './public/img/act')
@@ -133,12 +150,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
     res.render("activity_admin");  
 
 });
-// db test//
-// dbConnectionn.query(`SELECT Name_Event,Detail_Event FROM event;`,
-//             function (error, results, fields) {
-//                 console.log(results)
-//         });
-// end db test
+
 router.get("/control_announcement",usercheck.checkloginforalluser,async(req,res) => {
     var datax = await new Promise((resolve,rejects)=>{
         dbConnectionn.query(`SELECT ID_event,Name_Event,Detail_Event,Detail_Img FROM event;`,
@@ -167,11 +179,28 @@ router.get("/add_announcement",usercheck.checkloginforalluser,(req,res) => {
     res.render("add_announcement");  
 
 });
-router.post("/edit_announcement",usercheck.checkloginforalluser,(req,res) => {
-    console.log(req.body)
-    res.render("edit_announcement",{
-
-    });
+router.post("/edit_announcement",usercheck.checkloginforalluser,upload.single("image"),(req,res) => {
+    if(!req.file){
+        console.log(req.body)
+        console.log(req.body)
+        // UPDATE `thesisz`.`event` SET `ID_event` = '12', `Name_Event` = '12', `Detail_Event` = '12', `start_Event` = '2', `end_Event` = '2', `Posted_Event` = '2', `idType_Event` = '2', `thamnail` = '2', `Detail_Img` = '2', `school_year` = '2' WHERE (`ID_event` = '1');
+        dbConnectionn.query("UPDATE event SET  Name_Event = ?, Detail_Event = ?, start_Event = ?, end_Event = ?, idType_Event = ?, school_year = ? WHERE (ID_event = ?)",
+        [req.body.eventName,req.body.event_detail,req.body.startEventdate,req.body.endEventdate,req.body.eventtype,now.getFullYear()+543,req.body.eventID],
+                function (error, results, fields) {  
+                    res.redirect("/control_announcement")  
+            });
+    }else{
+        console.log(req.body)
+        var imgsrc = '../img/act/' + req.file.filename
+        console.log(imgsrc)
+        console.log(req.body)
+        // UPDATE `thesisz`.`event` SET `ID_event` = '12', `Name_Event` = '12', `Detail_Event` = '12', `start_Event` = '2', `end_Event` = '2', `Posted_Event` = '2', `idType_Event` = '2', `thamnail` = '2', `Detail_Img` = '2', `school_year` = '2' WHERE (`ID_event` = '1');
+        dbConnectionn.query("UPDATE event SET  Name_Event = ?, Detail_Event = ?, start_Event = ?, end_Event = ?, idType_Event = ?, thamnail = ?, Detail_Img = ?, school_year = ? WHERE (ID_event = ?)",
+        [req.body.eventName,req.body.event_detail,req.body.startEventdate,req.body.endEventdate,req.body.eventtype,imgsrc,imgsrc,now.getFullYear()+543,req.body.eventID],
+                function (error, results, fields) {  
+                    res.redirect("/control_announcement")  
+            });
+    }
 });
 
 // console.log(today);
@@ -202,14 +231,22 @@ router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
     res.render("review_announcement");  
 
 });
-router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,(req,res) => {
+router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(req,res) => {
     console.log(req.params.eventID)
-    // res.render("edit_announcement");  
+    var datax = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query('SELECT event.*,type_event.Detail_type_E FROM event inner join type_event on type_event.idType_Event=event.idType_Event  where ID_event=?',[req.params.eventID],function(error,results,fields){
+           if (error) throw error // resolve(res.send(results))
+            results[0].start_Event = formatDateToString(results[0].start_Event).toString()
+            results[0].end_Event = formatDateToString(results[0].end_Event).toString()
+            console.log(results)
+            resolve(results)
+        })
+    })
+    res.render("edit_announcement",{
+        datax : datax
+    })
 
 });
-// app.get('/p/:tagId', function(req, res) {
-//   res.send("tagId is set to " + req.params.tagId);
-// });
 
 
 module.exports = router;
