@@ -248,7 +248,7 @@ router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(re
 
 });
 router.post("/delete_event/:eventID",usercheck.checkloginforalluser,(req,res) => {
-    // console.log(req.params.eventID)
+    console.log(req.params.eventID)
     
     // DELETE FROM thesisz.event WHERE (ID_event = '1342022223911');
     dbConnectionn.query(`DELETE FROM event WHERE (ID_event = ?)`,[req.params.eventID],
