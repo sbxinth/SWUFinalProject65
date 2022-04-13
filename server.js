@@ -59,6 +59,8 @@ app.use(
  app.use("/", require('./route/activityforstd_router'))
  app.use("/", require('./route/announce_router'))
  app.use("/", require('./route/admin_route'))
+ app.use("/", require('./route/admin_route_annouce'))
+ 
 
 
 app.get("/home", (req, res) => {
