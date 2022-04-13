@@ -126,18 +126,18 @@
 
 <!--เปลี่ยนรูป --> 
 
-
+<form action="/edit_announcement" method="post" enctype="multipart/form-data">
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <div class="file-upload">
 
   <div class="image-upload-wrap" style="display: none;">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <input class="file-upload-input" name="image" type='file' value="<%= datax[0].thamnail %>" onchange="readURL(this);" accept="image/*" />
     <div class="drag-text">
       <h3>คลิกเพื่อเปลี่ยนรูป</h3>
     </div>
   </div>
   <div class="file-upload-content" style="display: block;">
-    <img class="file-upload-image" src="../images/bg-cosci-login.png" alt="your image" />
+    <img class="file-upload-image" src="<%= datax[0].thamnail %>" alt="your image" />
     <div class="image-title-wrap">
       <button  style="margin: 0px;" type="button" onclick="removeUpload()" class="btn2 btn--red">Remove <span class=""></span></button>
       <button style="margin: 0px;" class="btn2 btn--blue" type="button" onclick="$('.file-upload-input').trigger( 'click' )">เปลี่ยนรูป</button>
@@ -161,18 +161,42 @@
 <!--แก้ไขชื่อกิจกรรม --> 
 
       <div class="mt-4 ms-4" >
-        <form class="form-floating  ms-3 my-3" >
-          <input type="text" class="form-control form-control-lg" id="floatingInputValue" placeholder="กิจกรรมอาสา" value="กิจกรรมอาสา">
+        <!-- <form class="form-floating  ms-3 my-3" > -->
+          <input hidden name="eventID" value=<%= datax[0].ID_event %>></input>
           <label for="floatingInputValue">แก้ไขชื่อกิจกรรม</label>
-        </form>
+          <input type="text" name="eventName" class="form-control form-control-lg" id="floatingInputValue" placeholder="กิจกรรมอาสา" value=<%= datax[0].Name_Event %>>
+          
+        <!-- </form> -->
     </div>
-  
+
+    <div class="mt-4 ms-4" >
+      <!-- <form class="form-floating  ms-3 my-3" > -->
+        <label for="floatingInputValue">แก้ไขวันที่ เริ่มกิจกรรม</label>
+        <input type="date" name="startEventdate" class="form-control form-control-lg" id="startEventdate" value=<%= datax[0].start_Event %>>
+        
+      <!-- </form> -->
+  </div>
+
+  <div class="mt-4 ms-4" >
+      <label for="floatingInputValue">แก้ไขวันที่ สิ้นสุดกิจกรรม</label>
+      <input type="date" name="endEventdate" class="form-control form-control-lg" id="endEventdate" value=<%= datax[0].end_Event %>>
+      
+</div>
+  <div class="mt-4 ms-4">
+    
+    <label for="floatingInputValue">ประเภทกิจกรรม</label>
+    <select disabled name="eventtype" style="margin-bottom: 15px;" class="form-select" aria-label="select Activity category">
+      <option selected hidden value=<%= datax[0].idType_Event %> ><%= datax[0].Detail_type_E %></option>
+      <option value=1> กิจกรรมบังคับ </option>
+      <option value=2> กิจกรรมเลือก </option>
+      <option value=3> กิจกรรมบําเพ็ญสาธารณะประโยชน์ </option>
+  </div>
   
 </div>
    
   <!--แก้ไขเนื้อหาย่อ --> 
 
-  <div class="col-md-11">
+  <!-- <div class="col-md-11">
     <div class="mt-4 ms-4" >
       <form class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;" >
         <textarea class="form-control " aria-label="With textarea">เนื้อหาแบบย่อๆๆๆๆๆๆๆๆ ตรงนี้จะเอาไว้ขึ้นโชว์ตรง card หน้าประกาศกิจกรรม </textarea>
@@ -182,14 +206,13 @@
       </form>
   </div>
   
-  </div>
+  </div> -->
   
       <!--แก้ไขเนื้อหาหลัก --> 
 
 <div class="col-md-11">
   <div class="form-floating ms-4 mt-4">
-    <textarea type="text" class="form-control" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "> 
-   เนื้อหา              เนื้อหา เนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหา</textarea>
+    <textarea type="text" class="form-control" name="event_detail" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "><%= datax[0].Detail_Event %></textarea>
     <label for="floatingTextarea2">แก้ไขเนื้อหา</label>
   </div>
 
@@ -206,7 +229,8 @@
   <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"  >ยืนยันข้อมูล</button>
 
 </div>
-      
+  
+</form>
   </div>
      
       </div>
