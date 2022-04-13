@@ -77,7 +77,7 @@
           
 <div class="col-lg-6 col-sm-5 d-flex justify-content-end">
     <div class="box-name-admin">
-<p class="pt-3">ชื่อ admin</p> <img src="../images/pic-ex.jpg">
+<p class="pt-3"><%= firstname %></p> <img src=<%= imgpath %>
     </div>
 
 </div>
@@ -113,18 +113,18 @@
     
       <div class="col-md-11 ms-xl-4 ms-md-1 ">
 <div class="container" >
-  <h1 class="mb-5 " style="color: white">ชื่อกิจกรรม</h1>
+  <h1 class="mb-5 " style="color: white"><%= datax[0].Name_Event %></h1>
 
 <div class="container-box ">
   <a href="/control_announcement"> < กลับไปที่หน้าแก้ไข</a>
 <div class="row">
   <div class="col-md-12 mt-md-5 d-flex justify-content-center">
-<img  class="fix_mainimg" src="../images/history-1705x960--1.jpeg">
+<img  class="fix_mainimg" src="<%= datax[0].Detail_Img %>">
   </div>
 <div class="container">
     <div class="d-flex align-items-center mt-4 ms-4" style="color: black;border-bottom: solid 1px ;padding: 10px;">
         <img src="../images/announcement.png" width="40px">   
-        <p class="pt-3 ps-4"> ชื่อกิจกรรม ฉบับเต้ม COSCI cinema</p>
+        <p class="pt-3 ps-4"> <%= datax[0].Name_Event %> </p>
 
         
      </div>
@@ -136,24 +136,15 @@
 
 </div>
         <div class="col-md-10 ">
-            <div class=" fw-bold" style="width: 90%;">
+            <!-- <div class=" fw-bold" style="width: 90%;">
                 <p style="color: rgb(46, 46, 184);text-indent: 50px;word-wrap: break-word ; font-size: 17px; ">รายละเอียดแบบย่อ รายละเอียดแบบย่อรายละรายละเอียดแบบย่อเอียดแบบย่อรายละเอียดแบบย่อรายละเอียดแบบย่อ รายละเอียดแบบย่อ</p>   
 
-            </div>
+            </div> -->
             
          
             <div style="width: 95%;">
               <p style="color: rgb(0, 0, 0); text-indent: 50px;word-wrap: break-word ; font-size: 17px; ">
-                Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-                  ละเอียดกิจกรรมอรายละเอียดกิจกรรม 
-                  Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรม   details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรม details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรม details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรม  details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรมdetails รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรร details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
-ละเอียดกิจกรรมอรายละเอียดกิจกรรม
+               <%= datax[0].Detail_Event %>
 </p>
 
 

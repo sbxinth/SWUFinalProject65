@@ -40,12 +40,13 @@ function getuidf() {
  }
 
 // db test//
-// dbConnectionn.query(`SELECT event.*,type_event.Detail_type_E FROM thesisz.event inner join type_event on type_event.idType_Event=event.idType_Event`,
-//             function (error, results, fields) {
-//                 console.log(formatDateToString(results[2].start_Event))
-//                 console.log(results[7].start_Event)
-                
-//         });
+// dbConnectionn.query('SELECT event.*,type_event.Detail_type_E FROM event inner join type_event on type_event.idType_Event=event.idType_Event  where ID_event=?',["1342022211640"],function(error,results,fields){
+//     if (error) throw error // resolve(res.send(results))
+//      results[0].start_Event = formatDateToString(results[0].start_Event).toString()
+//      results[0].end_Event = formatDateToString(results[0].end_Event).toString()
+//      console.log(results)
+//     //  resolve(results)
+//  })
 // end db test
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -103,8 +104,23 @@ router.post("/edit_announcement",usercheck.checkloginforalluser,upload.single("i
             });
     }
 });
-
 // console.log(today);
+router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(req,res) => {
+    console.log(req.params.eventID)
+    var datax = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query('SELECT event.*,type_event.Detail_type_E FROM event inner join type_event on type_event.idType_Event=event.idType_Event  where ID_event=?',[req.params.eventID],function(error,results,fields){
+           if (error) throw error // resolve(res.send(results))
+            results[0].start_Event = formatDateToString(results[0].start_Event).toString()
+            results[0].end_Event = formatDateToString(results[0].end_Event).toString()
+            console.log(results)
+            resolve(results)
+        })
+    })
+    res.render("edit_announcement",{
+        datax : datax
+    })
+
+});
 
 router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('image'),async(req,res) => {
     if (!req.file) {
@@ -127,13 +143,7 @@ router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('im
         
     }
 });
-router.get("/review_announcement",usercheck.checkloginforalluser,(req,res) => {
-
-    res.render("review_announcement");  
-
-});
-router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(req,res) => {
-    console.log(req.params.eventID)
+router.get("/review_announcement/:eventID",usercheck.checkloginforalluser,async(req,res) => {
     var datax = await new Promise((resolve,rejects)=>{
         dbConnectionn.query('SELECT event.*,type_event.Detail_type_E FROM event inner join type_event on type_event.idType_Event=event.idType_Event  where ID_event=?',[req.params.eventID],function(error,results,fields){
            if (error) throw error // resolve(res.send(results))
@@ -143,7 +153,7 @@ router.get("/edit_announcement/:eventID",usercheck.checkloginforalluser,async(re
             resolve(results)
         })
     })
-    res.render("edit_announcement",{
+    res.render("review_announcement",{
         datax : datax
     })
 
