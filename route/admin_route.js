@@ -191,7 +191,8 @@ router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('im
                         if (error) throw error
                         resolve(results)
                 });
-        res.redirect("/control_announcement")
+                res.redirect("/control_announcement")
+        
         }) 
         
     }

@@ -155,9 +155,10 @@ border-radius: 10px;
   .bg-building-admin{
     position: relative;
     background-image: url(../images/history-1705x960--1.jpeg);
+    background-attachment: fixed;
   background-repeat: no-repeat;
   padding-left: 75px;
-  height: 400px;
+  height: 1000px;
   
   }
   
