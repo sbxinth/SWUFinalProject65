@@ -4,43 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>invild username or password</title>
+        <link rel="stylesheet" href="../css/admin.css">
+
     <style>
-        .lds-dual-ring {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.center {
-  margin: 20% 0 0 0;
-  width: 50%;
-  /* border: 3px solid green; */
-  padding: 10px;
-}
-    </style>
-</head>
-<body style="background-color:red">
-    <center>
-    <div class="lds-dual-ring center">LOGIN FAIL</div>
-</center>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+   * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
+   }
+   /*use flexbox to centered element*/
+   div.wrapper {
+     width: 100%;
+     min-height: 100vh;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+   }
+   h1.brand {
+     font-size: 40px;
+   }
+   h1.brand span:nth-child(1) {
+     background-color: transparent;
+     color: #2C69F6;
+   }
+   h1.brand span:nth-child(2) {
+     background-color: #f62c2c;
+     color: #f3f2ef;
+     padding: 0px 6px;
+     margin-left: -6px;
+     border-radius: 2px;
+   }
+   div.loading-bar {
+     width: 200px;
+     height: 5px;
+     background-color: #d6cec2;
+     border-radius: 10px;
+     margin-top: 25px;
+     overflow: hidden;
+     position: relative;
+   }
+   div.loading-bar::after {
+     content: '';
+     width: 120px;
+     height: 5px;
+     position: absolute;
+     background-color: #f62c2c;
+     transform: translateX(-20px);
+     animation: loop 2s ease infinite;
+   }
+   @keyframes loop {
+     0%,100% {
+       transform: translateX(-28px);
+     }
+     50% {
+       transform: translateX(78px)
+     }
+   }
+       </style>
+   </head>
+   <body class="bg-building-admin">
+     
+   
+   <div class="wrapper">
+     <h1 class="brand">
+       <span style="color: #f3f2ef;font-size: ;">LOGIN</span>
+       <span>FAILED</span>
+     </h1>
+     <div class="loading-bar"></div>
+   </div>
+   
     <script>
         setTimeout(function () {
            // after 2 seconds
