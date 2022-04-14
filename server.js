@@ -25,7 +25,7 @@ app.use(
 );
  session.isLoggedIn = false;
 
-
+// console.log(365*24*60*60)
  app.use(function(req,res,next){
   try{
     // console.log(req.cookies.sslg)
@@ -41,6 +41,16 @@ app.use(
     res.locals.gender = req.cookies.sslg.gender
     // console.log(res.locals)
     }
+    if (req.cookies?.amrq) {
+      res.locals.bungkublenget = req.cookies.amrq.bungkublenget
+      res.locals.bungkublengetpassed = req.cookies.amrq.bungkublengetpassed
+      res.locals.leuakLeng = req.cookies.amrq.leuakLeng
+      res.locals.leuakLengpasss = req.cookies.amrq.leuakLengpasss
+      res.locals.bampen = req.cookies.amrq.bampen
+      res.locals.bampenpass = req.cookies.amrq.bampenpass
+      res.locals.allrequest = req.cookies.amrq.allrequest
+      // console.log(res.locals,"res local")
+    }
   next()
   }
   catch{ next() }
@@ -51,13 +61,22 @@ app.use(
  app.use("/", require('./route/announceforstd_router'))
  app.use("/", require('./route/checkstatus_router'))
  app.use("/", require('./route/subcheckforstd_router'))
+ 
+ app.use("/", require('./route/announce_router'))
+ app.use("/", require('./route/admin_route'))
+ app.use("/", require('./route/admin_route_annouce'))
+ 
+
 
 app.get("/home", (req, res) => {
   resrender("swu");
  });
-
-
-
+// db test//
+// dbConnectionn.query(`SELECT * FROM request where Status_req != "4"`,
+//             function (error, results, fields) {
+//                 console.log(results.length)
+//         });
+// end db test
  app.get("/info_activity01",usercheck.checkforstudentonly, (req, res) => {
    
           // console.log(req.cookies.sslg,"data sslg in log xxx")
@@ -140,7 +159,7 @@ app.get("/confirmed_activity",usercheck.checkforstudentonly,(req, res) => {
     // console.log(req.cookies.sslg)
     if (req.cookies.sslg.status == "admin"){
         console.log("go to admin profile");
-        res.render("main_admin")
+        res.redirect("/main_admin")
     } else {
         res.render("userprofile")
     }   
@@ -200,7 +219,7 @@ async function (error, results, fields) {
     var responsefromservice = {
       isLoggedIn,username,firstname,lastname,studentID,Major,subMajor,Year,status,img,gender
     }
-    const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: "60000"})
+    const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
     res.render("login_success");
   } else {
     console.log("HAS NO ACCOUNT xxxx")

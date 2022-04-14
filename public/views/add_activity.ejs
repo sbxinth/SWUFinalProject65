@@ -270,7 +270,7 @@
                   <select name="eventtype" class="form-select" aria-label="select Activity category">
                     <option selected>เลือกกิจกรรมที่เข้าร่วม</option>
                     <% dataAC.map((e)=>{ %>
-                      <option value="<%= e.id %>"> <%= e.name %> </option>
+                      <option value="<%= e.id %>"> <%= e.name %> [<%= e.type %>]</option>
                     <% }) %>
                     <!-- <option value="1">กิจกรรมซัมติง</option>
                     <option value="2">กิจกรรม</option>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2022 at 11:19 AM
+-- Generation Time: Apr 13, 2022 at 05:03 PM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.15
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `event` (
-  `ID_event` int(11) NOT NULL,
+  `ID_event` varchar(20) NOT NULL,
   `Name_Event` varchar(100) NOT NULL,
   `Detail_Event` text NOT NULL,
   `start_Event` date NOT NULL,
@@ -45,9 +45,10 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`ID_event`, `Name_Event`, `Detail_Event`, `start_Event`, `end_Event`, `Posted_Event`, `idType_Event`, `thamnail`, `Detail_Img`, `school_year`) VALUES
-(260320, 'record rest', 'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม', '2022-03-26', '2022-04-13', '2022-04-06 06:42:22', 2, 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', '2564'),
-(6042022, 'avtivity test', 'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม', '2022-04-06', '2022-04-28', '2022-04-06 06:41:42', 3, 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', '2564'),
-(26032022, 'จิตอาสา', 'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\nSub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม', '2022-03-26', '2022-04-08', '2022-04-05 21:44:07', 1, 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', 'http://127.0.0.1:5500/public/images/bg-cosci-login.png', '2564');
+('1342022211640', 'ปาร์ตี้ริมสระ', ' \r\n   พวกเรามาปาร์ตี้กัน โย่วๆ', '2022-04-01', '2022-04-30', '2022-04-13 14:41:08', 1, '../img/act/file-1649859838303.jpg', '../img/act/file-1649859838303.jpg', '2565'),
+('1342022211727', 'เชิดสิงโต', 'กุ้งแช่ กุ้งแช่ กุ้งแช่ กุ้งแช่ กุ้งแช่ กุ้งแช่ กุ้งแช่ ', '2022-04-07', '2022-04-22', '2022-04-13 14:32:50', 2, '../img/act/file-1649859855416.jpg', '../img/act/file-1649859855416.jpg', '2565'),
+('134202221185', 'นั่งดูพระอาทิตย์', ' \r\n   ถ้าพระอาทิตย์เลือนหาย', '2022-04-20', '2022-04-29', '2022-04-13 14:32:50', 1, '../img/act/file-1649859861924.jpg', '../img/act/file-1649859861924.jpg', '2565'),
+('1342022213229', 'ตัดหญ้าเพื่อพ่ออออ', ' \r\n   ตัดตัดตัด', '2022-04-12', '2022-04-22', '2022-04-13 14:53:06', 3, '../img/act/file-1649861586388.jpg', '../img/act/file-1649861586388.jpg', '2565');
 
 -- --------------------------------------------------------
 
@@ -59,21 +60,17 @@ CREATE TABLE `evidence` (
   `idEvidence` int(11) NOT NULL,
   `idRequest` int(11) NOT NULL,
   `idRegister` int(11) NOT NULL,
-  `img_Evid` varchar(255) NOT NULL
+  `img_evid` varchar(255) NOT NULL,
+  `file_evid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `evidence`
 --
 
-INSERT INTO `evidence` (`idEvidence`, `idRequest`, `idRegister`, `img_Evid`) VALUES
-(1111, 3000, 1234, 'http://127.0.0.1:5500/public/images/history-1705x960--1.jpeg'),
-(2222, 3100, 5678, 'https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg'),
-(3333, 3500, 3456, 'llll'),
-(4444, 3456, 3456, 'kkkkkk'),
-(5555, 2000, 2345, 'lll'),
-(6666, 2001, 2347, 'lll'),
-(7777, 2002, 8765, ';;;;;;');
+INSERT INTO `evidence` (`idEvidence`, `idRequest`, `idRegister`, `img_evid`, `file_evid`) VALUES
+(111, 2222, 3333, '////', '////'),
+(7777, 2002, 8765, '////', '////');
 
 -- --------------------------------------------------------
 
@@ -227,30 +224,18 @@ INSERT INTO `register` (`idRegister`, `Username`, `ID_event`, `date_reg`) VALUES
 --
 
 CREATE TABLE `request` (
-  `idRequest` int(11) NOT NULL,
+  `idRequest` varchar(20) NOT NULL,
   `Username` varchar(11) NOT NULL,
   `idType_req` int(2) NOT NULL,
-  `ID_event` int(11) NOT NULL,
-  `idEvidence` int(11) NOT NULL,
+  `ID_event` varchar(20) NOT NULL,
+  `file_img` varchar(255) NOT NULL,
+  `file_pdf` varchar(255) NOT NULL,
   `date_req` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Status_req` int(2) NOT NULL,
   `hour` varchar(2) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `request`
---
-
-INSERT INTO `request` (`idRequest`, `Username`, `idType_req`, `ID_event`, `idEvidence`, `date_req`, `Status_req`, `hour`, `start_date`, `end_date`) VALUES
-(2000, 'co611010039', 1, 260320, 5555, '2022-04-09 08:15:28', 1, '8', '2022-03-26', '2022-04-13'),
-(2001, 'co611010039', 1, 26032022, 6666, '2022-04-09 08:19:17', 1, '8', '2022-04-06', '2022-04-13'),
-(2002, 'co611010039', 1, 6042022, 7777, '2022-04-09 08:19:25', 1, '5', '2022-03-26', '2022-04-08'),
-(3000, 'co611010035', 1, 6042022, 1111, '2022-04-09 08:20:09', 1, '8', '2022-04-06', '2022-04-28'),
-(3100, 'co611010035', 1, 260320, 2222, '2022-04-09 08:20:24', 1, '8', '2022-03-26', '2022-04-13'),
-(3456, 'co611010035', 2, 26032022, 4444, '2022-04-09 08:21:20', 1, '8', '2022-04-06', '2022-04-28'),
-(3500, 'co611010035', 1, 26032022, 3333, '2022-04-09 08:21:28', 1, '8', '2022-04-06', '2022-04-08');
 
 -- --------------------------------------------------------
 
@@ -378,9 +363,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`Username`, `Password`, `ID_Student`, `user_phone`, `Firstname`, `Lastname`, `gender_id`, `Major`, `secMaj`, `Year`, `Permission`, `img_user`) VALUES
-('co611010035', 'co611010035', '61130010035', '0611725321', 'Rachapol', 'Burinwatthana', '1', 3, 2, '4', 1, '../img/file-1649262704223.png'),
+('co611000000', '123', '61100000000', '0000000000', 'namsx', 'nsusq', '1', 3, 1, '3', 2, ''),
+('co611010035', 'co611010035', '61130010035', '0611725321', 'Rachapol', 'Burinwatthana', '1', 3, 2, '4', 1, '../img/file-1649859878021.jpg'),
 ('co611010039', '123', '61130010039', '0999999999', 'Kamonlapat', 'Phaenthong', '2', 3, 2, '4', 1, '../img/file-1649179618413.png'),
-('year3', 'year3', '516156156', '0888888888', 'Namaewa', 'Ltnamse', '2', 2, 1, '2', 1, '../img/file-1649281894740.png');
+('year3', 'year3', '516156156', '0888888888', 'Namaewa', 'Ltnamse', '2', 2, 1, '2', 2, '../img/file-1649281894740.png');
 
 --
 -- Indexes for dumped tables
@@ -480,7 +466,20 @@ ALTER TABLE `update_status`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD UNIQUE KEY `Username` (`Username`);
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD KEY `fk_user_permission_idx` (`Permission`),
+  ADD KEY `fk_user_major1_idx` (`Major`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_major1` FOREIGN KEY (`Major`) REFERENCES `major` (`idMajor`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_permission` FOREIGN KEY (`Permission`) REFERENCES `permission` (`idPermission`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

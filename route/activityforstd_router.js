@@ -38,7 +38,7 @@ usercheck.checkforstudentonly,
 async (req, res) => {
   console.log(req.cookies.sslg,"in get /add ac")
 var dataAc =  await new Promise((resolve,rejects)=>{
- dbConnectionn.query('SELECT ID_event as id , Name_Event as name FROM event' ,function (error, results, fields) {
+ dbConnectionn.query('SELECT event.ID_event as id , event.Name_Event as name , type_event.Detail_type_E as type FROM event inner join type_event on event.idType_Event=type_event.idType_Event' ,function (error, results, fields) {
   if (error) throw error; 
   resolve(results) 
   });
