@@ -61,8 +61,8 @@ app.use(
  app.use("/", require('./route/announceforstd_router'))
  app.use("/", require('./route/checkstatus_router'))
  app.use("/", require('./route/subcheckforstd_router'))
- 
- app.use("/", require('./route/announce_router'))
+
+//  app.use("/", require('./route/announce_router'))
  app.use("/", require('./route/admin_route'))
  app.use("/", require('./route/admin_route_annouce'))
  
@@ -125,24 +125,7 @@ app.get("/info_activity03",usercheck.checkforstudentonly, (req, res) => {
  });
  
 
- app.get("/status_page",usercheck.checkforstudentonly, (req, res) => {
-      dbConnectionn.query('SELECT request.idRequest,request.date_req,type_req.Detail_Type_R,status.Detail_Status FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN user ON request.Username=user.Username INNER JOIN type_req ON request.idType_req=type_req.idType_Req INNER JOIN status ON request.Status_req=status.idStatus WHERE user.Username = ?',[req.cookies.sslg.username],function (error, results, fields) {
-        var datax = results;
-          res.render("status_page", {
-            data : datax
-          });
-      }); 
- }); 
 
- app.post('/details_submit',usercheck.checkforstudentonly, (req, res) => {
-          dbConnectionn.query('SELECT request.idRequest,user.ID_Student,user.Firstname,user.Lastname,Major.name_maj,user.user_phone,event.Name_Event,event.start_Event,event.end_Event FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username INNER JOIN major ON user.Major=major.idMajor WHERE user.Username = ? AND request.idRequest = ?',[req.cookies.sslg.username,req.body.reqiD],function (error, results, fields) {
-            var datax = results;
-              res.render("details_submit", { 
-                data :datax
-              });
-          }); 
-
-});
 app.get("/confirmed_activity",usercheck.checkforstudentonly,(req, res) => {
           dbConnectionn.query('SELECT request.idRequest,user.Firstname,event.ID_event,event.school_year,event.Name_Event,event.start_Event,event.end_Event,type_event.Detail_type_E FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username WHERE user.Username = ? AND type_event.Detail_type_E = "กิจกรรมบังคับ"',
           [req.cookies.sslg.username],function (error, results, fields) {
