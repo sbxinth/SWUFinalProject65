@@ -80,10 +80,11 @@ module.exports.updatereq = async (req, res, next) => {
                     });
     })
 
-       var allrequest = bungkublenget+leuakLeng+bampen
-       var tokloan = bungkublengetpassed+leuakLengpasss+bampenpass
-       var dataset = {bungkublenget,bungkublengetpassed,leuakLeng,leuakLengpasss,bampen,bampenpass,allrequest,tokloan,eventnow}
-       const savecookie = await res.cookie('amrq', dataset, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
+        var allrequest = bungkublenget+leuakLeng+bampen
+        var tokloan = bungkublengetpassed+leuakLengpasss+bampenpass
+        var dataset = {bungkublenget,bungkublengetpassed,leuakLeng,leuakLengpasss,bampen,bampenpass,allrequest,tokloan,eventnow}
+        // console.log(dataset)
+        const savecookie = await res.cookie('amrq', dataset, { httpOnly: true, domain : '' , maxAge: 365*24*60*60})
     // console.log(dataset,"update req cookie test")
     return next()
       

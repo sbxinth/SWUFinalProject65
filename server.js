@@ -42,13 +42,14 @@ app.use(
     // console.log(res.locals)
     }
     if (req.cookies?.amrq) {
-      res.locals.bungkublenget = req.cookies.bungkublenget
-      res.locals.bungkublengetpassed = req.cookies.bungkublengetpassed
-      res.locals.leuakLeng = req.cookies.leuakLeng
-      res.locals.leuakLengpasss = req.cookies.leuakLengpasss
-      res.locals.bampen = req.cookies.bampen
-      res.locals.bampenpass = req.cookies.bampenpass
-      res.locals.allrequest = req.cookies.allrequest
+      res.locals.bungkublenget = req.cookies.amrq.bungkublenget
+      res.locals.bungkublengetpassed = req.cookies.amrq.bungkublengetpassed
+      res.locals.leuakLeng = req.cookies.amrq.leuakLeng
+      res.locals.leuakLengpasss = req.cookies.amrq.leuakLengpasss
+      res.locals.bampen = req.cookies.amrq.bampen
+      res.locals.bampenpass = req.cookies.amrq.bampenpass
+      res.locals.allrequest = req.cookies.amrq.allrequest
+      // console.log(res.locals,"res local")
     }
   next()
   }

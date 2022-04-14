@@ -40,12 +40,15 @@ function getuidf() {
  }
 
 // db test//
-// dbConnectionn.query(`SELECT event.*,type_event.Detail_type_E FROM thesisz.event inner join type_event on type_event.idType_Event=event.idType_Event`,
-//             function (error, results, fields) {
-//                 console.log(formatDateToString(results[2].start_Event))
-//                 console.log(results[7].start_Event)
-                
-//         });
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
+            function (error, results, fields) {
+                console.log(results.length)
+        });
 // end db test
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -146,8 +149,33 @@ router.get("/main_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
         });  
 });
 router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
-
-    res.render("activity_admin");  
+    var dataxsave = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+    var dataxtokloan = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='ตกหล่น'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+        
+    res.render("activity_admin",{
+        dataxsave : dataxsave,
+        dataxtokloan : dataxtokloan
+    });  
 
 });
 router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
