@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const dbConnectionn = require("../database");
 var session = require("express-session");
-const checklogin = require('../middleware/logintokencheck')
+const usercheck = require('../middleware/logintokencheck')
 const multer = require("multer");
-const { resolve } = require('path');
 
 function getuidf() {
   var date = new Date();
@@ -32,26 +31,12 @@ var storage2 = multer.diskStorage({
 
 const upload2 = multer({ storage:storage2})
 
-router.use(function(req,res,next){
-  try{
-    res.locals.isloggedin = session.isLoggedIn 
-    res.locals.firstname = session.firstname 
-    res.locals.lastname = session.lastname 
-    res.locals.studentID = session.studentID 
-    res.locals.major = session.Major 
-    res.locals.Year = session.Year 
-    res.locals.status = session.status
-    res.locals.imgpath = session.img 
-    res.locals.gender = session.gender
-  next()
-  }
-  catch{ next() }
-})
+
 
 router.get("/add_activity",
-checklogin.checklogin,
-async (request, response,) => {
-  
+usercheck.checkforstudentonly,
+async (req, res) => {
+  console.log(req.cookies.sslg,"in get /add ac")
 var dataAc =  await new Promise((resolve,rejects)=>{
  dbConnectionn.query('SELECT ID_event as id , Name_Event as name FROM event' ,function (error, results, fields) {
   if (error) throw error; 
@@ -68,7 +53,9 @@ var reqtype =  await new Promise((resolve,rejects)=>{
 console.log(dataAc)
 console.log(reqtype)
 // session.dataACtiv = results;
-response.render("add_activity", { 
+
+console.log(req.cookies.sslg,"in before render")
+res.render("add_activity", { 
 dataAC : dataAc,
 reqtype : reqtype
 });
@@ -97,7 +84,7 @@ router.post('/add_activity',upload2.any(), async (req, res) => {
 
     var statereq =  await new Promise((resolve,rejects)=>{
      var {reqtype,eventtype,durationEventTime,firstdate,lastdate} = req.body
-      dbConnectionn.query('INSERT INTO request (idRequest, Username, idType_req, ID_event,file_img,file_pdf,Status_req,hour,start_date,end_date) VALUE (?,?,?,?,?,?,?,?,?,?)' ,[getuidf(),session.studentID,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
+      dbConnectionn.query('INSERT INTO request (idRequest, Username, idType_req, ID_event,file_img,file_pdf,Status_req,hour,start_date,end_date  ) VALUE (?,?,?,?,?,?,?,?,?,?)' ,[getuidf(),req.cookies.sslg.username,reqtype,eventtype,img,pdf,"1",durationEventTime,firstdate,lastdate]
     ,function (error, results, fields) {
        if (error) throw error; 
        resolve(results)  //
@@ -106,6 +93,7 @@ router.post('/add_activity',upload2.any(), async (req, res) => {
 
      if(statereq){
        console.log(statereq)
+       res.redirect("/status_page")
      }
 
   } catch (error) {

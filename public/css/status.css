@@ -19,7 +19,7 @@
   transform: translateY(-50%);
   height: 13px;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
 }
 
 .progress-container {
@@ -39,7 +39,7 @@
   transform: translateY(-50%);
   height: 8px;
   width: 0%;
-  z-index: -1;
+  z-index: 1;
   transition: 0.4s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
@@ -57,6 +57,7 @@
   border: 4px solid var(--line-border-empty);
   transition: .4s ease;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 1;
   
 }
 
@@ -117,4 +118,49 @@ padding-top: 50px;
 
 .a--under  {
   text-decoration:underline
+}
+
+
+
+
+.circles {
+  background-color: white;
+  color: #999;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid lightgray;
+  transition: 0.4s ease;
+}
+
+.circles.active {
+  border-color: blue;
+}
+
+.btn {
+  background-color: blue;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 30px;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:disabled {
+  background-color: lightgray;
+  cursor: not-allowed;
 }

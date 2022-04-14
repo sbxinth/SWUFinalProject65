@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แก้ไขกิจกรรม</title>
+    <title>เพิ่มกิจกรมม</title>
     <link rel="SHORTCUT ICON" href="../images/logo-swu.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -33,33 +33,33 @@
             </header>
     
             <div class="menu-bar">
-              <div class="menu">
-               <li class="">
-                   <a href="../html_2/main_admin.html">
-                       <i class=" bi bi-house-door icon" ></i>
-                   </a>
-              </li>
+                <div class="menu">
+                    <li class="">
+                        <a href="../html_2/main_admin.html">
+                            <i class=" bi bi-house-door icon" ></i>
+                        </a>
+                   </li>
 
-               <li class="">
-                   <a href="../html_2/activity_admin.html">
-                       <i class="bi bi-bell-fill icon" ></i>
-                   </a>
-              </li>
+                    <li class="">
+                        <a href="../html_2/activity_admin.html">
+                            <i class="bi bi-bell-fill icon" ></i>
+                        </a>
+                   </li>
 
-              <li class="">
-               <a href="../html_2/control_announcement.html">
-                   <i class="bi bi-calendar-plus-fill icon"></i>
-               </a>
-          </li>
+                   <li class="">
+                    <a href="../html_2/control_announcement.html">
+                        <i class="bi bi-calendar-plus-fill icon"></i>
+                    </a>
+               </li>
 </div>
 
-           <div class="">
-               <li>
-               <a href="#">
-                   <i class="bi bi-box-arrow-right icon" ></i>
-               </a>
-           </li>
-           </div>
+                <div class="">
+                    <li>
+                    <a href="#">
+                        <i class="bi bi-box-arrow-right icon" ></i>
+                    </a>
+                </li>
+                </div>
 
                   
     
@@ -96,7 +96,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
                     <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
                   </svg>
-                  <p class="ps-3">- แก้ไข ประชาสัมพันธ์กิจกรรม</p>
+                  <p class="ps-3">- เพิ่ม ประชาสัมพันธ์กิจกรรม</p>
             </div>
 
         </div>
@@ -105,7 +105,7 @@
 </section>
  
 
-<!--esit content --> 
+<!--add content --> 
 
 
 <section>
@@ -113,15 +113,12 @@
 
   <div class="container mt-5">
     <div class="row ">
-   
-
-      
-      <div class="col-md-11 ms-lg-5 ms-md-2 ">
+     
+      <div class="col-md-11 ms-lg-5 ms-md-2">
 <div class="container"  >
 <div class="container-box " style="background-color: rgb(236, 236, 236);">
   <a href="../html_2/control_announcement.html"> < กลับไปที่หน้าแก้ไข</a>
-
-
+<div class="row">
   <div class="col-md-12 mt-md-5 d-flex justify-content-center">
 
 <!--เปลี่ยนรูป --> 
@@ -130,39 +127,33 @@
 <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <div class="file-upload">
 
-  <div class="image-upload-wrap" style="display: none;">
+  <div class="image-upload-wrap">
     <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
     <div class="drag-text">
       <h3>คลิกเพื่อเปลี่ยนรูป</h3>
     </div>
   </div>
-  <div class="file-upload-content" style="display: block;">
-    <img class="file-upload-image" src="../images/bg-cosci-login.png" alt="your image" />
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="" alt="your image" />
     <div class="image-title-wrap">
       <button  style="margin: 0px;" type="button" onclick="removeUpload()" class="btn2 btn--red">Remove <span class=""></span></button>
-      <button style="margin: 0px;" class="btn2 btn--blue" type="button" onclick="$('.file-upload-input').trigger( 'click' )">เปลี่ยนรูป</button>
+      <button style="margin: 0px;" class="btn2 btn--blue" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
     </div>
   </div>
-<!--
-<div class="d-flex justify-content-center mt-2" >
-  <button style="margin: 0px;" class="btn2 btn--blue" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-
-</div>-->
 
 </div>  </div>
-
 
 
 <div class="container">
   <div class="row ">
   
     <div class="col-md-11">
-<!--แก้ไขชื่อกิจกรรม --> 
+<!--ชื่อกิจกรรม --> 
 
       <div class="mt-4 ms-4" >
         <form class="form-floating  ms-3 my-3" >
-          <input type="text" class="form-control form-control-lg" id="floatingInputValue" placeholder="กิจกรรมอาสา" value="กิจกรรมอาสา">
+          <input type="text" class="form-control form-control-lg" id="floatingInputValue" placeholder="" >
           <label for="floatingInputValue">แก้ไขชื่อกิจกรรม</label>
         </form>
     </div>
@@ -170,13 +161,13 @@
   
 </div>
    
-  <!--แก้ไขเนื้อหาย่อ --> 
+  <!--เนื้อหาย่อ --> 
 
   <div class="col-md-11">
     <div class="mt-4 ms-4" >
-      <form class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;" >
-        <textarea class="form-control " aria-label="With textarea">เนื้อหาแบบย่อๆๆๆๆๆๆๆๆ ตรงนี้จะเอาไว้ขึ้นโชว์ตรง card หน้าประกาศกิจกรรม </textarea>
-        <label for="floatingInputValue">แก้ไขเนื้อหาแบบย่อ </label>
+      <form class="form-floating  ms-3 my-3" style="border-bottom: 1px solid rgb(24, 14, 88);padding-bottom: 15px;">
+        <textarea class="form-control " aria-label="With textarea"> </textarea>
+        <label for="floatingInputValue">เนื้อหาแบบย่อ </label>
         <div id="" class="form-text">เนื้อหาแบบย่อ ควรไม่เกิน 100 ตัวอักษร</div>
   
       </form>
@@ -189,7 +180,7 @@
 <div class="col-md-11">
   <div class="form-floating ms-4 mt-4">
     <textarea type="text" class="form-control" placeholder="" id="" value="" style="height: 250px;word-wrap: break-word ;  "> 
-   เนื้อหา              เนื้อหา เนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหาเนื้อหา</textarea>
+   </textarea>
     <label for="floatingTextarea2">แก้ไขเนื้อหา</label>
   </div>
 
@@ -202,21 +193,21 @@
 
 
 
-<div class="d-flex justify-content-end mt-5 me-2" >
-  <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"  >ยืนยันข้อมูล</button>
-
-</div>
-      
-  </div>
-     
-      </div>
-      
-          
         
+          </div> 
+          <div class="d-flex justify-content-end mt-5 me-2" >
+            <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"  >ยืนยันข้อมูล</button>
+
+          </div>
 
   </div>
 
 </div>
+  </div>
+  </div>
+  </div>
+
+
   </div>
 
 
