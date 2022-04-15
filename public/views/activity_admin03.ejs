@@ -143,8 +143,8 @@
                 <tbody>
                     <tr >
                         <td>กิจกรรมบำเพ็ญประโยชน์</td>
-                        <td>3</td>
-                        <td>1</td>
+                        <td><%= bampen %></td>
+                        <td><%= bampenpass %></td>
                       </tr>
                
                   
@@ -179,21 +179,18 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <% for (i=0; i < dataxsave.length ; i++) { %>
                       <tr class="tr--hover2" >
-                        <td >1</td>
-                        <td >  <a href="/sub_request_general" style=" text-decoration: underline;">61130010188</a> </td> 
-                        <td> ปี 4</td>
-                        <td >กิจกรรมบำเทะนทเเ</td>
+                        <td ><%= i+1 %></td>
+                        <td >  <a href="/sub_request_general" style=" text-decoration: underline;"><%= dataxsave[i].ID_Student %></a> </td> 
+                        <td> ปี <%= dataxsave[i].Year %></td>
+                        <td ><%= dataxsave[i].Name_Event %></td>
                     
                       </tr>
-                    
-                        <tr class="tr--hover2" >
-                          <td >3</td>
-                          <td >61130010188</td>    
-                          <td> ปี 2</td>
-                          <td >กิจกรรมรำรำรำำรำรำ</td>
-                      
-                        </tr>
+                    <% } %>
+                    <% if (i==0) { %>
+                      <td> <a href="">ยังไม่พบรายการคำร้อง</a></td>
+                     <% } %>
                       
             
                   </tbody>
@@ -235,13 +232,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <tr class="tr--hover" >
-                          <td > 1</td>
-                         <td > <a href="/sub_request_omit" style=" text-decoration: underline;">61130010188</a> </td>
-                          <td> ปี 4</td>
-                          <td >กิจกรรมสานฝัน</td>
-                      
-                        </tr>
+                    <% for (i=0; i < daatxsave2.length ; i++) { %>
+                      <tr class="tr--hover2" >
+                        <td ><%= i+1 %></td>
+                        <td >  <a href="/sub_request_general" style=" text-decoration: underline;"><%= daatxsave2[i].ID_Student %></a> </td> 
+                        <td> ปี <%= daatxsave2[i].Year %></td>
+                        <td ><%= daatxsave2[i].Name_Event %></td>
+                    
+                      </tr>
+                    <% } %>
+                    <% if (i==0) { %>
+                      <td> <a href="">ยังไม่พบรายการคำร้อง</a></td>
+                     <% } %>
         
                        
             

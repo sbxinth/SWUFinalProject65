@@ -180,13 +180,64 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
 });
 router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
 
-    res.render("activity_admin02");  
+    var dataxsave = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='บันทึกกิจกรรม'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+    var daatxsave2 = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='ตกหล่น'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+        
+    res.render("activity_admin02",{
+        dataxsave : dataxsave,
+        daatxsave2 : daatxsave2
+    });
 
 });
 router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
 
-    res.render("activity_admin03");  
-
+    var dataxsave = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='บันทึกกิจกรรม'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+    var daatxsave2 = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='ตกหล่น'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+        
+    res.render("activity_admin03",{
+        dataxsave : dataxsave,
+        daatxsave2 : daatxsave2
+    });
 });
 router.get("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
 
