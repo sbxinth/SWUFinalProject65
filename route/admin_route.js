@@ -40,15 +40,15 @@ function getuidf() {
  }
 
 // db test//
-        dbConnectionn.query(`SELECT * FROM thesisz.request
-        inner join event on event.ID_event=request.ID_event
-        inner join type_event on type_event.idType_Event=event.idType_Event
-        inner join type_req on type_req.idType_Req=request.idType_req 
-        inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
-            function (error, results, fields) {
-                console.log(results.length)
-        });
+        // dbConnectionn.query(`SELECT * FROM thesisz.request
+        // inner join event on event.ID_event=request.ID_event
+        // inner join type_event on type_event.idType_Event=event.idType_Event
+        // inner join type_req on type_req.idType_Req=request.idType_req 
+        // inner join user on request.Username=user.Username
+        // where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
+        //     function (error, results, fields) {
+        //         console.log(results)
+        // });
 // end db test
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -239,8 +239,8 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
         daatxsave2 : daatxsave2
     });
 });
-router.get("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
-
+router.get("/sub_request_general/:idEvent",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.params.idEvent)
     res.render("sub_request_general");  
 
 });
