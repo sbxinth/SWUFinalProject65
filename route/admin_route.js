@@ -40,12 +40,12 @@ function getuidf() {
  }
 
 // db test//
-        // dbConnectionn.query(`SELECT * FROM thesisz.request
-        // inner join event on event.ID_event=request.ID_event
-        // inner join type_event on type_event.idType_Event=event.idType_Event
-        // inner join type_req on type_req.idType_Req=request.idType_req 
+        // dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
         // inner join user on request.Username=user.Username
-        // where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
+        // inner join major on user.Major=major.idMajor
+        // inner join event on request.ID_event=event.ID_event
+        // inner join type_req on request.idType_req=type_req.idType_Req
+        // inner join status on status.idStatus=request.Status_req`,
         //     function (error, results, fields) {
         //         console.log(results)
         // });
@@ -239,9 +239,59 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
         daatxsave2 : daatxsave2
     });
 });
-router.get("/sub_request_general/:idEvent",usercheck.checkloginforalluser,(req,res) => {
-    console.log(req.params.idEvent)
-    res.render("sub_request_general");  
+router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,async(req,res) => {
+    console.log(req.params.requestID)
+
+   
+
+        var datax = await new Promise((resolve,rejects)=>{
+            dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+            inner join user on request.Username=user.Username
+            inner join major on user.Major=major.idMajor
+            inner join event on request.ID_event=event.ID_event
+            inner join type_req on request.idType_req=type_req.idType_Req
+            inner join status on status.idStatus=request.Status_req where request.idRequest=?`,[req.params.requestID],
+             function (error, results, fields) {
+                results[0].start_date = formatDateToString(results[0].start_date)
+                results[0].end_date = formatDateToString(results[0].end_date)
+                resolve(results)
+            });
+        })
+
+
+            res.render("sub_request_general",{
+                datax : datax
+            });  
+
+});
+router.post("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.body)
+    console.log("in post sub_request_general")
+   
+
+        
+            // dbConnectionn.query(` `,
+            //  function (error, results, fields) {
+                 
+            //  });
+            res.send(req.body)
+
+            // res.redirect("/sub_request_general");  
+
+});
+router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.body)
+    console.log("in post sub_request_general")
+        // dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+        // inner join user on request.Username=user.Username
+        // inner join major on user.Major=major.idMajor
+        // inner join event on request.ID_event=event.ID_event
+        // inner join type_req on request.idType_req=type_req.idType_Req
+        // inner join status on status.idStatus=request.Status_req`,
+        //     function (error, results, fields) {
+        //         console.log(results)
+        // });
+            res.send(req.body)
 
 });
 router.get("/sub_request_omit",usercheck.checkloginforalluser,(req,res) => {

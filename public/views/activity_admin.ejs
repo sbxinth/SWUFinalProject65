@@ -182,7 +182,7 @@
                     <% for (i=0; i < dataxsave.length ; i++) { %>
                       <tr class="tr--hover2" >
                         <td ><%= i+1 %></td>
-                        <td >  <a href="/sub_request_general/<%= dataxsave[i].ID_event %>" style=" text-decoration: underline;"><%= dataxsave[i].ID_Student %></a> </td> 
+                        <td >  <a href="/sub_request_general/<%= dataxsave[i].idRequest %>" style=" text-decoration: underline;"><%= dataxsave[i].ID_Student %></a> </td> 
                         <td> ปี <%= dataxsave[i].Year %></td>
                         <td ><%= dataxsave[i].Name_Event %></td>
                     
@@ -235,7 +235,7 @@
                     <% for (i=0; i < dataxtokloan.length ; i++) { %>
                       <tr class="tr--hover2" >
                         <td ><%= i+1 %></td>
-                        <td >  <a href="/sub_request_general" style=" text-decoration: underline;"><%= dataxtokloan[i].ID_Student %></a> </td> 
+                        <td >  <a href="/sub_request_general/<%= dataxtokloan[i].idRequest %>" style=" text-decoration: underline;"><%= dataxtokloan[i].ID_Student %></a> </td> 
                         <td> ปี <%= dataxtokloan[i].Year %></td>
                         <td ><%= dataxtokloan[i].Name_Event %></td>
                     

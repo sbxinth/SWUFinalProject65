@@ -20,3 +20,16 @@
 
 bungkublenget,bungkublengetpassed,leuakLeng,
 leuakLengpasss,bampen,bampenpass,allrequest
+
+
+    datax[0].Detail_Type_R: 'บันทึกกิจกรรม',
+    datax[0].ID_Student: '61130010035',
+    datax[0].name_maj: 'คอมพิวเตอร์เพื่อการสื่อสาร',
+    datax[0].Firstname: 'Rachapol',
+    datax[0].Lastname: 'Burinwatthana',
+    datax[0].user_phone: '0611725321',
+    datax[0].Name_Event: 'ปาร์ตี้ริมสระ',
+    datax[0].start_date: 2022-04-13T17:00:00.000Z,
+    datax[0].end_date: 2022-04-14T17:00:00.000Z,
+    datax[0].hour: '1',
+    datax[0].Detail_Status: 'ยืนยันข้อมูล'

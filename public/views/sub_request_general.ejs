@@ -79,7 +79,7 @@
           
 <div class="col-lg-6 col-sm-5 d-flex justify-content-end">
     <div class="box-name-admin">
-<p class="pt-3">ชื่อแอดมิน</p> <img src="../images/pic-ex.jpg">
+<p class="pt-3"><%= firstname %></p> <img src=<%= imgpath %>>
     </div>
 
 </div>
@@ -173,10 +173,10 @@
         </div>
         <div class="col-md-10">
           <div class="bgadd  " >
-            <form class="row g-3">
+            <!-- <form class="row g-3"> -->
               <div class="col-md-6">
                 <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
-                <input class="form-control" type="text" value="ลงทะเบียนเข้าร่วมทั่วไป" aria-label="Disabled input example" disabled readonly>
+                <input class="form-control" type="text" value="<%= datax[0].Detail_Type_R %>" aria-label="Disabled input example" disabled readonly>
   
               </div>
           
@@ -209,7 +209,7 @@
               <div class="row g-3 d-flex">
                 <div class="mb-2 col-12 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                  <input class="form-control" type="text" value="81130010188" aria-label="Disabled input example" >
+                  <input class="form-control" type="text" value="<%= datax[0].ID_Student %>" readonly aria-label="Disabled input example" >
   
                 </div>
                
@@ -217,7 +217,7 @@
   <div class=" mb-2 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
    
-    <input class="form-control" type="text" value="วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร" aria-label="Disabled input example" >
+    <input class="form-control" type="text" value="<%= datax[0].ID_Student %>" readonly aria-label="Disabled input example" >
 
   </div>
   
@@ -226,18 +226,18 @@
   
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-    <input class="form-control" type="text" value="รวิสรา" aria-label="Disabled input example" >
+    <input class="form-control" type="text" value="<%= datax[0].Firstname %>" readonly aria-label="Disabled input example" >
   
   </div>
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-    <input class="form-control" type="text" value="เลิศจันทร์เพ็ญ" aria-label="Disabled input example">
+    <input class="form-control" type="text" value="<%= datax[0].Lastname%>"  readonly aria-label="Disabled input example">
   
   </div>
   
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">เบอร์ติดต่อ * </label>
-    <input class="form-control" type="text" value="0986675466" aria-label="Disabled input example" >
+    <input class="form-control" type="text" value="<%=  datax[0].user_phone %>" readonly aria-label="Disabled input example" >
   
   </div>
   
@@ -260,7 +260,7 @@
     
     <!--ตอนที่ 2--> 
 
-  
+    <form action="/sub_request_general" method="post">
     <section class="my-5">
   
       <div class="container">
@@ -276,8 +276,8 @@
                 <div class="row g-3 d-flex">
                   <div class="mb-2 col-12 ">
                     <label for="exampleFormControlInput1" class="form-label">ชื่อกิจกรรม/โครงการ * </label>
-                    <input class="form-control" type="text" value="กิจกรรมสานฝัน" aria-label="input example" >
-    
+                    <input class="form-control" type="text" name="actName" value="<%= datax[0].Name_Event %>" aria-label="input example" >
+                    <input type="hidden" name="idRequest" value="<%= datax[0].idRequest %>">
                   </div>
                  
     
@@ -286,20 +286,20 @@
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ เข้าร่วมกิจกรรม (วันแรก) *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" >
+      <input class="form-control" type="date" name="dateJoinact" value="<%= datax[0].start_date %>" aria-label="Disabled input example" >
  
     </div>
     
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ สิ้นสุดเข้าร่วมกิจกรรม  *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" >
+      <input class="form-control" type="date" name="dateEndAct" value="<%=  datax[0].end_date %>" aria-label="Disabled input example" >
     </div>
   
     <div class="mb-1 col-12">
       <label for="exampleFormControlInput1" class="form-label">ระยะเวลาที่เข้าร่วมกิจกรรม/โครงการ *
       </label>
-      <input class="form-control" type="text" value="8" aria-label="Disabled input example" >
+      <input class="form-control" type="text" name="durationact" value="<%= datax[0].hour %>" aria-label="Disabled input example" >
   
     </div>
     
@@ -333,7 +333,8 @@
       </div>
     
       </section>
-        
+    </form>
+
     <!-- อัปสเตตั้น--> 
 
     <section>
@@ -344,32 +345,84 @@
           </div>
           <div class="col-md-10">
             <div class="bgadd  " >
-              <form class="row g-3">
+              <form class="row g-3" action="/sub_request_general/status_update" method="post">
                 <div class="col-md-12">
-
+                  
                   <h3 class="mb-3  d-flex justify-content-center" style="color: #032c8a;">Update Status</h3>
-
-                  <div class="container mt-5  d-flex justify-content-center">
-                    <div class="progress-container">
-                      <div class="circle "><img src="../images/get.png" style="width: 50px;"></div>
-                      <div class="circle  "><img src="../images/get_info.png" style="width: 50px;"></div>
-                      <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
-                      <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
-    
-    </div>
+                  <% switch (datax[0].Status_req) {
+                    case 1 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 0%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
                       
+                            <% break;
+                    
+                    case 2 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 33.3%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
+                      
+                            <% break;
+                    
+                    case 3 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 66.6%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                     </div>
                     </div>
+                            <% break;
+
+                    case 4 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 99.9%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                  </div>
+                        
+                      </div>
+                            <% break;
+                    
+                    } %>
+
+                    
                     <div class=" d-flex justify-content-center ">
                       <p class="pe-xl-5 pe-sm-3 fw-bolder" style="color: #032c8a;font-size:larger">ยืนยันข้อมูล</p>
                       <p class="px-xl-5 ps-sm-1 fw-bolder" style="color: #032c8a;font-size:larger">รับเรื่อง</p>
-                      <p class="px-xl-4 ps-sm-1 ms-sm-3 fw-bolder" style="color: #032c8a;font-size:larger">ส่งเรื่องไปยังคณะ</p>
+                      <p class="px-xl-4 ps-sm-1 ms-sm-3 fw-bolder" style="color: #032c8a;font-size:larger"> กำลังดำเนินการ </p>
                       <p class="px-xl-5 ps-sm-1 ms-sm-4  fw-bolder" style="color: #032c8a;font-size:larger">สำเร็จ </p>
                       
                             </div>
+
       </div>
          
-
-                  <select class="form-select mt-4" aria-label="Default select example">
+                  <input hidden value="<%= datax[0].idRequest %>" name="idRequest">
+                  <select name="Status_req" class="form-select mt-4" aria-label="Default select example">
+                    <option hidden  value="<%= datax[0].Status_req %>" selected> <%= datax[0].Detail_Status %> </option>
                     <option value="1">ยืนยันข้อมูล</option>
                     <option value="2">รับเรื่อง</option>
                     <option value="3">ส่งเรื่องไปยังคณะ</option>
@@ -379,9 +432,10 @@
                  
                   
     <div class="d-flex justify-content-end mt-5 me-2">
-      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">ดัปเดทสถานะ</button>
+      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">อัพเดทสถานะ</button>
 
     </div>
+              </form>
               </div>
           </div>
           
