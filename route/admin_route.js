@@ -6,7 +6,7 @@ const usercheck = require('../middleware/logintokencheck')
 const mwupdatereq = require('../middleware/update_rq')
 const multer = require("multer");
 const { resolve } = require('path');
-const { rejects } = require('assert');
+const { rejects, throws } = require('assert');
 const req = require("express/lib/request");
 const { DATE } = require('mysql/lib/protocol/constants/types');
 
@@ -155,7 +155,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม'`,
+        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='บันทึกกิจกรรม' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -166,7 +166,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='ตกหล่น'`,
+        where type_event.Detail_type_E='กิจกรรมบังคับ' and Detail_Type_R='ตกหล่น' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -186,7 +186,7 @@ router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.update
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='บันทึกกิจกรรม'`,
+        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='บันทึกกิจกรรม' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -197,7 +197,7 @@ router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.update
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='ตกหล่น'`,
+        where type_event.Detail_type_E='กิจกรรมเลือก' and Detail_Type_R='ตกหล่น' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -217,7 +217,7 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='บันทึกกิจกรรม'`,
+        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='บันทึกกิจกรรม' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -228,7 +228,7 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
         inner join user on request.Username=user.Username
-        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='ตกหล่น'`,
+        where type_event.Detail_type_E='กิจกรรมบําเพ็ญสาธารณะประโยชน์' and Detail_Type_R='ตกหล่น' and request.Status_req != '4'`,
         function (error, results, fields) {
             resolve(results)
     });
@@ -239,8 +239,38 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
         daatxsave2 : daatxsave2
     });
 });
+router.get("/activity_admin04",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
+
+    var dataxsave = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where request.Status_req = '4' and Detail_Type_R='บันทึกกิจกรรม'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+    var daatxsave2 = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT * FROM thesisz.request
+        inner join event on event.ID_event=request.ID_event
+        inner join type_event on type_event.idType_Event=event.idType_Event
+        inner join type_req on type_req.idType_Req=request.idType_req 
+        inner join user on request.Username=user.Username
+        where  request.Status_req = '4' and Detail_Type_R='ตกหล่น'`,
+        function (error, results, fields) {
+            resolve(results)
+    });
+    })
+        
+    res.render("activity_admin04",{
+        dataxsave : dataxsave,
+        daatxsave2 : daatxsave2
+    });
+});
 router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,async(req,res) => {
-    console.log(req.params.requestID)
+    // console.log(req.params.requestID)
 
    
 
@@ -279,23 +309,20 @@ router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,asyn
 //             // res.redirect("/sub_request_general");  
 
 // });
-router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,(req,res) => {
-    console.log(req.body)
-    console.log("in post sub_request_general")
-        // dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
-        // inner join user on request.Username=user.Username
-        // inner join major on user.Major=major.idMajor
-        // inner join event on request.ID_event=event.ID_event
-        // inner join type_req on request.idType_req=type_req.idType_Req
-        // inner join status on status.idStatus=request.Status_req`,
-        //     function (error, results, fields) {
-        //         console.log(results)
-        // });
-            res.send(req.body)
+router.post("/sub_request_general/status_update",usercheck.checkloginforalluser, async (req,res) => {
+    // console.log(req.body)
+    // console.log("in post sub_request_general")
+      await dbConnectionn.query(`UPDATE thesisz.request SET Status_req = ? WHERE (idRequest = ?);
+        `,[req.body.Status_req,req.body.idRequest],
+            function (error, results, fields) {
+                if (error) throw error
+                // console.log(results)
+        });
+            res.redirect("/sub_request_general/"+req.body.idRequest)
 
 });
-router.get("/sub_request_omit",usercheck.checkloginforalluser,(req,res) => {
-
+router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,(req,res) => {
+    console.log(req.params.idRequest)
     res.render("sub_request_omit");  
 
 });

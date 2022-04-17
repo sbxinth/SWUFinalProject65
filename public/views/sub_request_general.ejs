@@ -260,7 +260,7 @@
     
     <!--ตอนที่ 2--> 
 
-    <form action="/sub_request_general" method="post">
+    <form action="/sub_request_general/status_update" method="post">
     <section class="my-5">
   
       <div class="container">
@@ -333,7 +333,7 @@
       </div>
     
       </section>
-    </form>
+    <!-- </form> -->
 
     <!-- อัปสเตตั้น--> 
 
@@ -345,7 +345,7 @@
           </div>
           <div class="col-md-10">
             <div class="bgadd  " >
-              <form class="row g-3" action="/sub_request_general/status_update" method="post">
+              <!-- <form class="row g-3" action="/sub_request_general/status_update" method="post"> -->
                 <div class="col-md-12">
                   
                   <h3 class="mb-3  d-flex justify-content-center" style="color: #032c8a;">Update Status</h3>
@@ -420,7 +420,7 @@
 
       </div>
          
-                  <input hidden value="<%= datax[0].idRequest %>" name="idRequest">
+                  <!-- <input hidden value="<%= datax[0].idRequest %>" name="idRequest"> -->
                   <select name="Status_req" class="form-select mt-4" aria-label="Default select example">
                     <option hidden  value="<%= datax[0].Status_req %>" selected> <%= datax[0].Detail_Status %> </option>
                     <option value="1">ยืนยันข้อมูล</option>
