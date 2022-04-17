@@ -264,21 +264,21 @@ router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,asyn
             });  
 
 });
-router.post("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
-    console.log(req.body)
-    console.log("in post sub_request_general")
+// router.post("/sub_request_general",usercheck.checkloginforalluser,(req,res) => {
+//     console.log(req.body)
+//     console.log("in post sub_request_general")
    
 
         
-            // dbConnectionn.query(` `,
-            //  function (error, results, fields) {
+//             // dbConnectionn.query(` `,
+//             //  function (error, results, fields) {
                  
-            //  });
-            res.send(req.body)
+//             //  });
+//             res.send(req.body)
 
-            // res.redirect("/sub_request_general");  
+//             // res.redirect("/sub_request_general");  
 
-});
+// });
 router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,(req,res) => {
     console.log(req.body)
     console.log("in post sub_request_general")
