@@ -45,7 +45,7 @@ function getuidf() {
         // inner join major on user.Major=major.idMajor
         // inner join event on request.ID_event=event.ID_event
         // inner join type_req on request.idType_req=type_req.idType_Req
-        // inner join status on status.idStatus=request.Status_req`,
+        // inner join status on status.idStatus=request.Status_req where request.idRequest='154202233349609'`,
         //     function (error, results, fields) {
         //         console.log(results)
         // });
@@ -321,11 +321,48 @@ router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,
             res.redirect("/sub_request_general/"+req.body.idRequest)
 
 });
-router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,(req,res) => {
+router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(req,res) => {
     console.log(req.params.idRequest)
-    res.render("sub_request_omit");  
+    var datax = await new Promise((resolve,rejects)=>{
+        dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+        inner join user on request.Username=user.Username
+        inner join major on user.Major=major.idMajor
+        inner join event on request.ID_event=event.ID_event
+        inner join type_req on request.idType_req=type_req.idType_Req
+        inner join status on status.idStatus=request.Status_req where request.idRequest= ? `,[req.params.idRequest],
+         function (error, results, fields) {
+             if (error) throw error
+            //  console.log(results,"resukt xx")
+            //  console.log(results[0].start_date,"results[0].start_date")
+            results[0].start_date = formatDateToString(results[0].start_date)
+            results[0].end_date = formatDateToString(results[0].end_date)
+            resolve(results)
+        });
+    })
+
+
+        res.render("sub_request_omit",{
+            datax : datax
+        });  
 
 });
+router.post("/print_page",usercheck.checkloginforalluser,(req,res)=>{
+    // console.log(req.body,"xxxx")
+
+})
+router.post("/update_tl",usercheck.checkloginforalluser,async(req,res)=>{
+    // console.log(req.body)
+    await dbConnectionn.query(`UPDATE thesisz.request SET Status_req = ? WHERE (idRequest = ?); `,
+    [req.body.Status_req,req.body.idRequest],
+        function (error, results, fields) {
+            if (error) throw error
+            // console.log(results)
+    });
+       res.redirect("/sub_request_omit/"+req.body.idRequest)
+    //  
+
+})
+// router
 
 
 module.exports = router;

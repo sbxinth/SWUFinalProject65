@@ -79,7 +79,7 @@
           
 <div class="col-lg-6 col-sm-5 d-flex justify-content-end">
     <div class="box-name-admin">
-<p class="pt-3">ชื่อ admin</p> <img src="../images/pic-ex.jpg">
+<p class="pt-3"><%= firstname %></p> <img src="<%= imgpath %>">
     </div>
 
 </div>
@@ -116,24 +116,24 @@
              
               </div>
       
-          <div class="col-md-9 col-xl-5 ms-2 ">
+          <!-- <div class="col-md-9 col-xl-5 ms-2 ">
             <div class="  container--info--1 ">
                   <div class=" p-2 d-flex align-items-center">
                       <div class="ps-3">
                         <div class="d-flex">
                           <p class="fw-bold me-1"> ชื่อ :  </p>   
-                          <p class="fw-light color-gray ms-1"> น.ส. รวิสรา เลิศจันทร์เพ็ญ. </p>
+                          <p class="fw-light color-gray ms-1"> <%= datax[0].Firstname %> </p>
               
                         </div>
                         <div class="d-flex">
                           <p class="fw-bold me-2">เลขประจำตัวนิสิต :  </p>   
-                          <p class="fw-light color-gray ms-1"> 61130010188</p>
+                          <p class="fw-light color-gray ms-1"> <%= datax[0].ID_Student %> </p>
                         </div>
                        
                     
                         <div class="d-flex">
                           <p class="fw-bold me-2">สาขา :  </p>   
-                          <p class="fw-light color-gray ms-1">คอมพิวเตอร์เพื่อการสื่อสาร</p>
+                          <p class="fw-light color-gray ms-1"><%= datax[0].name_maj %></p>
                         </div>
                         <div class="d-flex">
                           <p class="fw-bold me-2"> กลุ่มผู้เรียน :  </p>   
@@ -147,7 +147,7 @@
                   </div>
               </div>
              
-          </div>
+          </div> -->
           </div>
        </div>
       
@@ -173,10 +173,10 @@
         </div>
         <div class="col-md-10 1">
           <div class="bgadd  " >
-            <form class="row g-3">
+            <!-- <form class="row g-3"> -->
               <div class="col-md-6">
                 <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
-                <input class="form-control" type="text" value="ลงทะเบียนเข้าร่วมทั่วไป" aria-label="Disabled input example" disabled readonly>
+                <input class="form-control" type="text" value="<%= datax[0].Detail_Type_R %>" name="DetailREQTYPE" aria-label="Disabled input example" disabled readonly>
   
               </div>
           
@@ -209,7 +209,7 @@
               <div class="row g-3 d-flex">
                 <div class="mb-2 col-12 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                  <input class="form-control" type="text" value="81130010188" aria-label="Disabled input example" disabled readonly>
+                  <input class="form-control" type="text" value="<%= datax[0].ID_Student %>" name="studenid" aria-label="Disabled input example" disabled readonly>
   
                 </div>
                
@@ -217,7 +217,7 @@
   <div class=" mb-2 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
    
-    <input class="form-control" type="text" value="วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร" aria-label="Disabled input example" disabled readonly >
+    <input class="form-control" type="text" value="<%= datax[0].name_maj %>" name="majname" aria-label="Disabled input example" disabled readonly >
 
   </div>
   
@@ -226,18 +226,18 @@
   
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-    <input class="form-control" type="text" value="รวิสรา" aria-label="Disabled input example" disabled readonly >
+    <input class="form-control" type="text" value="<%= datax[0].Firstname %>" name="firstnam" aria-label="Disabled input example" disabled readonly >
   
   </div>
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-    <input class="form-control" type="text" value="เลิศจันทร์เพ็ญ" aria-label="Disabled input example" disabled readonly>
+    <input class="form-control" type="text" value="<%= datax[0].Lastname %>" name="lastname" aria-label="Disabled input example" disabled readonly>
   
   </div>
   
   <div class="mb-1 col-12 col-lg-6">
     <label for="exampleFormControlInput1" class="form-label">เบอร์ติดต่อ * </label>
-    <input class="form-control" type="text" value="0986675466" aria-label="Disabled input example" disabled readonly >
+    <input class="form-control" type="text" value="<%= datax[0].user_phone %>" name="phone" aria-label="Disabled input example" disabled readonly >
   
   </div>
   
@@ -276,7 +276,7 @@
                 <div class="row g-3 d-flex">
                   <div class="mb-2 col-12 ">
                     <label for="exampleFormControlInput1" class="form-label">ชื่อกิจกรรม/โครงการ * </label>
-                    <input class="form-control" type="text" value="กิจกรรมสานฝัน" aria-label="Disabled input example" disabled readonly >
+                    <input class="form-control" type="text" value="<%= datax[0].Name_Event %>" name="evntname" aria-label="Disabled input example" disabled readonly >
     
                   </div>
                  
@@ -286,20 +286,20 @@
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ เข้าร่วมกิจกรรม (วันแรก) *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" disabled readonly >
+      <input class="form-control" type="date" value="<%= datax[0].start_date %>" aria-label="Disabled input example" disabled readonly >
  
     </div>
     
     <div class="mb-1 col-10 col-lg-6">
       <label for="exampleFormControlInput1" class="form-label">วันที่ สิ้นสุดเข้าร่วมกิจกรรม  *
       </label>
-      <input class="form-control" type="date" value="12/12/21" aria-label="Disabled input example" disabled readonly >
+      <input class="form-control" type="date" value="<%= datax[0].end_date %>" aria-label="Disabled input example" disabled readonly >
     </div>
   
     <div class="mb-1 col-12">
       <label for="exampleFormControlInput1" class="form-label">ระยะเวลาที่เข้าร่วมกิจกรรม/โครงการ *
       </label>
-      <input class="form-control" type="text" value="8" aria-label="Disabled input example" disabled readonly>
+      <input class="form-control" type="text" value=" <%= datax[0].hour %>" aria-label="Disabled input example" disabled readonly>
   
     </div>
     
@@ -316,7 +316,7 @@
     </div>
     
     <div class="d-flex justify-content-end mt-5 me-2">
-      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">ยืนยันข้อมูล</button>
+      <!-- <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">ยืนยันข้อมูล</button> -->
 
     </div>
     
@@ -347,78 +347,79 @@
         <div class="bgadd " style="background-color: rgb(245, 245, 245);" >
           <div class="container">
             <h3 class="mb-5 d-flex justify-content-center" style="color: #032c8a;"> พิมคำร้อง </h3>
-
+            <form action="/print_page" method="post">
             <div class="row g-3 d-flex">
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">ส่วนงาน </label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" type="text" name="suanngan" value=""  >
              
               </div>
               <div class="mb-1 col-6 col-lg-3">
                 <label  class="form-label">โทร </label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" type="text" name="tel" value=""  >
              
               </div>
               <div class="mb-1 col-6 col-lg-3">
                 <label  class="form-label">ที่ </label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" type="text" name="at" value=""  >
              
               </div>
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">วันที่</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" type="text" name="date" value=""  >
              
               </div>
 
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">เรื่อง</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" type="text" name="title" value=""  >
       
               </div>
               <div class="mb-1 col-12 col-lg-12">
                 <label  class="form-label">เนื้อหา ย่อหน้าที่.1 </label>
-                <textarea class="form-control"  rows="3"></textarea>
+                <textarea class="form-control" name="paragraph1"  rows="3"></textarea>
              
               </div>
               <div class="mb-1 col-12 col-lg-12">
                 <label  class="form-label">เนื้อหา ย่อหน้าที่.2 </label>
-                <textarea class="form-control"  rows="3"></textarea>
+                <textarea class="form-control" name="paragraph2" rows="3"></textarea>
              
               </div>
-              <div class="mb-1 col-12 col-lg-12">
+              <!-- <div class="mb-1 col-12 col-lg-12">
                 <label  class="form-label">เนื้อหา ย่อหน้าที่.2 </label>
                 <input class="form-control" type="text" value="จึงเรียนเพื่อโปรดพิจารณาอนุเคราะห์ จะขอบคุณยิ่ง"  >
              
-              </div>
+              </div> -->
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">ใส่ชื่อ คนที่1 - ()</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" name="people1" type="text" value=""  >
       
               </div>
 
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">ตำแหน่ง</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" name="role1" type="text" value=""  >
       
               </div>
 
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">ใส่ชื่อ คนที่2 - ()</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" name="people2" type="text" value=""  >
       
               </div>
 
               <div class="mb-1 col-12 col-lg-6">
                 <label  class="form-label">ตำแหน่ง</label>
-                <input class="form-control" type="text" value=""  >
+                <input class="form-control" name="role2" type="text" value=""  >
       
               </div>
 
 
               <div class="d-flex justify-content-end mt-5 me-2">
-             <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2"><a style="color: aliceblue;" href="/page_print">บันทึกเพื่อสั่งพิมพ์</button>  </a>
+             <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">บันทึกเพื่อสั่งพิมพ์</button>
 </div>
             </div>
+          </form>
          
             </div>
         </div>
@@ -442,37 +443,86 @@
         <div class="row" >
           <div class=" col-md-1">
           </div>
-          <div class=" col-md-10">
+          <div class="col-md-10">
             <div class="bgadd  " >
-              <form class="row g-3">
+              <form class="row g-3" action="/update_tl" method="post">
                 <div class="col-md-12">
-
-
-
-
-                  <h3 class="mb-3 d-flex justify-content-center" style="color: #032c8a;">Update Status</h3>
-
-                  <div class="container mt-5 d-flex justify-content-center">
-                    <div class="progress-container">
-                      <div class="circle "><img src="../images/get.png" style="width: 50px;"></div>
-                      <div class="circle  "><img src="../images/get_info.png" style="width: 50px;"></div>
-                      <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
-                      <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
-    
-    </div>
+                  
+                  <h3 class="mb-3  d-flex justify-content-center" style="color: #032c8a;">Update Status</h3>
+                  <% switch (datax[0].Status_req) {
+                    case 1 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 0%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
                       
+                            <% break;
+                    
+                    case 2 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 33.3%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
+                      
+                            <% break;
+                    
+                    case 3 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 66.6%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                     </div>
                     </div>
+                            <% break;
+
+                    case 4 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 99.9%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                  </div>
+                        
+                      </div>
+                            <% break;
+                    
+                    } %>
+
+                    
                     <div class=" d-flex justify-content-center ">
                       <p class="pe-xl-5 pe-sm-3 fw-bolder" style="color: #032c8a;font-size:larger">ยืนยันข้อมูล</p>
                       <p class="px-xl-5 ps-sm-1 fw-bolder" style="color: #032c8a;font-size:larger">รับเรื่อง</p>
-                      <p class="px-xl-4 ps-sm-1 ms-sm-3 fw-bolder" style="color: #032c8a;font-size:larger">ส่งเรื่องไปยังคณะ</p>
+                      <p class="px-xl-4 ps-sm-1 ms-sm-3 fw-bolder" style="color: #032c8a;font-size:larger"> กำลังดำเนินการ </p>
                       <p class="px-xl-5 ps-sm-1 ms-sm-4  fw-bolder" style="color: #032c8a;font-size:larger">สำเร็จ </p>
                       
                             </div>
-      </div>
-         
 
-                  <select class="form-select mt-4" aria-label="Default select example">
+      </div>
+                  <!-- <input hidden value=<%= datax[0].idRequest %>> -->
+                  <input hidden value="<%= datax[0].idRequest %>" name="idRequest">
+                  <select name="Status_req" class="form-select mt-4" aria-label="Default select example">
+                    <option hidden  value="<%= datax[0].Status_req %>" selected> <%= datax[0].Detail_Status %> </option>
                     <option value="1">ยืนยันข้อมูล</option>
                     <option value="2">รับเรื่อง</option>
                     <option value="3">ส่งเรื่องไปยังคณะ</option>
@@ -482,11 +532,10 @@
                  
                   
     <div class="d-flex justify-content-end mt-5 me-2">
-      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">ดัปเดทสถานะ</button>
-      <form> 
-	</form> 
-	
+      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">อัพเดทสถานะ</button>
+
     </div>
+              </form>
               </div>
           </div>
           
