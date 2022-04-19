@@ -348,7 +348,10 @@ router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(r
 });
 router.post("/print_page",usercheck.checkloginforalluser,(req,res)=>{
     console.log(req.body,"xxxx")
-    res.send(req.body)
+    
+    res.render("index",{
+        datax : req.body
+    })
 
 })
 router.post("/update_tl",usercheck.checkloginforalluser,async(req,res)=>{
