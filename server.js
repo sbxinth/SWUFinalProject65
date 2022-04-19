@@ -262,5 +262,10 @@ app.post("/profile", upload.single('image'), (req, res) => {
       })
   }
 });
+
+app.get("/info_admin",(req,res)=> {
+  res.render("info_admin")
+});
+
   app.listen(PORT);
   console.log("running on port " + PORT);  
