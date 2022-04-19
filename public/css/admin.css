@@ -231,12 +231,13 @@ input::-webkit-input-placeholder {
 }
 
 .box-name-admin{
-    width: 145px;
+    min-width: 145px;
+    max-width: 170;
     height: 45px;
     padding: 10px;
     background-color: rgb(242, 242, 242);
     display: flex;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     justify-content: space-around;
     align-items: center;
     border-radius: 45px;
@@ -245,9 +246,10 @@ color: #002769;
 }
 
 .box-name-admin img {
-    width: 35px;
-    height: 35px;
-    border-radius: 35px;
+    width: 33px;
+    height: 33px;
+    border-radius: 33px;
+    padding-left: 2px;
 }
 
 .box-name-admin:hover{
