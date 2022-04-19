@@ -150,7 +150,7 @@ router.get("/main_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,a
 });
 router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
     var dataxsave = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -161,7 +161,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
     });
     })
     var dataxtokloan = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -181,7 +181,7 @@ router.get("/activity_admin",usercheck.checkloginforalluser,mwupdatereq.updatere
 router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
 
     var dataxsave = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -192,7 +192,7 @@ router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.update
     });
     })
     var daatxsave2 = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -212,7 +212,7 @@ router.get("/activity_admin02",usercheck.checkloginforalluser,mwupdatereq.update
 router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
 
     var dataxsave = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -223,7 +223,7 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
     });
     })
     var daatxsave2 = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -242,7 +242,7 @@ router.get("/activity_admin03",usercheck.checkloginforalluser,mwupdatereq.update
 router.get("/activity_admin04",usercheck.checkloginforalluser,mwupdatereq.updatereq ,async(req,res) => {
 
     var dataxsave = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -253,7 +253,7 @@ router.get("/activity_admin04",usercheck.checkloginforalluser,mwupdatereq.update
     });
     })
     var daatxsave2 = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT * FROM thesisz.request
+        dbConnectionn.query(`SELECT * FROM request
         inner join event on event.ID_event=request.ID_event
         inner join type_event on type_event.idType_Event=event.idType_Event
         inner join type_req on type_req.idType_Req=request.idType_req 
@@ -312,7 +312,7 @@ router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,asyn
 router.post("/sub_request_general/status_update",usercheck.checkloginforalluser, async (req,res) => {
     // console.log(req.body)
     // console.log("in post sub_request_general")
-      await dbConnectionn.query(`UPDATE thesisz.request SET Status_req = ? WHERE (idRequest = ?);
+      await dbConnectionn.query(`UPDATE request SET Status_req = ? WHERE (idRequest = ?);
         `,[req.body.Status_req,req.body.idRequest],
             function (error, results, fields) {
                 if (error) throw error
@@ -356,7 +356,7 @@ router.post("/print_page",usercheck.checkloginforalluser,(req,res)=>{
 })
 router.post("/update_tl",usercheck.checkloginforalluser,async(req,res)=>{
     // console.log(req.body)
-    await dbConnectionn.query(`UPDATE thesisz.request SET Status_req = ? WHERE (idRequest = ?); `,
+    await dbConnectionn.query(`UPDATE request SET Status_req = ? WHERE (idRequest = ?); `,
     [req.body.Status_req,req.body.idRequest],
         function (error, results, fields) {
             if (error) throw error
