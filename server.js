@@ -7,6 +7,8 @@ var usercheck = require("./middleware/logintokencheck");
 var router = express.Router();
 const cookieParser = require('cookie-parser');
 const PORT = process.env.PORT || 3000
+const dotenv = require('dotenv')
+dotenv.config()
 app.use(express.static('public'));
 const dbConnectionn = require("./database");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,11 +58,12 @@ app.use(
   catch{ next() }
 })
 
-// routers
+// routers student
  app.use("/", require('./route/activityforstd_router'))
  app.use("/", require('./route/announceforstd_router'))
  app.use("/", require('./route/checkstatus_router'))
  app.use("/", require('./route/subcheckforstd_router'))
+ app.use("/", require('./route/registerforstd_router'))
 
 //  app.use("/", require('./route/announce_router'))
  app.use("/", require('./route/admin_route'))
@@ -233,6 +236,7 @@ const multer = require("multer");
 const res = require("express/lib/response");
 const { resolve } = require("path");
 const { rejects } = require("assert");
+const { required } = require("nodemon/lib/config");
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {

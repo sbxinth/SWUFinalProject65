@@ -91,6 +91,7 @@ module.exports.checkloginforalluser = async (req, res, next) => {
 
 module.exports.checkforstudentonly = async (req, res, next) => {    
   try{
+    console.log(req.cookies.sslg,"in checkforstudentonly");
     if (req.cookies.sslg.status != "student") { 
       return res.send("คุณไม่มีสิทธิ์เข้าถึงหน้าเว็ปนี้")
     }
@@ -115,7 +116,7 @@ module.exports.checkforstudentonly = async (req, res, next) => {
           var responsefromservice = {
           isLoggedIn,username,firstname,lastname,studentID,Major,subMajor,Year,status,img,gender
           }
-          const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: "60000"})
+          const savecookie = await res.cookie('sslg', responsefromservice, { httpOnly: true, domain : '' , maxAge: process.env.expirecookie})
           return next()
           
         } else {
