@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../js/main.js">
     <link rel="stylesheet" href="../css/activity.css">
-    <link rel="stylesheet" href="../css/sub-detail.css">
 
 </head>
 <body id="main" class="bg-building">
@@ -266,7 +265,7 @@
   <u><a href="#" style="color: #032c8a;">คลิกดูรูป</a></u>
    </div>
 
-   <img id="myImg" src="<%= data[0].file_img %>" alt="Snow" style="width:100%; max-width:300px">
+   <img id="myImg" src="<%= data[0].file_img[0] %>" alt="" style="width:100%; max-width:300px">
    
    <!-- The Modal -->
  <div id="myModal" class="modal">
@@ -286,7 +285,7 @@
     <div class="mb-1">
       <label for="formFile" class="form-label">แนบกำหนดการ หรือเอกสารที่รับรองเข้าร่วมกิจกรรม/โครงการ *</label>
       <u><a href="<%= data[0].file_pdf %>" target="_blank" style="color: #032c8a;">คลิกดูเอกสาร</a></u>
-    </div>
+    </div> 
 
                 </div>
              

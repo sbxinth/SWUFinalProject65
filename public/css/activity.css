@@ -114,8 +114,8 @@ body {
   
   .card {
     position: relative;
-    margin-left: 30px;
-    margin-top:50px;
+    margin-left: 20px;
+    margin-top: 50px;
     padding-left: 0%;
     padding-right: 0%;
     background: #fefff900;
@@ -195,6 +195,9 @@ left: 1%;
 
 
   @media (max-width: 750px) {
+    .announce{
+      grid-template-columns: repeat(1,1fr);
+    }
     .card {
       max-width: 80%;
       margin-right: 20px;
@@ -308,6 +311,7 @@ left: 1%;
     height: 90px;
     text-indent: 10px;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 .container-box{
@@ -318,6 +322,12 @@ left: 1%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
   
+.announce{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+
+
 .bg-building{
   position: relative;
   background-image: url(../images/history-1705x960--1.jpeg);

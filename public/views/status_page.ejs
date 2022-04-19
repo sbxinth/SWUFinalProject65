@@ -213,9 +213,7 @@
       <td><%= data[i].date_req.toLocaleDateString() %></td>
       <td><%= data[i].Detail_Type_R %> </td>
       <td><%= data[i].Detail_Status %> </td>
-      <form action="/details_submit" method="post">
-      <td><button class="a--under" type="submit" name="reqiD" value=<%= data[i].idRequest %>>คลิ๊กดูรายละเอียด</button></td>
-    </form>
+      <td><a href="/details_submit/<%= data[i].idRequest %>"><button class="a--under" type="submit" name="reqiD" value=<%= data[i].idRequest %>>คลิ๊กดูรายละเอียด</button></a></td>
   </tr>
   <% } %>
   <% if(i=="0"){ %>
