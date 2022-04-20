@@ -20,12 +20,12 @@ router.post('/register',(req, res) => {
       //         if (error) throw error
       //   });
       // } catch (err) {
-      //    if (err.code == 'ER_DUP_ENTRY') {
+      //    if (err.code === 'ER_DUP_ENTRY') {
       //        //handleHttpErrors(SYSTEM_ERRORS.USER_ALREADY_EXISTS);
       //        res.send("มีบัญชีผู้ใช้นี้อยู่แล้ว กรุณาตรวจสอบ username อีกครั้ง")
       //    } else {
       //        //handleHttpErrors(err.message);
-      //        res.send(err.messaage)
+      //        res.send("error")
       //     }
       //   // res.send("xxxx")
       // }
