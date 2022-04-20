@@ -1,0 +1,15 @@
+{
+    ID_event: '6042022',
+    Name_Event: 'avtivity test',
+    Detail_Event: 'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจก
+รรมอรายละเอียดกิจกรรม\r\n' +
+      'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม\r\n' +
+      'Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม',
+    start_Event: 2022-04-05T17:00:00.000Z,
+    end_Event: 2022-04-27T17:00:00.000Z,
+    Posted_Event: 2022-04-06T06:41:42.000Z,
+    idType_Event: 3,
+    thamnail: 'http://127.0.0.1:5500/public/images/bg-cosci-login.png',
+    Detail_Img: 'http://127.0.0.1:5500/public/images/bg-cosci-login.png',
+    school_year: '2564'
+  }

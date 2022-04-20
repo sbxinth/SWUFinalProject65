@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ยืนยันข้อมูลตกหล่นและอัปเดทสถานะ </title>
+    <link rel="SHORTCUT ICON" href="../images/logo-swu.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="../css/activity.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/status.css">
+
+    <!--โหลดไอคอน--> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+</head>
+<body class="bg-main">
+<!--<title>Dashboard Sidebar Menu</title>--> 
+    <section>
+
+        <nav  class="leftside--menu--admin">
+            <header>
+                <div class="image-logo pt-3">
+                        <img class="ps-2" src="../images/logo1.png" width="45px" alt=""></img>
+
+                  
+                </div>
+            </header>
+    
+            <div class="menu-bar">
+              <div class="menu">
+               <li class="">
+                   <a href="/main_admin">
+                       <i class=" bi bi-house-door icon" ></i>
+                   </a>
+              </li>
+
+               <li class="">
+                   <a href="/activity_admin">
+                       <i class="bi bi-bell-fill icon" ></i>
+                   </a>
+              </li>
+
+              <li class="">
+               <a href="/control_announcement">
+                   <i class="bi bi-calendar-plus-fill icon"></i>
+               </a>
+          </li>
+</div>
+
+           <div class="">
+               <li>
+               <a href="/logout">
+                   <i class="bi bi-box-arrow-right icon" ></i>
+               </a>
+           </li>
+           </div>
+
+    
+
+</section>
+
+
+<!--Dashboard head--> 
+
+<section class="mt-4">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-lg-5 col-sm-5 ms-3">
+                <form id="search-box">
+                    <input type="search" placeholder="Search">
+                </form>
+                    </div>
+          
+<div class="col-lg-6 col-sm-5 d-flex justify-content-end">
+    <div class="box-name-admin">
+<p class="pt-3"><%= firstname %></p> <img src="<%= imgpath %>">
+    </div>
+
+</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="container mt-3 ">
+            <div class="d-flex" style="border-bottom: 1px solid white;color: white;">
+                <p class="pe-1">Dashboard  </p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                  </svg>
+                  <p class="ps-3">- ยืนยันข้อมูลตกหล่นและอัปเดทสถานะ </p>
+            </div>
+
+        </div>
+
+
+</section>
+ 
+
+<!-- info student --> 
+
+<section>
+      
+    <div class="container">
+  
+      
+      <div class="row mt-5">
+          <div class="col-md-2 col-xl-6  ">
+             
+              </div>
+      
+          <!-- <div class="col-md-9 col-xl-5 ms-2 ">
+            <div class="  container--info--1 ">
+                  <div class=" p-2 d-flex align-items-center">
+                      <div class="ps-3">
+                        <div class="d-flex">
+                          <p class="fw-bold me-1"> ชื่อ :  </p>   
+                          <p class="fw-light color-gray ms-1"> <%= datax[0].Firstname %> </p>
+              
+                        </div>
+                        <div class="d-flex">
+                          <p class="fw-bold me-2">เลขประจำตัวนิสิต :  </p>   
+                          <p class="fw-light color-gray ms-1"> <%= datax[0].ID_Student %> </p>
+                        </div>
+                       
+                    
+                        <div class="d-flex">
+                          <p class="fw-bold me-2">สาขา :  </p>   
+                          <p class="fw-light color-gray ms-1"><%= datax[0].name_maj %></p>
+                        </div>
+                        <div class="d-flex">
+                          <p class="fw-bold me-2"> กลุ่มผู้เรียน :  </p>   
+                          <p class="fw-light color-gray ms-1">IC43 (ปี 4) </p>
+              
+                        </div>
+                      </div>
+                      <div class="ms-4 ps-4 mb-3">
+                          <img class="main--imgprofile" src="../images/pic-ex.jpg">
+                        </div>
+                  </div>
+              </div>
+             
+          </div> -->
+          </div>
+       </div>
+      
+  <!-- 
+  <div class="container mt-4 d-flex justify-content-end">
+  <button class="btnwarn">
+  <span><img src="https://image.flaticon.com/icons/png/512/1157/1157000.png" width="20px"> <div class="ms-2 badge bg-danger">2</div> </span> 
+  <a href="../html/notification_activity" style="color: white;">มีการแจ้งเตือน</a>
+  </button>
+  
+  </div>
+  -->
+  
+  
+    </section>
+    
+<!-- รูปแบบ --> 
+<section>
+  
+    <div class="container mt-3">
+      <div class="row" >
+        <div class=" col-md-1">
+        </div>
+        <div class="col-md-10 1">
+          <div class="bgadd  " >
+            <!-- <form class="row g-3"> -->
+              <div class="col-md-6">
+                <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
+                <input class="form-control" type="text" value="<%= datax[0].Detail_Type_R %>" name="DetailREQTYPE" aria-label="Disabled input example" disabled readonly>
+  
+              </div>
+          
+            </div>
+        </div>
+        
+      </div>
+     
+    
+    </div>
+     
+    
+    </section>
+      
+
+  <!--ตอนที่1--> 
+
+<section class="my-5">
+  
+    <div class="container">
+      <div class="row" >
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+          <div class="bgadd " style="background-color: rgb(245, 245, 245);" >
+            <div class="container">
+              <h3 class="mb-2" style="color: #032c8a;">ตอนที่ 1 ข้อมูลส่วนตัว
+              </h3>
+  
+              <div class="row g-3 d-flex">
+                <div class="mb-2 col-12 col-lg-6">
+                  <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
+                  <input class="form-control" type="text" value="<%= datax[0].ID_Student %>" name="studenid" aria-label="Disabled input example" disabled readonly>
+  
+                </div>
+               
+  
+  <div class=" mb-2 col-12 col-lg-6">
+    <label for="exampleFormControlInput1" class="form-label">คณะ/วิทยาลัย *  </label>
+   
+    <input class="form-control" type="text" value="<%= datax[0].name_maj %>" name="majname" aria-label="Disabled input example" disabled readonly >
+
+  </div>
+  
+ 
+  
+  
+  <div class="mb-1 col-12 col-lg-6">
+    <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
+    <input class="form-control" type="text" value="<%= datax[0].Firstname %>" name="firstnam" aria-label="Disabled input example" disabled readonly >
+  
+  </div>
+  <div class="mb-1 col-12 col-lg-6">
+    <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
+    <input class="form-control" type="text" value="<%= datax[0].Lastname %>" name="lastname" aria-label="Disabled input example" disabled readonly>
+  
+  </div>
+  
+  <div class="mb-1 col-12 col-lg-6">
+    <label for="exampleFormControlInput1" class="form-label">เบอร์ติดต่อ * </label>
+    <input class="form-control" type="text" value="<%= datax[0].user_phone %>" name="phone" aria-label="Disabled input example" disabled readonly >
+  
+  </div>
+  
+  
+  
+              </div>
+           
+              </div>
+          </div>
+            </div>
+        </div>
+        
+     
+    
+    </div>
+     
+    
+    </section>
+      
+    
+    <!--ตอนที่ 2--> 
+
+  
+    <section class="my-5">
+  
+      <div class="container">
+        <div class="row" >
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-10">
+            <div class="bgadd ">
+              <div class="container">
+                <h3 class="mb-2" style="color: #032c8a;">ตอนที่ 2 การเข้าร่วมกิจกรรม/โครงการ
+                </h3>
+    
+                <div class="row g-3 d-flex">
+                  <div class="mb-2 col-12 ">
+                    <label for="exampleFormControlInput1" class="form-label">ชื่อกิจกรรม/โครงการ * </label>
+                    <input class="form-control" type="text" value="<%= datax[0].Name_Event %>" name="evntname" aria-label="Disabled input example" disabled readonly >
+    
+                  </div>
+                 
+    
+    
+    
+    <div class="mb-1 col-10 col-lg-6">
+      <label for="exampleFormControlInput1" class="form-label">วันที่ เข้าร่วมกิจกรรม (วันแรก) *
+      </label>
+      <input class="form-control" type="date" value="<%= datax[0].start_date %>" aria-label="Disabled input example" disabled readonly >
+ 
+    </div>
+    
+    <div class="mb-1 col-10 col-lg-6">
+      <label for="exampleFormControlInput1" class="form-label">วันที่ สิ้นสุดเข้าร่วมกิจกรรม  *
+      </label>
+      <input class="form-control" type="date" value="<%= datax[0].end_date %>" aria-label="Disabled input example" disabled readonly >
+    </div>
+  
+    <div class="mb-1 col-12">
+      <label for="exampleFormControlInput1" class="form-label">ระยะเวลาที่เข้าร่วมกิจกรรม/โครงการ *
+      </label>
+      <input class="form-control" type="text" value=" <%= datax[0].hour %>" aria-label="Disabled input example" disabled readonly>
+  
+    </div>
+    
+    <div class="mb-1">
+      <label for="formFile" class="form-label">แนบภาพถ่ายระหว่างเข้าร่วมกิจกรรม/โครงการ * </label>
+
+  <u><a href="#" style="color: #032c8a;">คลิ๊กดูรูป</a></u>
+   </div>
+    <div class="mb-1">
+      <label for="formFile" class="form-label">แนบกำหนดการ หรือเอกสารที่รับรองเข้าร่วมกิจกรรม/โครงการ *</label>
+      <u><a href="#" style="color: #032c8a;">คลิ๊กดูรูป</a></u>
+      
+  
+    </div>
+    
+    <div class="d-flex justify-content-end mt-5 me-2">
+      <!-- <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">ยืนยันข้อมูล</button> -->
+
+    </div>
+    
+    
+                </div>
+             
+                </div>
+            </div>
+              </div>
+          </div>
+          
+        
+      
+      </div>
+    
+      </section>
+        
+
+<!-- คอนเทน เพื่อสั่งพิม --> 
+
+<section class="my-5">
+  
+  <div class="container">
+    <div class="row" >
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10 ">
+        <div class="bgadd " style="background-color: rgb(245, 245, 245);" >
+          <div class="container">
+            <h3 class="mb-5 d-flex justify-content-center" style="color: #032c8a;"> พิมคำร้อง </h3>
+            <form action="/print_page" method="post">
+            <div class="row g-3 d-flex">
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">ส่วนงาน </label>
+                <input class="form-control" type="text" name="suanngan" value="วิทยาลัยนวัตกรรมสื่อสารสังคม  มหาวิทยาลัยศรีนครินทรวิโรฒ"  >
+             
+              </div>
+              <div class="mb-1 col-6 col-lg-3">
+                <label  class="form-label">โทร </label>
+                <input class="form-control" type="text" name="phone" value="11266"  >
+             
+              </div>
+              <div class="mb-1 col-6 col-lg-3">
+                <label  class="form-label">ที่ </label>
+                <input class="form-control" type="text" name="address" value="อว 8719.1/"  >
+             
+              </div>
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">วันที่</label>
+                <input class="form-control" type="date" name="date" value=""  >
+             
+              </div>
+
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">เรียน</label>
+                <input class="form-control" type="text" name="to" value="รองอธิการบดีฝ่ายพัฒนาศักยภาพนิสิต"  >
+      
+              </div>
+
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">เรื่อง</label>
+                <input class="form-control" type="text" name="title" value="ขอความอนุเคราะหGบันทึกชั่วโมงจิตอาสาให้แก่นิสิต"  >
+      
+              </div>
+              <div class="mb-1 col-12 col-lg-12">
+                <label  class="form-label">เนื้อหา ย่อหน้าที่.1 </label>
+                <textarea class="form-control" name="p1"  rows="3">    ด้วย วิทยาลัยนวัตกรรมสื่อสารสังคม มหาวิทยาลัยศรีนครินทรวิโรฒ ได้ดำเนินการจัด “โครงการส่งเสริมคุณธรรม จริยธรรม และเสริมสร้างทัศนคติที่ดี : กิจกรรมนวัตกรรมแรกพบ” เมื่อวันที่ 20 กรกฎาคม 2563 ณ ห้อง 401 ชั้น 4 อาคารวิทยาลัยนวัตกรรมสื่อสารสังคม ที่ผ่านมา โดยกิจกรรมดังกล่าวยังมีนิสิตที่ตกหล่นจากการบันทึกชั่วโมงจิตอาสา นั้น</textarea>
+             
+              </div>
+              <div class="mb-1 col-12 col-lg-12">
+                <label  class="form-label">เนื้อหา ย่อหน้าที่.2 </label>
+                <textarea class="form-control" name="p2" rows="3">      ในการนี้ ฝ่ายพัฒนาศักยภาพนิสิต วิทยาลัยนวัตกรรมสื่อสารสังคม จึงใคร่ขอความอนุเคราะห์ บันทึกกิจกรรมดังกล่าวให้แก่นางสาวธัญชนก เสาร์คำ รหัสนิสิต 62130010373 นิสิตชั้นปีที่ 2 วิชาเอกการสื่อสารเพื่อสุขภาพ ซึ่งนิสิตได้เข้าร่วมกิจกรรมดังกล่าวเป็นที่เรียบร้อยแล้ว (รายละเอียดดังเอกสารแนบ)</textarea>
+             
+              </div>
+              <!-- <div class="mb-1 col-12 col-lg-12">
+                <label  class="form-label">เนื้อหา ย่อหน้าที่.2 </label>
+                <input class="form-control" type="text" value="จึงเรียนเพื่อโปรดพิจารณาอนุเคราะห์ จะขอบคุณยิ่ง"  >
+             
+              </div> -->
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">ใส่ชื่อ คนที่1 - ()</label>
+                <input class="form-control" name="people1" type="text" value="อาจารย์ ดร.รินบุญ นุชน้อมบุญ"  >
+      
+              </div>
+
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">ตำแหน่ง</label>
+                <input class="form-control" name="role1" type="text" value="รองคณบดีฝ่ายพัฒนาศักยภาพนิสิต"  >
+      
+              </div>
+
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">ใส่ชื่อ คนที่2 - ()</label>
+                <input class="form-control" name="people2" type="text" value="คณบดีวิทยาลัยนวัตกรรมสื่อสารสังคม"  >
+      
+              </div>
+
+              <div class="mb-1 col-12 col-lg-6">
+                <label  class="form-label">ตำแหน่ง</label>
+                <input class="form-control" name="role2" type="text" value="ผู้ช่วยศาสตราจารย์ ดร.นพดล อินทร์จันทร์"  >
+      
+              </div>
+              <input type="hidden" value="<%= datax[0].file_img %>" name="file_img">
+
+              <div class="d-flex justify-content-end mt-5 me-2">
+             <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">บันทึกเพื่อสั่งพิมพ์</button>
+</div>
+            </div>
+          </form>
+         
+            </div>
+        </div>
+          </div>
+      </div>
+      
+  
+  </div>
+   
+  
+  </section>
+    
+
+
+
+    <!-- อัปสเตตั้น--> 
+
+    <section>
+  
+      <div class="container mt-3">
+        <div class="row" >
+          <div class=" col-md-1">
+          </div>
+          <div class="col-md-10">
+            <div class="bgadd  " >
+              <form class="row g-3" action="/update_tl" method="post">
+                <div class="col-md-12">
+                  
+                  <h3 class="mb-3  d-flex justify-content-center" style="color: #032c8a;">Update Status</h3>
+                  <% switch (datax[0].Status_req) {
+                    case 1 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 0%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
+                      
+                            <% break;
+                    
+                    case 2 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 33.3%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle  active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle  "><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+      </div>
+                        
+                      </div>
+                      
+                            <% break;
+                    
+                    case 3 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 66.6%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle "><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                     </div>
+                    </div>
+                            <% break;
+
+                    case 4 : %>
+                    <div class="container mt-5  d-flex justify-content-center">
+                      <div class="progress-container" >
+                        <div class="progress" id="progress" style="width: 99.9%;"> </div>
+                        <div class="circle active"><img src="../images/get.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/get_info.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/university.png" style="width: 50px;"></div>
+                        <div class="circle active"><img src="../images/4336672.png" style="width: 50px;"></div>
+      
+                  </div>
+                        
+                      </div>
+                            <% break;
+                    
+                    } %>
+
+                    
+                    <div class=" d-flex justify-content-center ">
+                      <p class="pe-xl-5 pe-sm-3 fw-bolder" style="color: #032c8a;font-size:larger">ยืนยันข้อมูล</p>
+                      <p class="px-xl-5 ps-sm-1 fw-bolder" style="color: #032c8a;font-size:larger">รับเรื่อง</p>
+                      <p class="px-xl-4 ps-sm-1 ms-sm-3 fw-bolder" style="color: #032c8a;font-size:larger"> กำลังดำเนินการ </p>
+                      <p class="px-xl-5 ps-sm-1 ms-sm-4  fw-bolder" style="color: #032c8a;font-size:larger">สำเร็จ </p>
+                      
+                            </div>
+
+      </div>
+                  <!-- <input hidden value=<%= datax[0].idRequest %>> -->
+                  <input hidden value="<%= datax[0].idRequest %>" name="idRequest">
+                  <select name="Status_req" class="form-select mt-4" aria-label="Default select example">
+                    <option hidden  value="<%= datax[0].Status_req %>" selected> <%= datax[0].Detail_Status %> </option>
+                    <option value="1">ยืนยันข้อมูล</option>
+                    <option value="2">รับเรื่อง</option>
+                    <option value="3">ส่งเรื่องไปยังคณะ</option>
+                    <option value="4">สำเร็จ</option>
+
+                  </select>
+                 
+                  
+    <div class="d-flex justify-content-end mt-5 me-2">
+      <button style="margin: 0px;" type="submit" value="Submit" class="btn2 btn--blue2">อัพเดทสถานะ</button>
+
+    </div>
+              </form>
+              </div>
+          </div>
+          
+        </div>
+       
+      
+      </div>
+       
+      
+      </section>
+        
+
+      
+<footer>
+   
+<div class="container">
+  <footer class="py-3 my-4">
+   
+    <p class="text-center text-muted">© 2021 COSCI, Srinakharinwirot University </p>
+  </footer>
+</div>
+
+  </footer>
+
+<script>
+ 
+</script>
+
+</body>
+
+
+</html>

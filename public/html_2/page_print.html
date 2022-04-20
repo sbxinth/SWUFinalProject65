@@ -1,0 +1,249 @@
+<!-- -------------PDF GENERATEOR --------------- -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+<link rel="SHORTCUT ICON" href="../images/logo-swu.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="fonts/thsarabunnew.css" /> 
+<link rel="stylesheet" href="../css/activity.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/status.css">
+
+<div class="d-flex justify-content-center my-4">
+  <button class="btnn btn--blue " id="pdf-generate">Download</button>
+  <input  class="btnn btn--blue ms-3" type="button" value="Print" onclick="window.print()" />
+</div>
+   
+
+    <div id="example">
+    <div class="box wide hidden-on-narrow">
+    </div>
+
+    <div class="page-container hidden-on-narrow">
+        <div class="pdf-page size-a4" >
+            <page size="A4" >
+               
+               <!-- ส่วนหัว -->
+<div class="d-flex  align-items-end" >
+<img src="../images/swu.png" width="65px">
+<h5 style="padding-left: 180px;" class="fw-bold" >บันทึกข้อความ</h5>
+
+</div>
+
+               <!-- ข้อมูลส่วนแรก -->
+<div class="pt-2 d-flex">
+  <p class="pe-3 fw-bold">ส่วนงาน</p>
+  <div  class="d-flex justify-content-between">
+    <p style="BORDER-BOTTOM: #262626 1.8px dotted;width: 480px;">วิทยาลัยนวัตกรรม ศรีนครินวิโวฯฯ</p>
+    <p style="BORDER-BOTTOM: #262626 1.8px dotted">โทร 11266</p>
+
+  </div>
+
+</div>
+<div class=" d-flex">
+  <p class="pe-3 fw-bold">ที่</p>
+    <p style="BORDER-BOTTOM: #262626 1.8px dotted;width: 260px;">อว 8719.5</p>
+  <p class="px-3 fw-bold">วันที่</p>
+  <p style="BORDER-BOTTOM: #262626 1.8px dotted;width: 260px;padding-left: 20px;">มกรา 2565</p>
+
+
+</div>
+<div class=" d-flex">
+  <p class="pe-3 fw-bold">เรื่อง</p>
+    <p style="BORDER-BOTTOM: #262626 1.8px dotted;width: 575px;">ขอความอนุเคราะ์บันทึกชม
+    </p>
+
+</div>
+<div class=" d-flex">
+  <p class="pe-3 fw-bold">เรียน</p>
+    <p style="BORDER-BOTTOM: #262626 1.8px dotted;width: 575px;">รองอธิการบดีฝ่ายพัฒนาศักยภาพนิสิต</p>
+
+</div>
+
+               <!-- ข้อมูลส่วนย่อหน้าที่ 1-->
+
+               <div style="width: 600px;" >
+                <p style=" text-indent: 120px;word-wrap: break-word  ">
+                  Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมรายละเอียดกิจกรรมอรายละเอียดกิจกรรม Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมรายละเอียดกิจกรรมอรายละเอียดกิจกรรม   details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+
+ </p>
+
+
+            </div>
+
+               <!-- ข้อมูลส่วนย่อหน้าที่ 2-->
+
+               <div style="width: 600px;" >
+                <p style=" text-indent: 120px;word-wrap: break-word  ">
+                  Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมรายละเอียดกิจกรรมอรายละเอียดกิจกรรม 
+ Sub details รายละเอียดกิจกรรม รายละเอียดกิจกรรมรายม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม   details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย ละเอียดกิจกรรมอรายละเอียดกิจกรรม   details รายละเอียดกิจกรร
+ละเอียดกิจกรรมอรายละเอียดกิจกรรม   details รายละเอียดกิจกรรม รายละเอียดกิจกรรมราย
+
+ </p>
+
+
+            </div>
+
+  <!-- ข้อมูลส่วนย่อหน้าที่ 3-->
+
+  <div style="width: 600px;" >
+    <p style=" text-indent: 120px;word-wrap: break-word  ">
+      จึงเรียนเพื่อโปรดพิจารณาอนุเคราะห์ จะขอบคุณยิ่ง
+
+</p> </div>
+
+
+
+ <!-- ข้อมูลชื่ออ้างอิง 1-->
+
+ <div style="padding-left: 340px;padding-top: 90px;"  >
+   <!-- ใส่ชื่อในวงเลบ-->
+   <div class="d-flex ps-3">
+    <p > (</p>   <p >รวิสรา ลี้ชัยพรกุล</p> <p> )</p>
+   </div>
+      <!-- ใส่ตำแหน่ง-->
+<p>รองหัวหน้าคณบดีฝ่ายกิจดย</p>
+
+
+</div>
+
+ <!-- ข้อมูลชื่ออ้างอิง 2-->
+
+ <div style="padding-left: 340px;padding-top: 70px;"  >
+  <!-- ใส่ชื่อในวงเลบ-->
+  <div class="d-flex ps-3">
+   <p > (</p>   <p >รวิสรา ลี้ชัยพรกุล</p> <p> )</p>
+  </div>
+     <!-- ใส่ตำแหน่ง-->
+<p>รองหัวหน้าคณบดีฝ่ายกิจดย</p>
+
+
+</div>
+
+
+            </page>
+        </div> </div>
+       
+
+    </div>
+
+
+                 <!-- แผ่นสอง -->
+
+    <div id="example">
+      <div class="box wide hidden-on-narrow">
+      </div>
+  
+      <div class="page-container hidden-on-narrow">
+          <div class="pdf-page size-a4 mt-2" >
+              <page size="A4" style="padding: 80px;" >
+                 
+                 <!-- ส่วนหัว -->
+  <div class="d-flex  align-items-end" >
+  <h5 class="fw-bold" style="padding-left: 130px;" >ภาพการเข้าร่วมกิจกรรมและจัดเตรียมงาน</h5>
+  
+  </div>
+
+  <div class="d-flex mt-3 justify-content-center"  >
+    <img src="../images/bg-cosci-login.png" style="max-width: 500px;">
+  </div>
+  
+                 
+  
+                 <!-- ข้อมูลส่วนย่อหน้าที่ 1-->
+  
+  
+    <!-- ข้อมูลส่วนย่อหน้าที่ 3-->
+  
+  
+  
+              </page>
+          </div> </div>
+         
+  
+      </div>
+  
+   
+
+    <div class="responsive-message"></div>
+
+    <style>
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .pdf-page {
+          font-family: 'THSarabunNew', sans-serif; 
+        }
+    </style>
+
+    <script>
+        // Import DejaVu Sans font for embedding
+
+        // NOTE: Only required if the Kendo UI stylesheets are loaded
+        // from a different origin, e.g. cdn.kendostatic.com
+        kendo.pdf.defineFont({
+            "THSarabunNew sans"             : <link rel="stylesheet" href="fonts/thsarabunnew.css" />,
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
+
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <!-- <script src="../content/shared/js/pako.min.js"></script> -->
+
+    <script>
+      function getPDF(selector) {
+        kendo.drawing.drawDOM($(selector)).then(function(group){
+          kendo.drawing.pdf.saveAs(group, 'testing.pdf');
+        });
+      }
+    </script>
+    <style>
+
+@import url(fonts/thsarabunnew.css);
+    * {
+        box-sizing: border-box;
+    }
+
+   
+
+    body {
+      font-family: 'THSarabunNew', sans-serif; 
+      line-height: 1.4rem;
+      color: black;
+    }
+
+    p{
+      font-size: 21px;
+      font-family: 'THSarabunNew', sans-serif; 
+      font-weight: 300;
+    }
+    page[size="A4"] {  
+      width: 790px;
+      height: 1000px; 
+      padding-left: 90px;
+      padding-right: 30px;
+      padding-top:50px;
+    }
+    page {
+      background: white; 
+      display: block;
+      margin: 0 auto;
+    }
+
+</style>
+
+</div>
+
+<script type="text/javascript">
+       $('#pdf-generate').click(function(){
+         getPDF('.pdf-page');
+       })
+</script>
