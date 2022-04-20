@@ -40,15 +40,18 @@ function getuidf() {
  }
 
 // db test//
-        // dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
-        // inner join user on request.Username=user.Username
-        // inner join major on user.Major=major.idMajor
-        // inner join event on request.ID_event=event.ID_event
-        // inner join type_req on request.idType_req=type_req.idType_Req
-        // inner join status on status.idStatus=request.Status_req where request.idRequest='154202233349609'`,
-        //     function (error, results, fields) {
-        //         console.log(results)
-        // });
+// dbConnectionn.query('SELECT request.idRequest,user.ID_Student,user.Firstname,user.Lastname,Major.name_maj,user.user_phone,event.Name_Event,event.start_Event,event.end_Event,request.file_pdf,request.file_img FROM request INNER JOIN event ON request.ID_event=event.ID_event INNER JOIN type_event ON event.idType_Event=type_event.idType_Event INNER JOIN user ON request.Username=user.Username INNER JOIN major ON user.Major=major.idMajor WHERE user.Username = "co611010035" AND request.idRequest = "154202213832564"'
+// ,async function (error, results, fields) {
+//   var datax = results;
+//   console.log(datax)
+
+//   datax[0].file_img = await datax[0].file_img.split(',')
+//   console.log(datax)
+
+//     // res.render("details_submit", { 
+//     //   data :datax
+//     // });
+// }); 
 // end db test
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -324,7 +327,7 @@ router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,
 router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(req,res) => {
     console.log(req.params.idRequest)
     var datax = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+        dbConnectionn.query(`SELECT request.file_img,request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
         inner join user on request.Username=user.Username
         inner join major on user.Major=major.idMajor
         inner join event on request.ID_event=event.ID_event
@@ -348,7 +351,9 @@ router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(r
 });
 router.post("/print_page",usercheck.checkloginforalluser,(req,res)=>{
     console.log(req.body,"xxxx")
-    
+    req.body.file_img = req.body.file_img.split(',')
+    // req.body.date = formatDateToString(req.body.date)
+    console.log(req.body)
     res.render("index",{
         datax : req.body
     })
