@@ -73,6 +73,24 @@ transform: translate(-50%,-50%);
 transform: translate(-50%,-50%);
 }
 
+.crop-img3 {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.crop-img3 img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+-ms-transform: translate(-50%,-50%);
+transform: translate(-50%,-50%);
+}
 
 
 
