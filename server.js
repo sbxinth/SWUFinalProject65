@@ -69,7 +69,8 @@ app.use(
  app.use("/", require('./route/admin_route'))
  app.use("/", require('./route/admin_route_annouce'))
  
-
+// routers upload profile pic all
+app.use("/", require('./route/uploadprofile_router'))
 
 app.get("/home", (req, res) => {
   resrender("swu");
@@ -142,18 +143,20 @@ app.get("/confirmed_activity",usercheck.checkforstudentonly,(req, res) => {
  app.get("/profile", 
  usercheck.checkloginforalluser
   ,(req, res) => {
-    // console.log(req.cookies.sslg)
+    console.log(req.cookies.sslg)
     if (req.cookies.sslg.status == "admin"){
         console.log("go to admin profile");
         res.redirect("/main_admin")
     } else {
         res.render("userprofile")
-    }   
+    }
   });
- 
-//     }
-//   }
-//  });
+
+  app.get("/info_admin", 
+ usercheck.checkloginforalluser
+  ,(req, res) => {
+        res.render("info_admin")
+  });
 
  app.get("/login", (req, res) => {
   if (req.cookies?.sslg){
@@ -230,42 +233,6 @@ function getuidf() {
   return id.toString(16);
 }
 
-//upload pic
-
-const multer = require("multer");
-const res = require("express/lib/response");
-const { resolve } = require("path");
-const { rejects } = require("assert");
-const { required } = require("nodemon/lib/config");
-
-var storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, './public/img')
-  },
-  filename: (req, file, cb) => {
-      cb(null, 'file-' + Date.now() + '.' +
-      file.originalname.split('.')[file.originalname.split('.').length-1])}
-})
-
-const upload = multer({ storage:storage })
-
-app.post("/profile", upload.single('image'), (req, res) => {
-  if (!req.file) {
-      console.log("No file upload");
-      res.render("No file upload");
-  } else {
-      var imgsrc = '../img/' + req.file.filename
-      var insertData = ("UPDATE `User` SET `img_user`= (?) WHERE ID_Student = (?)");
-      dbConnectionn.query(insertData, [imgsrc,req.cookies.sslg.studentID], (err, result) => {
-          if (err) throw err
-          res.redirect("/profile")
-      })
-  }
-});
-
-app.get("/info_admin",(req,res)=> {
-  res.render("info_admin")
-});
 
   app.listen(PORT);
   console.log("running on port " + PORT);  

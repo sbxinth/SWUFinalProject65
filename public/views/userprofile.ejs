@@ -189,7 +189,7 @@
                                   <form method="post" action="/profile" enctype="multipart/form-data">
                                   <label for="file">
                                     <div class="crop-img">
-                                      <img id="output"  src=<%= imgpath %> >
+                                      <img style="cursor: pointer;" id="output"  src=<%= imgpath %> >
                                     </div>
                             
                                     <input style="display: none;" id="file" name="image" type="file" onchange="loadFile(event)" required/>

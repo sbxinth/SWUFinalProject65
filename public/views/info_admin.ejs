@@ -53,7 +53,7 @@
 
                 <div class="">
                     <li>
-                    <a href="#">
+                    <a href="/logout">
                         <i class="bi bi-box-arrow-right icon" ></i>
                     </a>
                 </li>
@@ -123,12 +123,13 @@
                                         <p class=" fw-light"><%= lastname %> </p> 
                                         </div>
                                         <div class="p-1  d-flex justify-content-start">
-                                            <p class="pe-4  ms-5 fw-bold"> ชื่อเล่น : ?????????????????????????????</p>    
-                                            <p class=" fw-light">เค้ก </p> 
+                                            <p class="pe-4  ms-5 fw-bold"> รหัสประจำตัวเจ้าหน้าที่ : </p>    
+                                            <p class=" fw-light"><%= studentID %></p> 
                                             </div>
                                           <div class="p-1 d-flex justify-content-start">
-                                              <p class="pe-4 ms-5 fw-bold"> คณะ :</p>   
-                                              <p class=" fw-light"><%= major %> </p> 
+                                              <p class="pe-4 ms-5 fw-bold"> วิทยาลัย :</p>   
+                                              <!-- <p class=" fw-light"><%= major %></p>  เผื่อเพิ่มกรณีใช้หลายคณะ-->  
+                                              <p class="fw-light"> นวัตกรรมสื่อสารสังคม </p>   
                                               </div>
                                     
                                                   <div class="p-1 d-flex justify-content-start">
@@ -140,18 +141,31 @@
                                       
                                     </div>
                               
-                              <div class="col-sm-10 col-lg-5 pt-sm-5 pt-lg-1">
-                                  <div class="mt-2 d-flex justify-content-center ">
-                                      <img class="imgprofile " src=<%= imgpath %>>
-    
+                              <!-- <div class="col-sm-10 col-lg-5"> -->
+                                <form class="col-sm-10 col-lg-5 d-flex justify-content-center" method="post" action="/info_admin" enctype="multipart/form-data">
+                                    <label for="file">
+                                      <div class="mt-2 d-flex justify-content-cente">
+                                        <img class="imgprofile" style="cursor: pointer;" id="output"  src=<%= imgpath %> >
+                                      </div>
+                              
+                                      <input style="display: none;" id="file" name="image" type="file" onchange="loadFile(event)" required/>
+                                      
+                                      <div class="mt-3 d-flex justify-content-center ">
+                                        <button value="" type="submit" class=" ms-2 btn2 btn--blue">อัพรูปภาพ</button>
+                                      </div>
+                                    </label>
+                                </form>
+
+                                  <!-- <div class="mt-2 d-flex justify-content-center">
+                                      <img class="imgprofile" id="output" src=<%= imgpath %>>
+                                      <input style="display: none;" id="file" name="image" type="file" onchange="loadFile(event)" required/>
                                   </div>
+
                                   <div class="mt-3 d-flex justify-content-center ">
-                                    <a href="#"> <button type="button" class=" ms-2 btn2 btn--blue">เปลี่ยนรูปภาพ</button></a>
+                                  <button value="" type="submit" class=" ms-2 btn2 btn--blue">อัพรูปภาพ</button>
     
-                                </div>
-    
-    
-                              </div>
+                                </div> 
+                                </div> -->
     
                           </div>
     
@@ -176,9 +190,15 @@
 <footer>
    
 
-  </footer>
+</footer>
+<script>
+        function loadFile(event) {
+        var image = document.getElementById("output");
+        var data = image.src = URL.createObjectURL(event.target.files[0]);
+            console.log(data)
+        };
 
-
+</script>
 
 </body>
 
