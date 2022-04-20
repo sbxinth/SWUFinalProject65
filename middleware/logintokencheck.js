@@ -136,3 +136,20 @@ module.exports.checkforstudentonly = async (req, res, next) => {
   // res.status(response.status).send(response)
 
 }
+
+module.exports.newonly = async (req, res, next) => {    
+  try{
+    if (req.cookies.sslg){
+      res.send("คุณไม่มีสิทธ์เข้าถึงหน้าสมัคร โปรดออกจากระบบก่อน")
+    }else{
+      return next()
+    }
+  }
+  catch (error) {
+      // res.send(error)
+      res.redirect('/login')
+      console.log(`Something went wrong with : checkforstudentonly ` ,error);
+  }
+  // res.status(response.status).send(response)
+
+}

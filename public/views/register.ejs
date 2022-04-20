@@ -46,25 +46,26 @@
         
         <div class="col-xl-6 col-md-11 ms-xl-5 mt-4">
           <div class="container--regiser ">
+            <form action="/register" method="post">
             <div class="container">
               <h3 class="mb-2" style="color: #032c8a;">สมัครเข้าสู่ระบบ</h3>
-  <p style="font-size: 12px;color: darkgray;">*** สมัครเข้าสู่ระบบไม่เกี่ยวกับรหัสบัวศรี</p>
+              <p style="font-size: 12px;color: darkgray;">*** สมัครเข้าสู่ระบบไม่เกี่ยวกับรหัสบัวศรี</p>
               <div class="row g-2 d-flex">
                 <div class="mb-2 col-10 col-lg-6">
                   <label class="form-label">Username</label>
-                  <input type="text" class="form-control" id="register" placeholder="jungcrape">
+                  <input type="text" class="form-control" name="username" id="register" placeholder="jungcrape">
   
                 </div>
                 <div class="mb-2 col-10 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="register" placeholder="password">
+                  <input type="password" class="form-control" name="password" id="register" placeholder="password">
                   <div id="emailHelp" class="form-text">* กรุณาระบุรหัสผ่าน</div>
   
                 </div>
                
                 <div class="mb-2 col-10 col-lg-10">
                   <label for="exampleFormControlInput1" class="form-label">รหัสประจำตัวนิสิต</label>
-                  <input type="text" class="form-control" id="register" placeholder="611288229290">
+                  <input type="text" class="form-control" id="register" name="studentID" placeholder="611288229290">
                   <div  class="form-text">* รหัสประจำตัวนิสิต 13 ตัว</div>
   
                 </div>
@@ -78,39 +79,54 @@
                   </div> -->
                 <div class="mb-2 col-10 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">ชื่อ</label>
-                  <input type="text" class="form-control" id="register" placeholder="รวิสรา">
+                  <input type="text" class="form-control" name="firstname" id="register" placeholder="รวิสรา">
   
                 </div>
                 <div class="mb-2 col-10 col-lg-6">
                   <label for="exampleFormControlInput1" class="form-label">นามสกุล</label>
-                  <input type="text" class="form-control" id="register" placeholder="เลิศ">
+                  <input type="text" class="form-control" name="lastname" id="register" placeholder="เลิศ">
+  
+                </div>
+                <div class="mb-2 col-10 col-lg-6">
+                  <label for="exampleFormControlInput1" class="form-label">เบอร์โทร</label>
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="0999999999">
   
                 </div>
                
-  <div class=" mb-2 col-10 col-lg-6">
-    <label  class="form-label">คณะ/วิทยาลัย *  </label>
-    <select class="form-select" aria-label="select Activity category">
-      <option selected>เอก/สาขา</option>
-      <option value="1">วิชาเอกการผลิตงานภาพยนตร์และสื่อดิจิทัล</option>
-      <option value="2">วิชาเอกการแสดงและกำกับการแสดงภาพยนตร์</option>
-      <option value="3">วิชาเอกการออกแบบเพื่องานภาพยนตร์และสื่อดิจิทัล</option>
-      <option value="4">วิชาเอกการจัดการภาพยนตร์และสื่อดิจิทัล</option>
-      <option value="5">วิชาเอกการออกแบบสื่อปฏิสัมพันธ์และมัลติมีเดีย</option>
-      <option value="6">วิชาเอกการจัดการธุรกิจไซเบอร์</option>
-      <option value="7">วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร</option>
-      <option value="8">วิชาเอกการสื่อสารเพื่อการจัดการนวัตกรรม</option>
-      <option value="9">วิชาเอกการสื่อสารเพื่อการท่องเที่ยว</option>
-      <option value="10">วิชาเอกการสื่อสารเพื่อสุขภาพ</option>
-      <option value="11">วิชาเอกการสื่อสารเพื่อเศรษฐศาสตร์</option>
-  
-  
-    </select>
-  </div>
+                <div class=" mb-2 col-10 col-lg-6">
+                  <label  class="form-label">คณะ/วิทยาลัย *  </label>
+                  <select name="major" class="form-select" aria-label="select Activity category">
+                    <option hidden selected>เอก/สาขา</option>
+                    <option value="1">วิชาเอกการผลิตงานภาพยนตร์และสื่อดิจิทัล</option>
+                    <option value="2">วิชาเอกการแสดงและกำกับการแสดงภาพยนตร์</option>
+                    <option value="3">วิชาเอกการออกแบบเพื่องานภาพยนตร์และสื่อดิจิทัล</option>
+                    <option value="4">วิชาเอกการจัดการภาพยนตร์และสื่อดิจิทัล</option>
+                    <option value="5">วิชาเอกการออกแบบสื่อปฏิสัมพันธ์และมัลติมีเดีย</option>
+                    <option value="6">วิชาเอกการจัดการธุรกิจไซเบอร์</option>
+                    <option value="7">วิชาเอกนวัตกรรมคอมพิวเตอร์เพื่อการสื่อสาร</option>
+                    <option value="8">วิชาเอกการสื่อสารเพื่อการจัดการนวัตกรรม</option>
+                    <option value="9">วิชาเอกการสื่อสารเพื่อการท่องเที่ยว</option>
+                    <option value="10">วิชาเอกการสื่อสารเพื่อสุขภาพ</option>
+                    <option value="11">วิชาเอกการสื่อสารเพื่อเศรษฐศาสตร์</option>
+                
+                
+                  </select>
+                </div>
+                <div class=" mb-2 col-10 col-lg-6">
+                  <label  class="form-label">เพศ *  </label>
+                  <select name="gender" class="form-select" aria-label="select Activity category">
+                    <option hidden selected>เลือกเพศ</option>
+                    <option value="1">ชาย</option>
+                    <option value="2">หญิง</option>
+                
+                
+                  </select>
+                </div>
   
   <div class=" mb-2 col-10 col-lg-6">
     <label  class="form-label">ชั้นปีที่ศึกษาอยู่ *  </label>
-    <select class="form-select" aria-label="select Activity category">
-      <option selected>เอก/สาขา</option>
+    <select name="year" class="form-select" aria-label="select Activity category">
+      <option hidden selected>ปีที่ </option>
       <option value="1">ชั้นปีที่ 1 </option>
       <option value="2">ชั้นปีที่ 2</option>
       <option value="3">ชั้นปีที่ 3</option>
@@ -120,12 +136,12 @@
   
     </select>
   </div>
-  </div>
-  <div class="ms-2 mt-3">
-    <button  type="button" class="btn btn--register">ลงทะเบียน</button>
-
-  </div>
-  
+              </div>
+            <div class="ms-2 mt-3">
+              <button  type="submit" class="btn btn--register">ลงทะเบียน</button>
+            
+            </div>
+          </form>
   
   
               </div>
