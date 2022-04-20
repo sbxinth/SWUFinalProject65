@@ -62,7 +62,6 @@ app.use(
  app.use("/", require('./route/activityforstd_router'))
  app.use("/", require('./route/announceforstd_router'))
  app.use("/", require('./route/checkstatus_router'))
- app.use("/", require('./route/subcheckforstd_router'))
  app.use("/", require('./route/registerforstd_router'))
 
 //  app.use("/", require('./route/announce_router'))

@@ -275,10 +275,8 @@ router.get("/activity_admin04",usercheck.checkloginforalluser,mwupdatereq.update
 router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,async(req,res) => {
     // console.log(req.params.requestID)
 
-   
-
         var datax = await new Promise((resolve,rejects)=>{
-            dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+            dbConnectionn.query(`SELECT request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status,request.file_pdf,request.file_img FROM request
             inner join user on request.Username=user.Username
             inner join major on user.Major=major.idMajor
             inner join event on request.ID_event=event.ID_event
@@ -287,7 +285,9 @@ router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,asyn
              function (error, results, fields) {
                 results[0].start_date = formatDateToString(results[0].start_date)
                 results[0].end_date = formatDateToString(results[0].end_date)
+                results[0].file_img = results[0].file_img.split(',')
                 resolve(results)
+                console.log(results)
             });
         })
 
@@ -327,7 +327,7 @@ router.post("/sub_request_general/status_update",usercheck.checkloginforalluser,
 router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(req,res) => {
     console.log(req.params.idRequest)
     var datax = await new Promise((resolve,rejects)=>{
-        dbConnectionn.query(`SELECT request.file_img,request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
+        dbConnectionn.query(`SELECT request.file_img,request.file_pdf,request.idRequest,type_req.Detail_Type_R,user.ID_Student,major.name_maj,user.Firstname,user.Lastname,user.user_phone,event.Name_Event,request.start_date,request.end_date,request.hour,request.Status_req,status.Detail_Status FROM request
         inner join user on request.Username=user.Username
         inner join major on user.Major=major.idMajor
         inner join event on request.ID_event=event.ID_event
@@ -339,7 +339,9 @@ router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(r
             //  console.log(results[0].start_date,"results[0].start_date")
             results[0].start_date = formatDateToString(results[0].start_date)
             results[0].end_date = formatDateToString(results[0].end_date)
+            results[0].file_img = results[0].file_img.split(',')
             resolve(results)
+            console.log(results)
         });
     })
 

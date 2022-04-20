@@ -305,12 +305,30 @@
     
     <div class="mb-1">
       <label for="formFile" class="form-label">แนบภาพถ่ายระหว่างเข้าร่วมกิจกรรม/โครงการ * </label>
+ <!-- <u><a href="#" style="color: #032c8a;"></a></u> -->
+    </div>
+        <img id="myImg" src="<%= datax[0].file_img[0] %>" alt="" style="width:100%; max-width:300px">
+        <img id="myImg" src="<%= datax[0].file_img[1] %>" alt="" style="width:100%; max-width:300px">
+        <img id="myImg" src="<%= datax[0].file_img[2] %>" alt="" style="width:100%; max-width:300px">
 
-  <u><a href="#" style="color: #032c8a;">คลิ๊กดูรูป</a></u>
-   </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="img01">
+
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+
+        <!-- ///////// this-->
+        </div>
+ 
     <div class="mb-1">
       <label for="formFile" class="form-label">แนบกำหนดการ หรือเอกสารที่รับรองเข้าร่วมกิจกรรม/โครงการ *</label>
-      <u><a href="#" style="color: #032c8a;">คลิ๊กดูรูป</a></u>
+      <u><a href="<%= datax[0].file_pdf %>" target="_blank" style="color: #032c8a;">คลิกดูเอกสาร</a></u>
       
   
     </div>
@@ -459,7 +477,28 @@
 </div>
 
   </footer>
+<script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
 
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+          modal.style.display = "block";
+          modalImg.src = img.src;
+          captionText.innerHTML = img.alt;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }   
+</script>
 
 </body>
 
