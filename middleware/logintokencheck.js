@@ -91,7 +91,7 @@ module.exports.checkloginforalluser = async (req, res, next) => {
 
 module.exports.checkforstudentonly = async (req, res, next) => {    
   try{
-    console.log(req.cookies.sslg,"in checkforstudentonly");
+    // console.log(req.cookies.sslg,"in checkforstudentonly");
     if (req.cookies.sslg.status != "student") { 
       return res.send("คุณไม่มีสิทธิ์เข้าถึงหน้าเว็ปนี้")
     }

@@ -116,7 +116,10 @@
           <form class="row g-3">
             <div class="col-md-6">
               <h3 class="mb-3" style="color: #032c8a;">รูปแบบการยื่นคำร้อง</h3>
-              <input class="form-control" type="text" value="ลงทะเบียนเข้าร่วมทั่วไป" aria-label="Disabled input example" disabled readonly>
+              <input class="form-control" type="text" value="<%= data[0].Detail_Type_R %>" aria-label="Disabled input example" disabled readonly>
+              <% if (data[0].Detail_Type_R == 'บันทึกกิจกรรม') { %>
+                  <a href="/details_submit/transtotl/<%= data[0].idRequest %>">ส่งคำขอ</a>
+              <% } %>
 
             </div>
         
