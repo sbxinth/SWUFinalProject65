@@ -129,10 +129,10 @@ router.post("/add_announcement",usercheck.checkloginforalluser,upload.single('im
         var imgsrc = '../img/act/' + req.file.filename
         console.log("hit submit",req.body)
         // var
-        var sqlx = 'INSERT INTO event (ID_event, Name_Event, Detail_Event, start_Event, end_Event, Posted_Event, idType_Event, thamnail, Detail_Img, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        var sqlx = 'INSERT INTO event (ID_event, Name_Event, Detail_Event, start_Event, end_Event, Posted_Event, idType_Event, thamnail, Detail_Img, school_year,main_detail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)'
 
             await new Promise((resolve,rejects)=>{
-            dbConnectionn.query(sqlx,[getuidf(), req.body.event_name , req.body.detailFull , req.body.start_date , req.body.end_date, today , req.body.eventtype , imgsrc , imgsrc , yyyy+543],
+            dbConnectionn.query(sqlx,[getuidf(), req.body.event_name , req.body.detailFull , req.body.start_date , req.body.end_date, today , req.body.eventtype , imgsrc , imgsrc , yyyy+543,req.body.detail],
                     function (error, results, fields) {
                         if (error) throw error
                         resolve(results)

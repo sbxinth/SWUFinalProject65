@@ -41,6 +41,7 @@ router.post('/register',(req, res) => {
                 if (error.code == 'ER_DUP_ENTRY'){
                   res.send("มีบัญชีผู้ใช้นี้อยู่แล้ว กรุณาตรวจสอบ username อีกครั้ง")
                 }else{
+                  throw error
                   res.send("เกิดข้อผิดพลาด")
                 }
               }else{
