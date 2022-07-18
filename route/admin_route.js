@@ -34,7 +34,7 @@ function getuidf() {
   var yyyy = today.getFullYear();
   today = yyyy + '-' + mm + '-' + dd ;
   function formatDateToString(date){
-    var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+    var dd = (new Date(date).getDate() < 10 ? '0' : '') + date.getDate();
     var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
     return ( yyyy + "-" + MM + "-" + dd);
  }
@@ -283,9 +283,9 @@ router.get("/sub_request_general/:requestID",usercheck.checkloginforalluser,asyn
             inner join type_req on request.idType_req=type_req.idType_Req
             inner join status on status.idStatus=request.Status_req where request.idRequest=?`,[req.params.requestID],
              function (error, results, fields) {
-                results[0].start_date = formatDateToString(results[0].start_date)
-                results[0].end_date = formatDateToString(results[0].end_date)
-                results[0].file_img = results[0].file_img.split(',')
+                results[0].start_date = formatDateToString(results[0]?.start_date)
+                results[0].end_date = formatDateToString(results[0]?.end_date)
+                results[0].file_img = results[0]?.file_img.split(',')
                 resolve(results)
                 console.log(results)
             });
@@ -337,9 +337,9 @@ router.get("/sub_request_omit/:idRequest",usercheck.checkloginforalluser,async(r
              if (error) throw error
             //  console.log(results,"resukt xx")
             //  console.log(results[0].start_date,"results[0].start_date")
-            results[0].start_date = formatDateToString(results[0].start_date)
-            results[0].end_date = formatDateToString(results[0].end_date)
-            results[0].file_img = results[0].file_img.split(',')
+            results[0].start_date = formatDateToString(results[0]?.start_date)
+            results[0].end_date = formatDateToString(results[0]?.end_date)
+            results[0].file_img = results[0]?.file_img.split(',')
             resolve(results)
             console.log(results)
         });
