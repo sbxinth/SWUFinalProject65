@@ -6,7 +6,7 @@ var path = require("path");
 var usercheck = require("./middleware/logintokencheck");
 var router = express.Router();
 const cookieParser = require('cookie-parser');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8005
 const dotenv = require('dotenv')
 dotenv.config()
 app.use(express.static('public'));
